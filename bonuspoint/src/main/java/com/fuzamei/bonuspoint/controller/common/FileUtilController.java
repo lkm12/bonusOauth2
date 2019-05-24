@@ -87,8 +87,9 @@ public class FileUtilController {
 
     /**
      * 上传文件
+     *
      * @param token token
-     * @param file file
+     * @param file  file
      * @return
      */
     @PostMapping("/platform/apk/upload")
@@ -114,6 +115,7 @@ public class FileUtilController {
 
     /**
      * 获取文件请求url
+     *
      * @return
      */
     @GetMapping("/server/file/url")

@@ -11,13 +11,13 @@ import com.fuzamei.common.enums.ResponseEnum;
 public enum UserResponseEnum implements ResponseEnum {
 
     USER_NOT_ROOT("false", "USER_NOT_ROOT", "038"),
-    WRONG_ID_CARD("false","WRONG_ID_CARD","500"),
+    WRONG_ID_CARD("false", "WRONG_ID_CARD", "500"),
     WRONG_CASH_RATE("false", "WRONG_CASH_RATE", "250"),
     WRONG_POINT_RATE("false", "WRONG_POINT_RATE", "250"),
     WRONG_ADDRESS("false", "WRONG_ADDRESS", "422"),
-    WRONG_PASSWORD("false","WRONG_PASSWORD","500"),
+    WRONG_PASSWORD("false", "WRONG_PASSWORD", "500"),
     USER_NOT_EXIST("false", "USER_NOT_EXIST", "218"),
-    USER_IS_NOT_UNIQUE("false","USER_IS_NOT_UNIQUE","300"),
+    USER_IS_NOT_UNIQUE("false", "USER_IS_NOT_UNIQUE", "300"),
 
     USER_REGISTER_FAIL("true", "USER_REGISTER_FAIL", "500"),
     USER_REGISTER_SUCCESS("true", "USER_REGISTER_SUCCESS", "200"),
@@ -40,7 +40,7 @@ public enum UserResponseEnum implements ResponseEnum {
     FIND_USERVAGUE_SUCCESS("true", "FIND_USERVAGUE_SUCCESS", "200"),
     EXCEL_SUCCESS("true", "EXCEL_SUCCESS", "200"),
     NO_COMPANY_INFO("false", "NO_COMPANY_INFO", "260"),
-    COMPANY_HAS_BEEN_DELETED("false","COMPANY_HAS_BEEN_DELETED","500"),
+    COMPANY_HAS_BEEN_DELETED("false", "COMPANY_HAS_BEEN_DELETED", "500"),
     CONTACT_EXIST_FAIL("false", "CONTACT_EXIST_FAIL", "261"),
     CONTACT_NOT_EXIST_FAIL("false", "CONTACT_NOT_EXIST_FAIL", "262"),
     USERNAME_FORMAT_FAIL("false", "USERNAME_FORMAT_FAIL", "263"),
@@ -52,7 +52,7 @@ public enum UserResponseEnum implements ResponseEnum {
     REGISTER_CHAIN_ERROR("false", "REGISTER_CHAIN_ERROR", "271"),
     FIND_USERINFO_PLATFORM_SUCCESS("true", "FIND_USERINFO_PLATFORM_SUCCESS", "200"),
     QRCODE_NOT_EXIST("false", "QRCODE_NOT_EXIST", "271"),
-    QUERY_POINT_SUCCESS("true","QUERY_POINT_SUCCESS","200");
+    QUERY_POINT_SUCCESS("true", "QUERY_POINT_SUCCESS", "200");
     private String success;
     private String message;
     private String code;

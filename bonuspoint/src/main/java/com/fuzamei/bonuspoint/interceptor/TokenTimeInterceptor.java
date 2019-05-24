@@ -51,13 +51,13 @@ public class TokenTimeInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
         // 处理预查询
-        if(OPTIONS.equals(request.getMethod())){
+        if (OPTIONS.equals(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             return;
         }
 
-        Token token = (Token)request.getAttribute("token");
-        if (token!=null) {
+        Token token = (Token) request.getAttribute("token");
+        if (token != null) {
             // 更新token缓存
             String str = redisTemplateUtil.getStr(CacheHeader.TOKEN + token.getUid());
             if (StringUtil.isBlank(str)) {

@@ -18,21 +18,23 @@ public class ResultUtil {
 
     /**
      * 检查区块链返回的结果
+     *
      * @param result
      * @return
      * @throws Exception
      */
-    public static Boolean checkResult(String result) throws Exception{
+    public static Boolean checkResult(String result) throws Exception {
         return false;
     }
 
     /**
      * 获取返回信息
+     *
      * @param result
      * @return
      * @throws Exception
      */
-    public static String resultMessage(String result) throws Exception{
+    public static String resultMessage(String result) throws Exception {
         ResponseBean responseBean = JSONObject.parseObject(result, ResponseBean.class);
 
         String error = responseBean.getError();
@@ -42,11 +44,12 @@ public class ResultUtil {
 
     /**
      * 获取区块hash
+     *
      * @param result
      * @return
      * @throws Exception
      */
-    public static String resultHash(String result) throws Exception{
+    public static String resultHash(String result) throws Exception {
         ResponseBean responseBean = JSONObject.parseObject(result, ResponseBean.class);
 
         return null;
@@ -54,11 +57,12 @@ public class ResultUtil {
 
     /**
      * 获取区块高度
+     *
      * @param result
      * @return
      * @throws Exception
      */
-    public static Integer resultHeight(String result) throws Exception{
+    public static Integer resultHeight(String result) throws Exception {
         ResponseBean responseBean = JSONObject.parseObject(result, ResponseBean.class);
 
         return null;

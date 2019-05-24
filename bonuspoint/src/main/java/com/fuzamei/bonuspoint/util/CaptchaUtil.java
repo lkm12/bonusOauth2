@@ -13,13 +13,13 @@ public class CaptchaUtil {
     /**
      * 生成6位数字验证码
      */
-    public static String  getCode (){
+    public static String getCode() {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         int j;
-        for (int i = 0 ; i < 6 ; i++){
+        for (int i = 0; i < 6; i++) {
             j = random.nextInt(1000);
-            sb.append(j%10);
+            sb.append(j % 10);
         }
         return sb.toString();
     }

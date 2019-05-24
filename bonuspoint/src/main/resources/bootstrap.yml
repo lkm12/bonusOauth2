@@ -38,4 +38,4 @@ eureka:
       #生产环境
       #defaultZone: http://admin:123456@${eureka.host:47.98.32.123}:${eureka.port:1111}/eureka/
 
-
+signing.key: "345345fsdfsf5345"

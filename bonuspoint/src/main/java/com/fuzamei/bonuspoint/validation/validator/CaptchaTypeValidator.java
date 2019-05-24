@@ -12,10 +12,11 @@ import javax.validation.ConstraintValidatorContext;
  * @author: WangJie
  * @create: 2018-07-12 11:13
  **/
-public class CaptchaTypeValidator implements ConstraintValidator<CaptchaType,Integer> {
+public class CaptchaTypeValidator implements ConstraintValidator<CaptchaType, Integer> {
 
     @Value("${captcha.type}")
     private String captchaType;
+
     @Override
     public void initialize(CaptchaType constraintAnnotation) {
 
@@ -24,13 +25,13 @@ public class CaptchaTypeValidator implements ConstraintValidator<CaptchaType,Int
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext context) {
         // 为空 不校验
-        if (value==null){
+        if (value == null) {
             return true;
         }
         String[] types = captchaType.split(",");
-        for (String type:types
-             ) {
-            if (type.equals(String.valueOf(value))){
+        for (String type : types
+                ) {
+            if (type.equals(String.valueOf(value))) {
                 return true;
             }
         }

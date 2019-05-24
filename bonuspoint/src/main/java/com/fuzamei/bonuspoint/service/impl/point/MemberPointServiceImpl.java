@@ -77,7 +77,6 @@ public class MemberPointServiceImpl implements MemberPointService {
     private final PlatformInfoMapper platformInfoMapper;
 
 
-
     @Autowired
     public MemberPointServiceImpl(UserDao userDao, MemberPointDao memberPointDao, ContactDao contactDao,
                                   PointRelationMapper pointRelationMapper, PlatformInfoMapper platformInfoMapper,
@@ -218,7 +217,6 @@ public class MemberPointServiceImpl implements MemberPointService {
     }
 
 
-
     @Override
     public ResponseVO memberPointInfo(QueryUserDTO queryUserDTO) {
         if (queryUserDTO.getPage() == null || queryUserDTO.getPage() < 1) {
@@ -243,7 +241,7 @@ public class MemberPointServiceImpl implements MemberPointService {
 
     @Override
     public List<MemberPointPO> getAllMemberPointInfo(QueryUserDTO queryUserDTO) {
-        return   memberPointDao.getMemberPointInfoListLikeMobile(queryUserDTO);
+        return memberPointDao.getMemberPointInfoListLikeMobile(queryUserDTO);
     }
 
     @Override
@@ -267,9 +265,9 @@ public class MemberPointServiceImpl implements MemberPointService {
 
         Page page = PageHelper.startPage(pagePointDTO.getPage(), pagePointDTO.getPageSize());
         List<ExcelPO> excelPOList = memberPointDao.findExchangeGeneralByPlatfromId(pagePointDTO);
-        excelPOList.stream().forEach(e ->{
-            if(e.getCashNum() != null){
-                e.setCashNumStr("-"+e.getCashNum());
+        excelPOList.stream().forEach(e -> {
+            if (e.getCashNum() != null) {
+                e.setCashNumStr("-" + e.getCashNum());
             }
         });
 

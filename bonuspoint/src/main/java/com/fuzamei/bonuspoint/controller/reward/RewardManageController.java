@@ -35,14 +35,15 @@ public class RewardManageController {
 
     /**
      * 添加邀请奖励注册规则
+     *
      * @param token
      * @param rewardDTO
      * @return
      */
     @PostMapping("/add-rule")
     public ResponseVO addRewardRule(@RequestAttribute("token") Token token,
-                                          @RequestBody @Valid RewardDTO rewardDTO,
-                                          BindingResult bindingResult) {
+                                    @RequestBody @Valid RewardDTO rewardDTO,
+                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
@@ -53,34 +54,35 @@ public class RewardManageController {
 
     /**
      * 使奖励规则生效
+     *
      * @param id
      * @param token
      * @return
      */
     @GetMapping("/effective/{id}")
-    public ResponseVO effectiveRewardRule(@PathVariable("id") Long id,@RequestAttribute("token") Token token){
-        return rewardService.effectiveRewardRule(id,token.getUid());
+    public ResponseVO effectiveRewardRule(@PathVariable("id") Long id, @RequestAttribute("token") Token token) {
+        return rewardService.effectiveRewardRule(id, token.getUid());
     }
+
     /**
      * 暂停奖励规则
      */
     @GetMapping("/stop/{id}")
-    public ResponseVO stopReward(@PathVariable("id") Long id,@RequestAttribute("token") Token token){
-        return rewardService.stopReward(id,token.getUid());
+    public ResponseVO stopReward(@PathVariable("id") Long id, @RequestAttribute("token") Token token) {
+        return rewardService.stopReward(id, token.getUid());
     }
 
     /**
      * 删除奖励规则
+     *
      * @param id
      * @param token
      * @return
      */
     @DeleteMapping("/delete/{id}")
-    public ResponseVO deleteReward(@PathVariable("id") Long id,@RequestAttribute("token") Token token){
-        return rewardService.deleteReward(id,token.getUid());
+    public ResponseVO deleteReward(@PathVariable("id") Long id, @RequestAttribute("token") Token token) {
+        return rewardService.deleteReward(id, token.getUid());
     }
-
-
 
 
 }

@@ -1,13 +1,12 @@
 /**
  * EdDSA-Java by str4d
- *
+ * <p>
  * To the extent possible under law, the person who associated CC0 with
  * EdDSA-Java has waived all copyright and related or neighboring rights
  * to EdDSA-Java.
- *
+ * <p>
  * You should have received a copy of the CC0 legalcode along with this
  * work. If not, see <https://creativecommons.org/publicdomain/zero/1.0/>.
- *
  */
 package com.fzm.blockchain.algorithm.eddsa.math.bigint;
 
@@ -19,8 +18,8 @@ import java.math.BigInteger;
 
 /**
  * A particular element of the field \Z/(2^255-19).
- * @author str4d
  *
+ * @author str4d
  */
 public class BigIntegerFieldElement extends FieldElement implements Serializable {
     private static final long serialVersionUID = 4890398908392808L;
@@ -39,7 +38,7 @@ public class BigIntegerFieldElement extends FieldElement implements Serializable
     }
 
     public FieldElement add(FieldElement val) {
-        return new BigIntegerFieldElement(f, bi.add(((BigIntegerFieldElement)val).bi)).mod(f.getQ());
+        return new BigIntegerFieldElement(f, bi.add(((BigIntegerFieldElement) val).bi)).mod(f.getQ());
     }
 
     @Override
@@ -48,7 +47,7 @@ public class BigIntegerFieldElement extends FieldElement implements Serializable
     }
 
     public FieldElement subtract(FieldElement val) {
-        return new BigIntegerFieldElement(f, bi.subtract(((BigIntegerFieldElement)val).bi)).mod(f.getQ());
+        return new BigIntegerFieldElement(f, bi.subtract(((BigIntegerFieldElement) val).bi)).mod(f.getQ());
     }
 
     @Override
@@ -62,7 +61,7 @@ public class BigIntegerFieldElement extends FieldElement implements Serializable
 
     @Override
     public FieldElement divide(FieldElement val) {
-        return divide(((BigIntegerFieldElement)val).bi);
+        return divide(((BigIntegerFieldElement) val).bi);
     }
 
     public FieldElement divide(BigInteger val) {
@@ -70,7 +69,7 @@ public class BigIntegerFieldElement extends FieldElement implements Serializable
     }
 
     public FieldElement multiply(FieldElement val) {
-        return new BigIntegerFieldElement(f, bi.multiply(((BigIntegerFieldElement)val).bi)).mod(f.getQ());
+        return new BigIntegerFieldElement(f, bi.multiply(((BigIntegerFieldElement) val).bi)).mod(f.getQ());
     }
 
     public FieldElement square() {
@@ -85,22 +84,22 @@ public class BigIntegerFieldElement extends FieldElement implements Serializable
     public FieldElement invert() {
         // Euler's theorem
         //return modPow(f.getQm2(), f.getQ());
-        return new BigIntegerFieldElement(f, bi.modInverse(((BigIntegerFieldElement)f.getQ()).bi));
+        return new BigIntegerFieldElement(f, bi.modInverse(((BigIntegerFieldElement) f.getQ()).bi));
     }
 
     public FieldElement mod(FieldElement m) {
-        return new BigIntegerFieldElement(f, bi.mod(((BigIntegerFieldElement)m).bi));
+        return new BigIntegerFieldElement(f, bi.mod(((BigIntegerFieldElement) m).bi));
     }
 
     public FieldElement modPow(FieldElement e, FieldElement m) {
-        return new BigIntegerFieldElement(f, bi.modPow(((BigIntegerFieldElement)e).bi, ((BigIntegerFieldElement)m).bi));
+        return new BigIntegerFieldElement(f, bi.modPow(((BigIntegerFieldElement) e).bi, ((BigIntegerFieldElement) m).bi));
     }
 
-    public FieldElement pow(FieldElement e){
+    public FieldElement pow(FieldElement e) {
         return modPow(e, f.getQ());
     }
 
-    public FieldElement pow22523(){
+    public FieldElement pow22523() {
         return pow(f.getQm5d8());
     }
 
@@ -126,6 +125,6 @@ public class BigIntegerFieldElement extends FieldElement implements Serializable
 
     @Override
     public String toString() {
-        return "[BigIntegerFieldElement val="+bi+"]";
+        return "[BigIntegerFieldElement val=" + bi + "]";
     }
 }

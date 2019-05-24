@@ -27,6 +27,7 @@ public class FilterConfig {
 
     /**
      * 配置过滤器
+     *
      * @return
      */
 
@@ -35,11 +36,10 @@ public class FilterConfig {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(corsFilter);
         registration.addUrlPatterns("/*");
-     //   registration.addInitParameter("paramName", "paramValue");
+        //   registration.addInitParameter("paramName", "paramValue");
         registration.setName("CorsFilter");
         return registration;
     }
-
 
 
 }

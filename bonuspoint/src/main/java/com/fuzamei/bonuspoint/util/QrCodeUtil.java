@@ -39,9 +39,9 @@ public class QrCodeUtil {
 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             BufferedImage image = toBufferedImage(bitMatrix);
-            ImageIO.write(image,"jpg",byteArrayOutputStream);
+            ImageIO.write(image, "jpg", byteArrayOutputStream);
             byte[] bytes = byteArrayOutputStream.toByteArray();
-            return fastDFSClient.uploadFile(bytes,fileName);
+            return fastDFSClient.uploadFile(bytes, fileName);
         } catch (Exception e) {
             throw new RuntimeException();
         }

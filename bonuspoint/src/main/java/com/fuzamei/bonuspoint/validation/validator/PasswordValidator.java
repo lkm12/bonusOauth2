@@ -30,7 +30,7 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         // 为空不校验
-        if (value==null){
+        if (value == null) {
             return true;
         }
         return Pattern.matches(passwordReg, String.valueOf(value));

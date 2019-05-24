@@ -440,7 +440,7 @@ public class PlatformCashServiceImpl implements PlatformCashService {
         Long height = queryTransaction.getResult().getHeight();
         String hash = responseBean.getResult();
         */
-       // cashRecordPO.setHash(hash);
+        // cashRecordPO.setHash(hash);
         //cashRecordPO.setHeight(height);
         //更新备付金充值记录
         try {

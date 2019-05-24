@@ -31,11 +31,11 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     @Override
     public ResponseVO addAdvertisement(AdvertisementDTO advertisementDTO) {
         AdvertisementPO advertisementPO = new AdvertisementPO();
-        BeanUtils.copyProperties(advertisementDTO,advertisementPO);
+        BeanUtils.copyProperties(advertisementDTO, advertisementPO);
         advertisementPO.setCreatedAt(TimeUtil.timestamp());
         advertisementPO.setUpdatedAt(TimeUtil.timestamp());
         int result = advertisementMapper.insertSelective(advertisementPO);
-        if (result == 1){
+        if (result == 1) {
             return new ResponseVO(CommonResponseEnum.ADD_SUCCESS);
         }
         return new ResponseVO(CommonResponseEnum.ADD_FAIL);
@@ -47,7 +47,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         advertisementPO.setId(id);
         advertisementPO.setIsDelete(1);
         int result = advertisementMapper.updateByPrimaryKeySelective(advertisementPO);
-        if (result == 1){
+        if (result == 1) {
             return new ResponseVO(CommonResponseEnum.DELETE_SUCCESS);
         }
         return new ResponseVO(CommonResponseEnum.DELETE_FAIL);
@@ -58,16 +58,16 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         AdvertisementPO advertisementPO = new AdvertisementPO();
         advertisementPO.setIsDelete(0);
         List<AdvertisementPO> list = advertisementMapper.select(advertisementPO);
-        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS,list);
+        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS, list);
     }
 
     @Override
     public ResponseVO updateAdvertisement(AdvertisementDTO advertisementDTO) {
         AdvertisementPO advertisementPO = new AdvertisementPO();
-        BeanUtils.copyProperties(advertisementDTO,advertisementPO);
+        BeanUtils.copyProperties(advertisementDTO, advertisementPO);
         advertisementPO.setUpdatedAt(TimeUtil.timestamp());
         int result = advertisementMapper.updateByPrimaryKeySelective(advertisementPO);
-        if (result == 1){
+        if (result == 1) {
             return new ResponseVO(CommonResponseEnum.UPDATE_SUCCESS);
         }
         return new ResponseVO(CommonResponseEnum.UPDATE_FALL);

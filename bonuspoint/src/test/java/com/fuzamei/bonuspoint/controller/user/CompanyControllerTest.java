@@ -48,14 +48,15 @@ public class CompanyControllerTest {
 
     /**
      * 商户查看店铺基础信息
+     *
      * @throws Exception
      */
     @Test
-    public void testGetCompanyBaseInfo() throws  Exception{
+    public void testGetCompanyBaseInfo() throws Exception {
 
         authorizationValue = "token&343";
         this.mockMvc.perform(get("/bonus-point/company/company-base-info")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andDo(print())
                 .andReturn().getResponse().getContentAsString();
@@ -63,20 +64,21 @@ public class CompanyControllerTest {
 
     /**
      * 商户更新店铺信息
+     *
      * @throws Exception
      */
     @Test
-    public void testUpdateCompanyBaseInfo() throws  Exception{
-        Map<String,Object>map = new HashMap<>(6);
-        map.put("companyName","wj_company");
-        map.put("companyLeader","wj_leader");
-        map.put("companyLeaderIdCard","41152619950816265X");
-        map.put("companyLeaderMobile","17826873177");
-        map.put("companyEmail","123455@qq.com");
-        map.put("headimgurl","http://www.t.cn");
+    public void testUpdateCompanyBaseInfo() throws Exception {
+        Map<String, Object> map = new HashMap<>(6);
+        map.put("companyName", "wj_company");
+        map.put("companyLeader", "wj_leader");
+        map.put("companyLeaderIdCard", "41152619950816265X");
+        map.put("companyLeaderMobile", "17826873177");
+        map.put("companyEmail", "123455@qq.com");
+        map.put("headimgurl", "http://www.t.cn");
         authorizationValue = "token&343";
         this.mockMvc.perform(put("/bonus-point/company/update-company-base-info")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())

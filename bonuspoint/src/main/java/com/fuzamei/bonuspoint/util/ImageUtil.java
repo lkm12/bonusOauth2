@@ -24,7 +24,7 @@ public class ImageUtil {
         this.fastDFSClient = fastDFSClient;
     }
 
-    public String  reduceImg(MultipartFile fi, int widthdist, int heightdist, Float rate) {
+    public String reduceImg(MultipartFile fi, int widthdist, int heightdist, Float rate) {
         try {
 
             // 如果比例不为空则说明是按比例压缩
@@ -51,7 +51,7 @@ public class ImageUtil {
             String imageFileName = fi.getOriginalFilename();
             String endType = imageFileName.split("\\.")[1];
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(tag, endType ,outputStream);
+            ImageIO.write(tag, endType, outputStream);
             byte[] by = outputStream.toByteArray();
             return fastDFSClient.uploadFile(by, imageFileName);
         } catch (Exception ef) {

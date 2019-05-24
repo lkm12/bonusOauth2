@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 /**
  * Created by 18519 on 2018/5/7.
- *
+ * <p>
  * lkm
  */
 @Data
@@ -16,21 +16,37 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CompanyPointPO {
 
-    /** 集团id*/
+    /**
+     * 集团id
+     */
     private Long id;
-    /** 集团名称 */
+    /**
+     * 集团名称
+     */
     private String companyName;
-    /** 集团公钥*/
+    /**
+     * 集团公钥
+     */
     private String publickey;
-    /** 集团头像*/
+    /**
+     * 集团头像
+     */
     private String img;
-    /** 集团积分数量*/
+    /**
+     * 集团积分数量
+     */
     private BigDecimal num;
-    /** 通用积分兑换比例（N：1通用积分）*/
+    /**
+     * 通用积分兑换比例（N：1通用积分）
+     */
     private Float pointRate;
-    /** 可兑换成通用积分数量*/
+    /**
+     * 可兑换成通用积分数量
+     */
     private Long numExchange;
-    /** 通用积分数量*/
+    /**
+     * 通用积分数量
+     */
     private Long generalPoint;
 
 }

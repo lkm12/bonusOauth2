@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
-public interface GoodRebateMapper  extends TkMapper<GoodRebatePO> {
+public interface GoodRebateMapper extends TkMapper<GoodRebatePO> {
 }

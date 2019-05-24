@@ -14,29 +14,31 @@ public class TestMq {
     private Send send;
     private Send1 send1;
     private SendTopic sendTopic;
+
     @Autowired
-    public TestMq(Send send,Send1 send1,SendTopic sendTopic){
+    public TestMq(Send send, Send1 send1, SendTopic sendTopic) {
         this.send = send;
         this.send1 = send1;
         this.sendTopic = sendTopic;
     }
 
 
-@PostMapping("/send")
+    @PostMapping("/send")
     public void sendTest() {
         send.send();
 
     }
 
     @PostMapping("/sendOneToMany")
-    public void sendOneToMany(){
-    for (int i = 0;i < 5;i++){
-        send.send();
+    public void sendOneToMany() {
+        for (int i = 0; i < 5; i++) {
+            send.send();
+        }
     }
-    }
+
     @PostMapping("/sendManyToMany")
-    public void sendManyToMany(){
-        for (int i = 0;i < 5;i++) {
+    public void sendManyToMany() {
+        for (int i = 0; i < 5; i++) {
             send.send();
             //send1.send1();
         }
@@ -47,7 +49,7 @@ public class TestMq {
     }
 
     @PostMapping("/sendTopic")
-    public void sendTopic(){
+    public void sendTopic() {
         sendTopic.send();
     }
 }

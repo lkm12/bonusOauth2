@@ -155,7 +155,7 @@ public class GoodSubTypeServiceImpl implements GoodSubTypeService {
     @Override
     public ResponseVO deleteGoodSubType(Long id) {
         int count = goodDao.countGoodsBySubType(id);
-        if (count >0){
+        if (count > 0) {
             return new ResponseVO(GoodResponseEnum.SUB_TYPE_HAS_GOODS);
         }
         goodSubTypeDao.deleteSubType(id);

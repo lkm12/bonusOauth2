@@ -19,7 +19,7 @@ public class RequestBean<T> {
     private Object id;
     private List<T> params;
 
-    public RequestBean(T params){
+    public RequestBean(T params) {
         this.jsonrpc = "2.0";
         this.method = BlankChainUrlConst.SEND_TRANSACTION;
         this.id = null;
@@ -27,7 +27,7 @@ public class RequestBean<T> {
         this.params.add(params);
     }
 
-    public RequestBean(T params, String blankChainUrlConst){
+    public RequestBean(T params, String blankChainUrlConst) {
         this.jsonrpc = "2.0";
         this.method = blankChainUrlConst;
         this.id = null;

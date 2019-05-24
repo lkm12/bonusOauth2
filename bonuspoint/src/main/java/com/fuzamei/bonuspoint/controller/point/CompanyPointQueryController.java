@@ -55,7 +55,7 @@ public class CompanyPointQueryController {
     private final MemberPointService memberPointService;
 
     @Autowired
-    public CompanyPointQueryController(CompanyPointService companyPointService, CompanyInfoService companyInfoService,UserService userService,
+    public CompanyPointQueryController(CompanyPointService companyPointService, CompanyInfoService companyInfoService, UserService userService,
                                        MemberPointService memberPointService) {
         this.companyPointService = companyPointService;
         this.companyInfoService = companyInfoService;
@@ -104,13 +104,13 @@ public class CompanyPointQueryController {
      * 集团已发放积分列表
      *
      * @param queryPointRecordFORM 请求参数
-     *                 {
-     *                 mobile: 手机号
-     *                 startTime: 起始时间
-     *                 endTime: 结束时间
-     *                 page: 当前页
-     *                 pageSize: 每页记录数
-     *                 }
+     *                             {
+     *                             mobile: 手机号
+     *                             startTime: 起始时间
+     *                             endTime: 结束时间
+     *                             page: 当前页
+     *                             pageSize: 每页记录数
+     *                             }
      * @return 响应
      */
     @PostMapping("/grant-list")
@@ -129,7 +129,7 @@ public class CompanyPointQueryController {
         }
 
         PointRecordDTO pointRecordDTO = new PointRecordDTO();
-        BeanUtils.copyProperties(queryPointRecordFORM,pointRecordDTO);
+        BeanUtils.copyProperties(queryPointRecordFORM, pointRecordDTO);
         pointRecordDTO.setUid(token.getUid());
         return companyPointService.grantPointList(token.getUid(), pointRecordDTO);
     }
@@ -186,13 +186,14 @@ public class CompanyPointQueryController {
 
     /**
      * 显示集团活动信息
-     * @param token token
+     *
+     * @param token       token
      * @param showOutTime 是否显示过期活动
      * @return
      */
     @GetMapping("/activities")
     public ResponseVO listActivity(@RequestAttribute("token") Token token,
-                                   @RequestParam(required = false,defaultValue = "0") Integer showOutTime) {
+                                   @RequestParam(required = false, defaultValue = "0") Integer showOutTime) {
         log.info("获取集团进行的活动");
         Boolean isShow = showOutTime == 1 ? true : false;
         return companyPointService.listActivity(token.getUid(), isShow);
@@ -217,7 +218,7 @@ public class CompanyPointQueryController {
         PagePointDTO pagePointDTO;
         // 将接收的json数据转换为数据传输对象
         try {
-            pagePointDTO = JSON.parseObject(jsonData,  PagePointDTO.class);
+            pagePointDTO = JSON.parseObject(jsonData, PagePointDTO.class);
         } catch (Exception e) {
             log.info("参数错误");
             return new ResponseVO(CommonResponseEnum.PARAMETER_ERROR);
@@ -239,6 +240,7 @@ public class CompanyPointQueryController {
      * mobile:手机号，
      * page:当前页数
      * pageSize:分页大小
+     *
      * @param jsonData 请求参数
      * @return 请求响应
      */

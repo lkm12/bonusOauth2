@@ -43,13 +43,13 @@ public class LocationQueryController {
     }
 
     @GetMapping("/list-all-city")
-    public ResponseVO getAllCityList(){
+    public ResponseVO getAllCityList() {
         List cityList = locationService.getAllCities();
         return new ResponseVO(CommonResponseEnum.QUERY_SUCCESS, cityList);
     }
 
     @GetMapping("/list-all-district")
-    public ResponseVO getAllDistrictList(){
+    public ResponseVO getAllDistrictList() {
         List districtList = locationService.getAllDistricts();
         return new ResponseVO(CommonResponseEnum.QUERY_SUCCESS, districtList);
     }

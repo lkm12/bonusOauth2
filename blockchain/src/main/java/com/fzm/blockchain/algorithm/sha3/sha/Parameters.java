@@ -6,18 +6,18 @@ package com.fzm.blockchain.algorithm.sha3.sha;
  * @author romus
  */
 public enum Parameters {
-    KECCAK_224 (1152, 0x01, 224),
-    KECCAK_256 (1088, 0x01, 256),
-    KECCAK_384 (832, 0x01, 384),
-    KECCAK_512 (576, 0x01, 512),
+    KECCAK_224(1152, 0x01, 224),
+    KECCAK_256(1088, 0x01, 256),
+    KECCAK_384(832, 0x01, 384),
+    KECCAK_512(576, 0x01, 512),
 
-    SHA3_224 (1152, 0x06, 224),
-    SHA3_256 (1088, 0x06, 256),
-    SHA3_384 (832, 0x06, 384),
-    SHA3_512 (576, 0x06, 512),
+    SHA3_224(1152, 0x06, 224),
+    SHA3_256(1088, 0x06, 256),
+    SHA3_384(832, 0x06, 384),
+    SHA3_512(576, 0x06, 512),
 
-    SHAKE128 (1344, 0x1F, 256),
-    SHAKE256 (1088, 0x1F, 512);
+    SHAKE128(1344, 0x1F, 256),
+    SHAKE256(1088, 0x1F, 512);
 
     private final int rate;
 

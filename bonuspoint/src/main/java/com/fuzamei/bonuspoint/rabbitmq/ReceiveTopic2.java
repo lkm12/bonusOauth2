@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @RabbitListener(queues = "55")
 public class ReceiveTopic2 {
     @RabbitHandler
-    public void receive(String ss){
+    public void receive(String ss) {
         System.out.println("ReceiveTopic2" + ss);
     }
 }

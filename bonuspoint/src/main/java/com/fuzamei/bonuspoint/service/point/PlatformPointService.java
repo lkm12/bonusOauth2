@@ -15,23 +15,24 @@ import com.fuzamei.common.model.vo.ResponseVO;
  *
  * @author wangtao
  * @create 2018/4/27
- *
  */
 
 public interface PlatformPointService {
 
     /**
      * 同意发放积分
+     *
      * @param uid uid
-     * @param id id
+     * @param id  id
      * @return
      */
     ResponseVO reviewPoint(Long uid, Long id);
 
     /**
      * 审核拒绝发放积分
-     * @param uid 用户id
-     * @param id  申请记录
+     *
+     * @param uid    用户id
+     * @param id     申请记录
      * @param reason 拒绝原因
      * @return
      */
@@ -39,6 +40,7 @@ public interface PlatformPointService {
 
     /**
      * 平台查询积分审核列表
+     *
      * @param queryPointDTO
      * @return
      */
@@ -46,18 +48,19 @@ public interface PlatformPointService {
 
     /**
      * 平台查看积分发放记录
-     * @param queryDTO{
-     *                 startTime:                 起始时间           非必需
-     *                 endTime：                  结束时间           非必需
-     *                 mobile                     模糊查询手机号      非必需
-     *                 page：                     当前页             非必需
-     *                 pageSize：                 页大小             非必需
+     *
+     * @param queryDTO{ startTime:                 起始时间           非必需
+     *                  endTime：                  结束时间           非必需
+     *                  mobile                     模糊查询手机号      非必需
+     *                  page：                     当前页             非必需
+     *                  pageSize：                 页大小             非必需
      * @return
      */
     ResponseVO pointGrantList(QueryPointDTO queryDTO);
 
     /**
      * 通过平台id获取平台通用积分
+     *
      * @param platformId
      * @return
      */

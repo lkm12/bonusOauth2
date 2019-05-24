@@ -15,10 +15,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class QueryUserDTO extends PageDTO {
 
-    /** 用户id */
-    private Long uid ;
-    /** 集团信息id */
+    /**
+     * 用户id
+     */
+    private Long uid;
+    /**
+     * 集团信息id
+     */
     private Long companyId;
-    /** 手机号 */
+    /**
+     * 手机号
+     */
     private String mobile;
 }

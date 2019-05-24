@@ -283,7 +283,7 @@ public class GoodServiceImpl implements GoodService {
             goodRebatePO.setGoodId(goodPO.getId());
             goodRebatePO.setStatus(GoodRebateConstant.PROCESSING);
             goodRebatePO = goodRebateMapper.selectOne(goodRebatePO);
-            if (goodRebatePO!= null ) {
+            if (goodRebatePO != null) {
                 goodVO.setRate(goodRebatePO.getRate());
             }
             return new ResponseVO<>(CommonResponseEnum.SUCCESS, goodVO);
@@ -541,9 +541,9 @@ public class GoodServiceImpl implements GoodService {
     }
 
     @Override
-    @Cacheable(value = "goods" , key = "'company_goods_info_'+#companyId")
+    @Cacheable(value = "goods", key = "'company_goods_info_'+#companyId")
     public ResponseVO getCompanyGoodsInfo(Long companyId) {
         CompanyGoodsInfoDTO companyGoodsInfoDTO = goodDao.companyGoodsInfo(companyId);
-        return new ResponseVO(CommonResponseEnum.QUERY_SUCCESS,companyGoodsInfoDTO);
+        return new ResponseVO(CommonResponseEnum.QUERY_SUCCESS, companyGoodsInfoDTO);
     }
 }

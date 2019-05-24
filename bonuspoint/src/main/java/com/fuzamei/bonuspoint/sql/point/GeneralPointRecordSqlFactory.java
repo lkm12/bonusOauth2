@@ -9,6 +9,7 @@ import com.fuzamei.bonuspoint.entity.po.point.GeneralPointRecordPO;
 
 /**
  * 通用积分记录sql
+ *
  * @author liumeng
  * @create 2018年5月9日
  */
@@ -16,7 +17,8 @@ import com.fuzamei.bonuspoint.entity.po.point.GeneralPointRecordPO;
 public class GeneralPointRecordSqlFactory {
     /**
      * 添加通用积分交易记录SQL
-     * @param generalPointRecordPO  数据传输类
+     *
+     * @param generalPointRecordPO 数据传输类
      * @return SQL
      */
     public String saveGeneralPointRecord(GeneralPointRecordPO generalPointRecordPO) {
@@ -47,7 +49,7 @@ public class GeneralPointRecordSqlFactory {
                 }
                 VALUES("created_at", String.valueOf(System.currentTimeMillis()));
                 VALUES("updated_at", String.valueOf(System.currentTimeMillis()));
-                
+
             }
         }.toString();
         log.info("添加通用积分交易记录SQL:\n" + sql);
@@ -56,7 +58,8 @@ public class GeneralPointRecordSqlFactory {
 
     /**
      * 更新通用积分交易记录SQL
-     * @param generalPointRecordPO  数据传输类
+     *
+     * @param generalPointRecordPO 数据传输类
      * @return SQL
      */
     public String updateGeneralPointRecord(GeneralPointRecordPO generalPointRecordPO) {
@@ -85,7 +88,7 @@ public class GeneralPointRecordSqlFactory {
                     SET("memo = " + "'" + generalPointRecordPO.getMemo() + "'");
                 }
                 WHERE("id = " + generalPointRecordPO.getId());
-                
+
             }
         }.toString();
         log.info("添加通用积分交易记录SQL:\n" + sql);
@@ -100,7 +103,7 @@ public class GeneralPointRecordSqlFactory {
             " and created_at > #{startTime} " +
             " and created_at < #{endTime}" )*/
 
-    public String grantPointRecordListSQL(QueryPointDTO queryPointDTO){
+    public String grantPointRecordListSQL(QueryPointDTO queryPointDTO) {
         String sql = new SQL() {
             {
                 SELECT("bp_general_point_record.id");
@@ -114,16 +117,16 @@ public class GeneralPointRecordSqlFactory {
                 FROM(" bp_general_point_record ");
                 INNER_JOIN(" bp_user on bp_user.id = bp_general_point_record.opposite_uid ");
                 WHERE("bp_general_point_record.uid = " + queryPointDTO.getUid());
-                WHERE(" type = "+queryPointDTO.getType());
-                WHERE(" category = "+queryPointDTO.getCategory());
-                if (queryPointDTO.getMobile()!=null){
-                    WHERE(" mobile like '%"+queryPointDTO.getMobile()+"%' ");
+                WHERE(" type = " + queryPointDTO.getType());
+                WHERE(" category = " + queryPointDTO.getCategory());
+                if (queryPointDTO.getMobile() != null) {
+                    WHERE(" mobile like '%" + queryPointDTO.getMobile() + "%' ");
                 }
-                if (queryPointDTO.getStartTime()!=null){
-                    WHERE("bp_general_point_record.created_at >"+queryPointDTO.getStartTime());
+                if (queryPointDTO.getStartTime() != null) {
+                    WHERE("bp_general_point_record.created_at >" + queryPointDTO.getStartTime());
                 }
-                if (queryPointDTO.getEndTime()!=null){
-                    WHERE("bp_general_point_record.created_at <"+queryPointDTO.getEndTime());
+                if (queryPointDTO.getEndTime() != null) {
+                    WHERE("bp_general_point_record.created_at <" + queryPointDTO.getEndTime());
                 }
                 ORDER_BY("bp_general_point_record.created_at desc");
 

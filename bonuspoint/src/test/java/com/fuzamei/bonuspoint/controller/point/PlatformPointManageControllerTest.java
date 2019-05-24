@@ -62,14 +62,14 @@ public class PlatformPointManageControllerTest {
                 .andExpect(status().isOk()).andDo(print())
                 .andReturn().getResponse().getContentAsString();
     }
+
     @Test
-    public  void  reviewPoint () throws Exception  {
+    public void reviewPoint() throws Exception {
         this.mockMvc.perform(get("/bonus-point/point/platform/applyrecord/58/review")
                 .header(authorizationName, authorizationValue))
                 .andExpect(status().isOk()).andDo(print())
                 .andReturn().getResponse().getContentAsString();
     }
-
 
 
     @Test

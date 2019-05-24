@@ -12,35 +12,65 @@ import java.math.BigDecimal;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ExcelPO {
-    /** 记录编号*/
+    /**
+     * 记录编号
+     */
     private Long recordId;
-    /** 手机*/
+    /**
+     * 手机
+     */
     private String mobile;
-    /** 用户地址*/
+    /**
+     * 用户地址
+     */
     private String publickey;
-    /** 商品名称*/
+    /**
+     * 商品名称
+     */
     private String goodName;
-    /** 兑换积分数量*/
+    /**
+     * 兑换积分数量
+     */
     private Long exchangeNum;
-    /** 支付积分类型*/
+    /**
+     * 支付积分类型
+     */
     private Integer payMode;
-    /** 积分数量*/
+    /**
+     * 积分数量
+     */
     private BigDecimal pointNum;
-    /** 积分价值*/
+    /**
+     * 积分价值
+     */
     private Long money;
-    /** 商品分类名称*/
+    /**
+     * 商品分类名称
+     */
     private String goodSidName;
-    /** 记录时间戳*/
+    /**
+     * 记录时间戳
+     */
     private Long updateTime;
-    /** 通用积分数量*/
+    /**
+     * 通用积分数量
+     */
     private BigDecimal generalPoint;
-    /** 积分兑换比率*/
+    /**
+     * 积分兑换比率
+     */
     private Float pointRate;
-    /** 记录时间 (dateTime 类型)*/
+    /**
+     * 记录时间 (dateTime 类型)
+     */
     private String updateTimeDate;
-    /** 积分名称*/
+    /**
+     * 积分名称
+     */
     private String name;
-    /** 集团名称*/
+    /**
+     * 集团名称
+     */
     private String companyName;
 
     private String hash;

@@ -22,7 +22,7 @@ public interface CompanyInfoDao {
     /**
      * 模糊查询集团（商户）信息
      *
-     * @param fields     需要查询的字段数组
+     * @param fields         需要查询的字段数组
      * @param companyInfoDTO
      * @return
      * @author wangjie
@@ -63,6 +63,7 @@ public interface CompanyInfoDao {
 
     /**
      * 查询管理员管理的集团Id
+     *
      * @param uid 管理员
      * @return
      */
@@ -71,6 +72,7 @@ public interface CompanyInfoDao {
 
     /**
      * 通过id 查询商品信息
+     *
      * @param id id
      * @return
      */
@@ -79,6 +81,7 @@ public interface CompanyInfoDao {
 
     /**
      * app 商家预览
+     *
      * @return
      */
     @Select(" SELECT company.id,company.company_name,logo_url ," +
@@ -88,9 +91,9 @@ public interface CompanyInfoDao {
     List<CompanyInfoPO> previewCompany(Long pid);
 
 
-
     /**
      * 获取集团所属平台id
+     *
      * @param uid 集团管理员id
      * @return
      */
@@ -101,10 +104,11 @@ public interface CompanyInfoDao {
 
     /**
      * 删除商户
+     *
      * @param platformUid 商户所属平台管理员id
-     * @param companyId 商户id
+     * @param companyId   商户id
      * @return
      */
     @Update("update bp_company_info , bp_user set company_status = 0   where  bp_company_info.id = #{companyId} and bp_user.id = bp_company_info.uid and bp_user.p_id = #{platformUid}")
-    int deleteCompany(@Param("platformUid") Long platformUid,@Param("companyId") Long companyId);
+    int deleteCompany(@Param("platformUid") Long platformUid, @Param("companyId") Long companyId);
 }

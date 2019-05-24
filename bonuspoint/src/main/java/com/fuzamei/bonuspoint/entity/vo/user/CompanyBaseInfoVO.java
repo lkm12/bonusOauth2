@@ -10,24 +10,42 @@ import lombok.Data;
  **/
 @Data
 public class CompanyBaseInfoVO {
-    /** 集团名称 */
+    /**
+     * 集团名称
+     */
     private String companyName;
-    /** 集团详细地址 */
+    /**
+     * 集团详细地址
+     */
     private String companyAddress;
-    /** 集团负责人 */
+    /**
+     * 集团负责人
+     */
     private String companyLeader;
-    /** 法人身份证号*/
+    /**
+     * 法人身份证号
+     */
     private String companyLeaderIdCard;
-    /** 法人手机 */
+    /**
+     * 法人手机
+     */
     private String companyLeaderMobile;
-    /** 集团电话 */
+    /**
+     * 集团电话
+     */
     private String companyTelephone;
-    /** 公司邮箱 */
+    /**
+     * 公司邮箱
+     */
     private String companyEmail;
-    /** 开店日期 */
+    /**
+     * 开店日期
+     */
     private Long createdAt;
 
-    /** 公司logo */
+    /**
+     * 公司logo
+     */
     private String logoUrl;
 
 }

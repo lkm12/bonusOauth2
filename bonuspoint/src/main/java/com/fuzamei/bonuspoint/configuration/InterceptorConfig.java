@@ -33,9 +33,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(tokenInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/bonus-point/message/reset/**","/bonus-point/safe/password-reset","/bonus-point/message/register/**")
-                .excludePathPatterns("/bonus-point/member/member-register", "/bonus-point/browser-login","/bonus-point/member/admin-login",
-                        "/bonus-point/member/memberLoginAPP","/bonus-point/memberTranfer/tranfer_bp_user","/bonus-point/member/memberLoginAPPCaptcha")
+                .excludePathPatterns("/bonus-point/message/reset/**", "/bonus-point/safe/password-reset", "/bonus-point/message/register/**")
+                .excludePathPatterns("/bonus-point/member/member-register", "/bonus-point/browser-login", "/bonus-point/member/admin-login",
+                        "/bonus-point/member/memberLoginAPP", "/bonus-point/memberTranfer/tranfer_bp_user", "/bonus-point/member/memberLoginAPPCaptcha")
                 .excludePathPatterns("/error", "/token-error")
                 .excludePathPatterns("/data/**")
                 .excludePathPatterns("/bonus-point/good/get/*")
@@ -52,8 +52,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(identityIntercept)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/bonus-point/member/member-register", "/bonus-point/browser-login","/bonus-point/member/admin-login",
-                        "/bonus-point/member/memberLoginAPP","/bonus-point/memberTranfer/tranfer_bp_user","/bonus-point/member/memberLoginAPPCaptcha");
+                .excludePathPatterns("/bonus-point/member/member-register", "/bonus-point/browser-login", "/bonus-point/member/admin-login",
+                        "/bonus-point/member/memberLoginAPP", "/bonus-point/memberTranfer/tranfer_bp_user", "/bonus-point/member/memberLoginAPPCaptcha");
 
 
         registry.addInterceptor(tokenTimeInterceptor)

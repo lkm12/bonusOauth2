@@ -16,6 +16,7 @@ public interface AccountService {
      * 通过不为空的字段统计用户数量
      * 目前有 pid role mobile username publicKey loginAt createdat
      * 时间统计大于该时间的
+     *
      * @param accountPO
      * @return
      */
@@ -23,7 +24,8 @@ public interface AccountService {
 
     /**
      * 检查同一父级下用户输入的手机号是否已经被使用
-     * @param pId 父级id
+     *
+     * @param pId    父级id
      * @param mobile 手机号
      * @return
      */
@@ -31,23 +33,26 @@ public interface AccountService {
 
     /**
      * 检查支付密码
+     *
      * @param payword
      * @param uid
      * @return
      */
-    boolean checkPayword(String payword , Long uid);
+    boolean checkPayword(String payword, Long uid);
 
     /**
      * 检查支付密码
+     *
      * @param password
      * @param uid
      * @return
      */
-    boolean checkPassword(String password , Long uid);
+    boolean checkPassword(String password, Long uid);
 
 
     /**
      * 获取账户信息，转账使用
+     *
      * @param accountDTO
      * @return
      */
@@ -59,11 +64,10 @@ public interface AccountService {
 
     /**
      * 修改昵称
-     * @param accountDTO{
-     *                  id
-     *                  nickname
-     *                  }
      *
+     * @param accountDTO{ id
+     *                    nickname
+     *                    }
      * @return
      */
     ResponseVO updateNickname(AccountDTO accountDTO);

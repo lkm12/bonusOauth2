@@ -68,6 +68,7 @@ public interface PointInfoMapper extends TkMapper<PointInfoPO> {
 
     /**
      * 查找过期而未处理的积分
+     *
      * @return
      */
     @Select("select id , name ,company , issue_platform  from bp_point_info where status =1 and end_at < #{nowTime} and end_at!=0")
@@ -75,6 +76,7 @@ public interface PointInfoMapper extends TkMapper<PointInfoPO> {
 
     /**
      * 将过期而未处理的积分设置为过期
+     *
      * @param id
      * @return
      */
@@ -83,20 +85,21 @@ public interface PointInfoMapper extends TkMapper<PointInfoPO> {
 
     /**
      * 获取集团积分流通量
+     *
      * @param companyId 集团id
-     * @return 流通量(可能为NULL ,表示0)
+     * @return 流通量(可能为NULL, 表示0)
      */
     @Select("SELECT SUM(num-num_used) as nums FROM  bp_point_info  WHERE company=#{companyId} AND `status` = 1 GROUP BY  company")
     BigDecimal companyPointLiquidity(Long companyId);
 
     /**
      * 获取集团待审核积分数量
+     *
      * @param companyId 集团id
-     * @return  待审核积分数量（为NULL ,表示 0）
+     * @return 待审核积分数量（为NULL ,表示 0）
      */
     @Select("SELECT SUM(num) as nums FROM  bp_point_info  WHERE company=#{companyId} AND `status` = 0 GROUP BY  company")
     BigDecimal companyPointToCheck(Long companyId);
-
 
 
 }

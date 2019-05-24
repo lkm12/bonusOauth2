@@ -256,11 +256,10 @@ public class SafeManagerController {
     /**
      * 修改手机号第一步 验证原手机号
      *
-     * @param secrecyFORM{
-     *                     country
+     * @param secrecyFORM{ country
      *                     mobile
      *                     code
-     *                   }
+     *                     }
      * @return
      */
     @LogAnnotation(note = "修改手机号第一步：验证原手机号")
@@ -274,7 +273,7 @@ public class SafeManagerController {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
-        if (secrecyFORM.getCountry()==null){
+        if (secrecyFORM.getCountry() == null) {
             secrecyFORM.setCountry("CN");
         }
         Message message = new Message();
@@ -352,10 +351,9 @@ public class SafeManagerController {
     /**
      * 绑定邮箱
      *
-     * @param secrecyFORM{
-     *                   code
-     *                   email
-     *                   }
+     * @param secrecyFORM{ code
+     *                     email
+     *                     }
      * @return
      */
     // @PutMapping("/email-set")
@@ -399,11 +397,12 @@ public class SafeManagerController {
 
     /**
      * 修改邮箱第一步 验证原邮箱
+     *
      * @param secrecyFORM {
      *                    code
      *                    email
-     *
-     * }
+     *                    <p>
+     *                    }
      * @return
      */
     // @PutMapping("/email-edit/verification-original-email")
@@ -432,11 +431,10 @@ public class SafeManagerController {
     /**
      * 修改邮箱第二步 修改为新邮箱
      *
-     * @param secrecyFORM{
-     *                   code
-     *                   email
-     *                   codeToken
-     *                   }
+     * @param secrecyFORM{ code
+     *                     email
+     *                     codeToken
+     *                     }
      * @return
      */
     // @PutMapping("/email-edit/update-email")

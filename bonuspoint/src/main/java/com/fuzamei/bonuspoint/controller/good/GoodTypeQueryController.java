@@ -78,6 +78,7 @@ public class GoodTypeQueryController {
         log.info("获取指定父分类子类信息");
         return goodSubTypeService.getSubTypeByPid(pid);
     }
+
     /**
      * 获取所有分类信息
      */

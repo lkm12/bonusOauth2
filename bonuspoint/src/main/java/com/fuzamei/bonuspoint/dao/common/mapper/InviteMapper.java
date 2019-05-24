@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface InviteMapper extends TkMapper<InvitePO>{
+public interface InviteMapper extends TkMapper<InvitePO> {
 }

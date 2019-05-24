@@ -36,31 +36,32 @@ public class MemberAddressQueryController {
 
     /**
      * 查看收货地址
+     *
      * @param token
      * @param pageDTO {
-     *              pageSize
-     *              page
-     *
+     *                pageSize
+     *                page
      * @return
      */
     @LogAnnotation(note = "查看收货地址列表")
     @PostMapping("/list")
     public ResponseVO getUserAddressList(@RequestAttribute("token") Token token, @RequestBody PageDTO pageDTO) {
-        return userAddressService.getUserAddressList(token.getUid(),pageDTO);
+        return userAddressService.getUserAddressList(token.getUid(), pageDTO);
 
     }
 
     /**
      * 获取默认收货地址
+     *
      * @param token
      * @return
      */
     @LogAnnotation(note = "获取用户默认收货地址")
     @GetMapping("/get-default-address")
-    public ResponseVO getDefaultAddress(@RequestAttribute("token") Token token){
+    public ResponseVO getDefaultAddress(@RequestAttribute("token") Token token) {
         AccountPO accountPO = accountService.getUserById(token.getUid());
-        if (accountPO.getDefaultAddress()== null){
-            return  new ResponseVO(AddressResponseEnum.NO_DEFAULT_ADDRESS_YET);
+        if (accountPO.getDefaultAddress() == null) {
+            return new ResponseVO(AddressResponseEnum.NO_DEFAULT_ADDRESS_YET);
         }
         return userAddressService.getDefaultAddress(accountPO.getDefaultAddress());
     }

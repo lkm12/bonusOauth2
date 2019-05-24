@@ -14,12 +14,12 @@ public class Send1 {
     @Autowired
     private MqQueue mqQueue;
 
-    public void send1(){
-        String sendMessage = "send + "+ new Date();
+    public void send1() {
+        String sendMessage = "send + " + new Date();
         System.out.println("send");
         System.out.println(new Date());
         System.out.println(mqQueue.queueDan().getName());
-        amqpTemplate.convertAndSend(mqQueue.queueDan().getName(),sendMessage);
+        amqpTemplate.convertAndSend(mqQueue.queueDan().getName(), sendMessage);
 
     }
 }

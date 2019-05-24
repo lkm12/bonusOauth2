@@ -18,10 +18,10 @@ public class BlowfishUtil {
      * 加密
      *
      * @param sourceString 待加密
-     * @param encryptKey 加密密钥
+     * @param encryptKey   加密密钥
      * @return
      */
-    public static String encryptString(String sourceString, String encryptKey){
+    public static String encryptString(String sourceString, String encryptKey) {
         Blowfish blowfish = new Blowfish(encryptKey);
         return blowfish.encryptString(sourceString);
     }
@@ -33,7 +33,7 @@ public class BlowfishUtil {
      * @param decryptKey 解密密钥
      * @return
      */
-    public static String decryptString(String signString, String decryptKey){
+    public static String decryptString(String signString, String decryptKey) {
         Blowfish blowfish = new Blowfish(decryptKey);
         return blowfish.decryptString(signString);
     }

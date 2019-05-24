@@ -1,7 +1,6 @@
 package com.fuzamei.bonuspoint.filter;
 
 
-
 import com.fuzamei.bonuspoint.util.RedisTemplateUtil;
 import com.fuzamei.common.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -45,21 +44,21 @@ public class ResponseFilter implements Filter {
 
         filterChain.doFilter(request, wrapperResponse);
         log.info("进入返回值过滤器处理{}", ((HttpServletRequest) request).getRequestURI());
-            byte[] content = wrapperResponse.getContent();//获取返回值
-            //判断是否有值
-            if (content.length > 0) {
+        byte[] content = wrapperResponse.getContent();//获取返回值
+        //判断是否有值
+        if (content.length > 0) {
 
-                String str = new String(content, "UTF-8");
-                log.info("处理前返回值{}", str);
-                String expectStr = JsonUtil.jsonNumberToString(str);
-                //把返回值输出到客户端
+            String str = new String(content, "UTF-8");
+            log.info("处理前返回值{}", str);
+            String expectStr = JsonUtil.jsonNumberToString(str);
+            //把返回值输出到客户端
 
-                ServletOutputStream out = response.getOutputStream();
-                out.write(expectStr.getBytes());
+            ServletOutputStream out = response.getOutputStream();
+            out.write(expectStr.getBytes());
 
 
-                log.info("处理后返回值{}", expectStr);
-            }
+            log.info("处理后返回值{}", expectStr);
+        }
         filterChain.doFilter(request, response);
 
     }

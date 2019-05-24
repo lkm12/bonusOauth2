@@ -324,7 +324,7 @@ public class CompanyCashServiceImpl implements CompanyCashService {
         cashRecordPO.setStatus(CashRecordConstant.SUCCESS);
         //备付金提现
         cashRecordPO.setCategory(CashRecordConstant.WITHDRAW_CASH);
-       // cashRecordPO.setHash(hash);
+        // cashRecordPO.setHash(hash);
         //cashRecordPO.setHeight(height);
         //保存集团提现记录
         try {

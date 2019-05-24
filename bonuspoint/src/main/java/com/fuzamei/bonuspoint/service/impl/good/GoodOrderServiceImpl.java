@@ -153,12 +153,12 @@ public class GoodOrderServiceImpl implements GoodOrderService {
         if (goodPO == null) {
             return new ResponseVO(GoodResponseEnum.GOOD_ORDER_GID_NOEXIT);
         }
-        if(goodPO.getStatus() != GoodStatusConstant.SALE) {
+        if (goodPO.getStatus() != GoodStatusConstant.SALE) {
             return new ResponseVO(GoodResponseEnum.GOOD_NOT_MATCH);
         }
 
-        if (goodPO.getIsLife() && goodPO.getStartAt() > System.currentTimeMillis()){
-            return  new ResponseVO(GoodResponseEnum.GOOD_PAY_TIME_NOT_COMING);
+        if (goodPO.getIsLife() && goodPO.getStartAt() > System.currentTimeMillis()) {
+            return new ResponseVO(GoodResponseEnum.GOOD_PAY_TIME_NOT_COMING);
         }
 
         goodOrderPO.setGid(goodPO.getGid());
@@ -184,9 +184,9 @@ public class GoodOrderServiceImpl implements GoodOrderService {
 //            return  new ResponseVO(GoodResponseEnum.USER_DEFAULT_ADDRESS_NOT_EXIT);
 //        }
 //        goodOrderPO.setAddressId(defaultAdressId);
-        AddressDetailVo addressDetail = userAddressDao.getAdressDetail(uid,goodOrderDTO.getAddressId());
-        if (addressDetail == null){
-            return  new ResponseVO(GoodResponseEnum.USER_DEFAULT_ADDRESS_NOT_EXIT);
+        AddressDetailVo addressDetail = userAddressDao.getAdressDetail(uid, goodOrderDTO.getAddressId());
+        if (addressDetail == null) {
+            return new ResponseVO(GoodResponseEnum.USER_DEFAULT_ADDRESS_NOT_EXIT);
         }
         goodOrderPO.setAddressId(goodOrderDTO.getAddressId());
         goodOrderPO.setAddressName(addressDetail.getAddressName());
@@ -571,10 +571,10 @@ public class GoodOrderServiceImpl implements GoodOrderService {
     /**
      * 用户支付商品
      *
-     * @param id       商品id
-     * @param uid      用户id
-     * @Param goodPayDTO 用户付款信息
+     * @param id  商品id
+     * @param uid 用户id
      * @return
+     * @Param goodPayDTO 用户付款信息
      */
     @Override
     public ResponseVO payGoodOrder(Long id, Long uid, GoodPayDTO goodPayDTO) {
@@ -597,23 +597,23 @@ public class GoodOrderServiceImpl implements GoodOrderService {
             return new ResponseVO(GoodResponseEnum.GOOD_PAYWORD_ERROR);
         }
 
-        GoodRebatePO goodRebatePO = new GoodRebatePO() ;
+        GoodRebatePO goodRebatePO = new GoodRebatePO();
         goodRebatePO.setGoodId(id);
         goodRebatePO = goodRebateMapper.selectOne(goodRebatePO);
-        if (goodOrderPO!=null){
+        if (goodOrderPO != null) {
             BigDecimal rebate = goodOrderPO.getGoodPrice().multiply(new BigDecimal(goodRebatePO.getRate()));
             Example example = new Example(PointInfoPO.class);
             Example.Criteria criteria = example.createCriteria();
-            criteria.andEqualTo("company",goodOrderPO.getGid());
-            criteria.andEqualTo("status",PointInfoConstant.CHECK_PASS);
-            criteria.andEqualTo("isLife",PointInfoConstant.LIFE_NOT_HAVING);
-            criteria.andGreaterThanOrEqualTo("numRemain",rebate);
+            criteria.andEqualTo("company", goodOrderPO.getGid());
+            criteria.andEqualTo("status", PointInfoConstant.CHECK_PASS);
+            criteria.andEqualTo("isLife", PointInfoConstant.LIFE_NOT_HAVING);
+            criteria.andGreaterThanOrEqualTo("numRemain", rebate);
             List<PointInfoPO> pointInfoPOList = pointInfoMapper.selectByExample(example);
-            if (pointInfoPOList== null || pointInfoPOList.isEmpty()){
+            if (pointInfoPOList == null || pointInfoPOList.isEmpty()) {
                 Long companyAdminId = companyInfoDao.queryUserIdByCompanyId(goodOrderPO.getGid());
                 AccountPO accountPO = accountService.getUserById(companyAdminId);
-                SubmailSMSUtil.sendSMS(accountPO.getMobile(),GoodRebateConstant.NO_REBATE_POINT_PROMPT_MESSAGE);
-            }else {
+                SubmailSMSUtil.sendSMS(accountPO.getMobile(), GoodRebateConstant.NO_REBATE_POINT_PROMPT_MESSAGE);
+            } else {
                 InvitePO invitePO = new InvitePO();
                 invitePO.setUid(uid);
                 invitePO = inviteMapper.selectOne(invitePO);
@@ -737,8 +737,8 @@ public class GoodOrderServiceImpl implements GoodOrderService {
         for (PointRecordPO pointRecordPO : todoRecords) {
             PointRecordPO recordPO = new PointRecordPO();
             recordPO.setId(pointRecordPO.getId());
-          //  recordPO.setHeight(queryTransaction.getResult().getHeight());
-          //  recordPO.setHash(responseBean.getResult());
+            //  recordPO.setHeight(queryTransaction.getResult().getHeight());
+            //  recordPO.setHash(responseBean.getResult());
             recordPO.setUpdatedAt(System.currentTimeMillis());
             pointRecordMapper.updateByPrimaryKeySelective(recordPO);
         }
@@ -747,8 +747,8 @@ public class GoodOrderServiceImpl implements GoodOrderService {
         BlockInfoPO blockInfoPO = new BlockInfoPO();
         blockInfoPO.setUid(goodOrderPO.getUid());
         blockInfoPO.setOperationType(Brokerpoints.ActionType.BuyCommodity_VALUE);
-       // blockInfoPO.setHash(responseBean.getResult());
-      //  blockInfoPO.setHeight(queryTransaction.getResult().getHeight());
+        // blockInfoPO.setHash(responseBean.getResult());
+        //  blockInfoPO.setHeight(queryTransaction.getResult().getHeight());
         blockInfoPO.setCreatedAt(System.currentTimeMillis());
         blockInfoDao.insertBlockInfo(blockInfoPO);
 
@@ -759,8 +759,8 @@ public class GoodOrderServiceImpl implements GoodOrderService {
         goodOrderPONew.setPayTotal(goodPoint);
         goodOrderPONew.setStatus(GoodOrderConstant.GOOD_TO_DELIVERED);
         goodOrderPONew.setPayedAt(System.currentTimeMillis());
-       // goodOrderPONew.setHeight(queryTransaction.getResult().getHeight());
-      //  goodOrderPONew.setHash(responseBean.getResult());
+        // goodOrderPONew.setHeight(queryTransaction.getResult().getHeight());
+        //  goodOrderPONew.setHash(responseBean.getResult());
         goodOrderDao.updateGoodOrder(goodOrderPONew);
         //添加用户为会员
         boolean isExit = companyMemberDao.isMember(goodOrderPO.getUid(), goodOrderPO.getGid());
@@ -861,7 +861,7 @@ public class GoodOrderServiceImpl implements GoodOrderService {
         GeneralPointRecordPO savePo = new GeneralPointRecordPO();
         savePo.setId(generalPointRecordPO.getId());
         //savePo.setHeight(queryTransaction.getResult().getHeight());
-       // savePo.setHash(responseBean.getResult());
+        // savePo.setHash(responseBean.getResult());
         savePo.setUpdatedAt(System.currentTimeMillis());
         generalPointRecordMapper.updateByPrimaryKeySelective(savePo);
 
@@ -872,8 +872,8 @@ public class GoodOrderServiceImpl implements GoodOrderService {
         BlockInfoPO blockInfoPO = new BlockInfoPO();
         blockInfoPO.setUid(uid);
         blockInfoPO.setOperationType(Brokerpoints.ActionType.BuyCommodity_VALUE);
-       // blockInfoPO.setHash(responseBean.getResult());
-       // blockInfoPO.setHeight(queryTransaction.getResult().getHeight());
+        // blockInfoPO.setHash(responseBean.getResult());
+        // blockInfoPO.setHeight(queryTransaction.getResult().getHeight());
         blockInfoPO.setCreatedAt(System.currentTimeMillis());
         blockInfoDao.insertBlockInfo(blockInfoPO);
 
@@ -884,8 +884,8 @@ public class GoodOrderServiceImpl implements GoodOrderService {
         goodOrderPONew.setPayTotal(goodGeneralpointTotal);
         goodOrderPONew.setStatus(GoodOrderConstant.GOOD_TO_DELIVERED);
         goodOrderPONew.setPayedAt(System.currentTimeMillis());
-       // goodOrderPONew.setHash(responseBean.getResult());
-       // goodOrderPONew.setHeight(queryTransaction.getResult().getHeight());
+        // goodOrderPONew.setHash(responseBean.getResult());
+        // goodOrderPONew.setHeight(queryTransaction.getResult().getHeight());
         goodOrderDao.updateGoodOrder(goodOrderPONew);
         //添加用户为会员
         boolean isExit = companyMemberDao.isMember(goodOrderPO.getUid(), goodOrderPO.getGid());
@@ -897,6 +897,7 @@ public class GoodOrderServiceImpl implements GoodOrderService {
 
     /**
      * 自动取消过期订单
+     *
      * @param outTime 过期时间
      */
     @Override

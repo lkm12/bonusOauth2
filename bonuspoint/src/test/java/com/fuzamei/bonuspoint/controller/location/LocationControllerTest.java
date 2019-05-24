@@ -38,23 +38,25 @@ public class LocationControllerTest {
     }
 
     @Test
-    public void testGetProvinceList() throws Exception{
+    public void testGetProvinceList() throws Exception {
         this.mockMvc.perform(get("/bonus-point/location/list-province")
-                .header(authorizationName,authorizationValue))
+                .header(authorizationName, authorizationValue))
                 .andExpect(status().isOk()).andDo(print())
                 .andReturn().getResponse().getContentAsString();
     }
+
     @Test
-    public void testGetCityList() throws Exception{
+    public void testGetCityList() throws Exception {
         this.mockMvc.perform(get("/bonus-point/location/420000/list-city")
-                .header(authorizationName,authorizationValue))
+                .header(authorizationName, authorizationValue))
                 .andExpect(status().isOk()).andDo(print())
                 .andReturn().getResponse().getContentAsString();
     }
+
     @Test
-    public void testGetAreaList() throws Exception{
+    public void testGetAreaList() throws Exception {
         this.mockMvc.perform(get("/bonus-point/location/421100/list-area")
-                .header(authorizationName,authorizationValue))
+                .header(authorizationName, authorizationValue))
                 .andExpect(status().isOk()).andDo(print())
                 .andReturn().getResponse().getContentAsString();
     }

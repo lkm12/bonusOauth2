@@ -12,7 +12,7 @@ import org.apache.ibatis.jdbc.SQL;
  */
 @Slf4j
 public class PlatformPointSqlFactory {
-    
+
     public String updatePointInfo(PointPO pointPO) {
         return new SQL() {{
             UPDATE("bp_point_info");

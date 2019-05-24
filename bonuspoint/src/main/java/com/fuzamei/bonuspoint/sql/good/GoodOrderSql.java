@@ -12,6 +12,7 @@ import com.fuzamei.bonuspoint.util.StringUtil;
 
 /**
  * 订单SQL
+ *
  * @author liumeng
  * @create 2018年4月25日
  */
@@ -61,16 +62,16 @@ public class GoodOrderSql {
                     VALUES("address_id", goodOrderPO.getAddressId().toString());
                 }
                 if (goodOrderPO.getAddressName() != null) {
-                    VALUES("address_name","'"+ goodOrderPO.getAddressName() + "'");
+                    VALUES("address_name", "'" + goodOrderPO.getAddressName() + "'");
                 }
-                if (goodOrderPO.getAddressMobile() != null){
-                    VALUES("address_mobile" , "'" + goodOrderPO.getAddressMobile() + "'");
+                if (goodOrderPO.getAddressMobile() != null) {
+                    VALUES("address_mobile", "'" + goodOrderPO.getAddressMobile() + "'");
                 }
-                if (goodOrderPO.getAddressDistrict() !=null){
-                    VALUES("address_district","'" + goodOrderPO.getAddressDistrict() +"'");
+                if (goodOrderPO.getAddressDistrict() != null) {
+                    VALUES("address_district", "'" + goodOrderPO.getAddressDistrict() + "'");
                 }
-                if (goodOrderPO.getAddressDetail() != null){
-                    VALUES("address_detail","'" + goodOrderPO.getAddressDetail() + "'");
+                if (goodOrderPO.getAddressDetail() != null) {
+                    VALUES("address_detail", "'" + goodOrderPO.getAddressDetail() + "'");
                 }
                 if (goodOrderPO.getStatus() != null) {
                     VALUES("status", goodOrderPO.getStatus().toString());
@@ -98,6 +99,7 @@ public class GoodOrderSql {
 
     /**
      * 更新订单信息
+     *
      * @param goodOrderPO
      * @return
      */
@@ -160,10 +162,10 @@ public class GoodOrderSql {
                 if (goodOrderPO.getBargainAt() != null) {
                     SET("bargain_at = " + goodOrderPO.getBargainAt().toString());
                 }
-                if(goodOrderPO.getHeight() != null) {
+                if (goodOrderPO.getHeight() != null) {
                     SET("height = " + goodOrderPO.getHeight().toString());
                 }
-                if(goodOrderPO.getHash() != null) {
+                if (goodOrderPO.getHash() != null) {
                     SET("hash = " + "'" + goodOrderPO.getHash() + "'");
                 }
                 SET("updated_at = " + String.valueOf(System.currentTimeMillis()));
@@ -174,6 +176,7 @@ public class GoodOrderSql {
 
     /**
      * 根据id 获取订单信息
+     *
      * @param id id
      * @return
      */
@@ -223,13 +226,15 @@ public class GoodOrderSql {
             }
         }.toString();
     }
+
     /**
      * 根据id 获取订单信息
-     * @param id id
+     *
+     * @param id  id
      * @param uid uid
      * @return
      */
-    public static String getUserOrderInfo(Long id,Long uid) {
+    public static String getUserOrderInfo(Long id, Long uid) {
         return new SQL() {
             {
                 List<String> columns = new ArrayList<>();
@@ -280,6 +285,7 @@ public class GoodOrderSql {
             }
         }.toString();
     }
+
     public static String queryGoodOrder(QueryOrderDTO queryOrderDTO) {
         return new SQL() {
             {
@@ -321,7 +327,7 @@ public class GoodOrderSql {
                         "WHEN 8 THEN '退货成功' " +
                         "WHEN 99 THEN '取消订单' " +
                         "WHEN 100 THEN '超时失效' " +
-                        "WHEN 101 THEN '隐藏订单'"  +
+                        "WHEN 101 THEN '隐藏订单'" +
                         "ELSE '' " +
                         "END AS statusName");
                 columns.add("orders.logistics_info");
@@ -355,16 +361,16 @@ public class GoodOrderSql {
                 if (queryOrderDTO.getGid() != null) {
                     WHERE("orders.gid = " + queryOrderDTO.getGid());
                 }
-                if(StringUtil.isNotBlank(queryOrderDTO.getCompanyName())) {
+                if (StringUtil.isNotBlank(queryOrderDTO.getCompanyName())) {
                     WHERE("company.company_name like " + "'" + queryOrderDTO.getCompanyName() + "%'");
                 }
-                if(StringUtil.isNotBlank(queryOrderDTO.getGoodName())) {
+                if (StringUtil.isNotBlank(queryOrderDTO.getGoodName())) {
                     WHERE("good.name like " + "'" + queryOrderDTO.getGoodName() + "%'");
                 }
                 if (queryOrderDTO.getStatus() != null) {
-                    if (GoodOrderConstant.ORDER_ALL_FAILED == queryOrderDTO.getStatus().intValue()){
-                        WHERE("(orders.status = 99 or orders.status = 100 )" );
-                    }else{
+                    if (GoodOrderConstant.ORDER_ALL_FAILED == queryOrderDTO.getStatus().intValue()) {
+                        WHERE("(orders.status = 99 or orders.status = 100 )");
+                    } else {
                         WHERE("orders.status = " + queryOrderDTO.getStatus());
                     }
                 }

@@ -19,7 +19,7 @@ public class RewardRuleStatus {
     /**
      * 待生效
      */
-    public static final int PENDING_EFFECTIVE= 2;
+    public static final int PENDING_EFFECTIVE = 2;
 
     /**
      * 删除

@@ -46,41 +46,44 @@ public class BaseControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
         login();
     }
+
     /**
      * 登陆平台
+     *
      * @return
      */
 
     private void login() throws RuntimeException {
-        Map<String,String> map = new HashMap<>(4);
-        map.put("username",username);
-        map.put("password",password);
-        map.put("mark","123456");
-        map.put("role","1");
+        Map<String, String> map = new HashMap<>(4);
+        map.put("username", username);
+        map.put("password", password);
+        map.put("mark", "123456");
+        map.put("role", "1");
         try {
             log.info(JsonUtil.toJsonString(map));
-            String result =this.mockMvc.perform(post("/bonus-point/browser-login")
+            String result = this.mockMvc.perform(post("/bonus-point/browser-login")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(JsonUtil.toJsonString(map))).andReturn().getResponse().getContentAsString();
             log.info(result);
             reslove(result);
         } catch (Exception e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
     /**
      * 解析参数
+     *
      * @param result
      */
-    public void reslove(String result) throws  RuntimeException {
+    public void reslove(String result) throws RuntimeException {
 
-        boolean success= result.contains("\"success\":\"true\"");
-        if (!success){
-            throw  new RuntimeException();
+        boolean success = result.contains("\"success\":\"true\"");
+        if (!success) {
+            throw new RuntimeException();
         }
         int last = result.lastIndexOf("\"");
-        this.authorizationValue = result.substring((result.substring(0,last).lastIndexOf("\"")+1),result.lastIndexOf("\""));
+        this.authorizationValue = result.substring((result.substring(0, last).lastIndexOf("\"") + 1), result.lastIndexOf("\""));
         log.info("token ： " + this.authorizationValue + "\n");
     }
 

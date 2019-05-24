@@ -12,10 +12,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class CityPO {
-    /** 市编码*/
+    /**
+     * 市编码
+     */
     private Long code;
-    /** 市名称*/
+    /**
+     * 市名称
+     */
     private String areaName;
-    /** 所属省编码*/
+    /**
+     * 所属省编码
+     */
     private Long provinceCode;
 }

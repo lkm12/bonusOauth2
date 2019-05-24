@@ -14,8 +14,12 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class QueryPointRecordFORM extends PageDTO {
-    /** 积分名称 */
+    /**
+     * 积分名称
+     */
     private String name;
-    /** 用户手机号*/
+    /**
+     * 用户手机号
+     */
     private String mobile;
 }

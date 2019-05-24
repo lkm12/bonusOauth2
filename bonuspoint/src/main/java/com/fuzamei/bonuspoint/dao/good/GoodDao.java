@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * 鍟嗗搧鎿嶄綔鎺ュ彛绫�
+ *
  * @author liumeng
  * @create 2018骞�4鏈�18鏃�
  */
@@ -26,7 +27,8 @@ public interface GoodDao {
 
     /**
      * 娣诲姞鍟嗗搧淇℃伅
-     * @param goodPO    鍟嗗搧淇℃伅
+     *
+     * @param goodPO 鍟嗗搧淇℃伅
      * @return 璁板綍鏁�
      */
     @InsertProvider(type = GoodSqlFactory.class, method = "savaGood")
@@ -35,13 +37,16 @@ public interface GoodDao {
 
     /**
      * 娣诲姞鍟嗗搧淇℃伅
-     * @param goodPO    鍟嗗搧淇℃伅
+     *
+     * @param goodPO 鍟嗗搧淇℃伅
      * @return 璁板綍鏁�
      */
     @InsertProvider(type = GoodSqlFactory.class, method = "savaGoodWithOutKey")
     int savaGoodWithOutKey(GoodPO goodPO);
+
     /**
      * 鏇存柊鍟嗗搧淇℃伅
+     *
      * @param goodPO 鍟嗗搧淇℃伅
      * @return
      */
@@ -50,6 +55,7 @@ public interface GoodDao {
 
     /**
      * 批量下架商品
+     *
      * @param goodIdList
      * @return
      */
@@ -59,8 +65,10 @@ public interface GoodDao {
             "#{id} " +
             "</foreach> ) </script>")
     int dropGoods(List<Long> goodIdList);
+
     /**
      * 鏍规嵁鍟嗗搧鑾峰彇瀵瑰簲闆嗗洟鐢ㄦ埛
+     *
      * @param id 闆嗗洟id
      * @return
      */
@@ -69,7 +77,8 @@ public interface GoodDao {
 
     /**
      * 鏍规嵁鍟嗗搧id 鑾峰彇鍟� 鍝�
-     * @param id 鍟嗗搧id 
+     *
+     * @param id 鍟嗗搧id
      * @return
      */
     @Select("select * from bp_good where id = #{id}")
@@ -77,6 +86,7 @@ public interface GoodDao {
 
     /**
      * 鏍规嵁鍟嗗搧鏍囪瘑鑾峰彇鍟嗗搧淇℃伅
+     *
      * @param id 鍟嗗搧鏍囪瘑
      * @return
      */
@@ -85,6 +95,7 @@ public interface GoodDao {
 
     /**
      * 鏍规嵁鏌ヨ鏉′欢鑾峰彇鍟嗗搧淇℃伅
+     *
      * @param queryGoodDTO
      * @return
      */
@@ -93,8 +104,9 @@ public interface GoodDao {
 
     /**
      * 璁㈣喘鍟嗗搧涓嬪崟
-     * @param id 鍟嗗搧id
-     * @param num  璁㈣喘鏁伴噺
+     *
+     * @param id  鍟嗗搧id
+     * @param num 璁㈣喘鏁伴噺
      * @return
      */
     @Update("update bp_good set num_used = num_used + #{num} , updated_at = unix_timestamp(now()) * 1000  where id = #{id} ")
@@ -102,8 +114,9 @@ public interface GoodDao {
 
     /**
      * 鍙栨秷鍟嗗搧涓嬪崟
-     * @param id 鍟嗗搧id
-     * @param num  璁㈣喘鏁伴噺
+     *
+     * @param id  鍟嗗搧id
+     * @param num 璁㈣喘鏁伴噺
      * @return
      */
     @Update("update bp_good set num_used = num_used - #{num}  , updated_at = unix_timestamp(now()) * 1000  where id = #{id} ")
@@ -111,6 +124,7 @@ public interface GoodDao {
 
     /**
      * 鍟嗗搧鍏戞崲璇︽儏鏌ヨ
+     *
      * @param goodExchangeDTO 鏌ヨ鏉′欢
      * @return 鏌ヨ缁撴灉
      */
@@ -119,8 +133,9 @@ public interface GoodDao {
 
     /**
      * app 首页展示
+     *
      * @param size
-     * @param pid 平台id
+     * @param pid  平台id
      * @return
      */
     @Select("SELECT good.* FROM bp_good AS good\n" +
@@ -129,20 +144,22 @@ public interface GoodDao {
             "WHERE good.`status` = 1 \n" +
             "AND uuser.p_id = #{pid}\n" +
             "ORDER BY created_at DESC LIMIT #{size} ")
-    List<GoodVO> appshow(@Param("size") Integer size,@Param("pid") Long pid);
+    List<GoodVO> appshow(@Param("size") Integer size, @Param("pid") Long pid);
 
     /**
      * 通过商品分类预览商品
+     *
      * @param tid 分类id
-     * @param  pid 平台id
+     * @param pid 平台id
      * @return
      */
     @SelectProvider(type = GoodSqlFactory.class, method = "previewGood")
-    List<GoodVO> previewGood(  Long tid , Long pid);
+    List<GoodVO> previewGood(Long tid, Long pid);
 
 
     /**
      * 分类商品预览
+     *
      * @return
      */
     @Select("SELECT id , `name` ,img FROM bp_good_type")
@@ -150,6 +167,7 @@ public interface GoodDao {
 
     /**
      * 查询需要自动过期的商品
+     *
      * @return
      */
     @Select("SELECT * FROM bp_good AS good WHERE good.is_life = 1 AND `status` =1")
@@ -157,13 +175,15 @@ public interface GoodDao {
 
     /**
      * 设置商品过期（即商品下架）
+     *
      * @param id 商品id
      */
     @Update("UPDATE bp_good AS good SET good.`status` = 0 , good.updated_at =unix_timestamp(now()) * 1000  WHERE good.id = #{id}")
-    void setOutTime (Long id);
+    void setOutTime(Long id);
 
     /**
      * 统计子分类下的商品
+     *
      * @param id
      * @return
      */
@@ -172,6 +192,7 @@ public interface GoodDao {
 
     /**
      * 通过店铺id获取店铺商品信息
+     *
      * @param companyId
      */
     @Select("SELECT count(id) goodsTotalNum , sum(num_used) goodsTotalUsed FROM `bp_good` where gid=#{companyId}")

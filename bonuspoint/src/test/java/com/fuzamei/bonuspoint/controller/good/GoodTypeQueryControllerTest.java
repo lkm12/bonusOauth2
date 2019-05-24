@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * test
+ *
  * @author liumeng
  * @create 2018年5月15日
  */
@@ -54,6 +55,7 @@ public class GoodTypeQueryControllerTest extends BaseControllerTest {
         this.mockMvc.perform(get("/bonus-point/goodtype/types/1/subtypes")).andExpect(status().isOk()).andDo(print())
                 .andReturn().getResponse().getContentAsString();
     }
+
     @Test
     public void listAllTypes() throws Exception {
         log.info("测试获取所有的分类信息");

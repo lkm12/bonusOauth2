@@ -17,6 +17,7 @@ public class DozerUtils {
 
     /**
      * 单个对象数据转换
+     *
      * @param source
      * @param destinationClass
      * @param <T>
@@ -28,16 +29,17 @@ public class DozerUtils {
 
     /**
      * 列表数据转换
+     *
      * @param sourceList
      * @param destinationClass
      * @param <T>
      * @param <S>
      * @return
      */
-    public static <T,S> List<T> convertList(List<S> sourceList, Class<T> destinationClass) {
-        if(CollectionUtils.isNotEmpty(sourceList)){
+    public static <T, S> List<T> convertList(List<S> sourceList, Class<T> destinationClass) {
+        if (CollectionUtils.isNotEmpty(sourceList)) {
             List<T> retList = new ArrayList<T>();
-            for(S source : sourceList){
+            for (S source : sourceList) {
                 retList.add(mapper.map(source, destinationClass));
             }
             return retList;

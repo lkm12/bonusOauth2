@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-
 /**
  * @author qbanxiaoli
  * @description
@@ -17,16 +16,24 @@ import lombok.NoArgsConstructor;
 
 public class ResponseVO<T> {
 
-    /** 结果状态 */
+    /**
+     * 结果状态
+     */
     private String success;
 
-    /** 结果信息 */
+    /**
+     * 结果信息
+     */
     private String message;
 
-    /** 结果码 */
+    /**
+     * 结果码
+     */
     private String code;
 
-    /** 返回数据 */
+    /**
+     * 返回数据
+     */
     private T data;
 
     public ResponseVO() {
@@ -38,6 +45,7 @@ public class ResponseVO<T> {
         this.success = responseEnum.getSuccess();
         this.code = responseEnum.getCode();
     }
+
     //返回结果不包含数据，返回信息不包含变量
     public ResponseVO(ResponseEnum responseEnum, String message) {
         this.message = I18nResource.getMessage(message);
@@ -67,7 +75,6 @@ public class ResponseVO<T> {
         this.code = responseEnum.getCode();
         this.data = data;
     }
-
 
 
 }

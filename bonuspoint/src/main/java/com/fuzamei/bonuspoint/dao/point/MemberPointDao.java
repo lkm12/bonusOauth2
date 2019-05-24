@@ -71,6 +71,7 @@ public interface MemberPointDao {
     /**
      * 根据uid查找用户
      * lkm
+     *
      * @param uid
      * @return
      */
@@ -90,6 +91,7 @@ public interface MemberPointDao {
     /**
      * 通过用户id查找其对应的通用积分数量
      * lkm
+     *
      * @param uid
      * @return
      */
@@ -115,6 +117,7 @@ public interface MemberPointDao {
 
     /**
      * 获取所有会员的会员积分数量
+     *
      * @param queryUserDTO
      * @return
      */
@@ -133,7 +136,6 @@ public interface MemberPointDao {
             "left join bp_company_info ON bp_company_info.id = company " +
             "where user_id = #{uid} and company = #{groupId} and end_at = 0")
     List<PointPO> findCompanyPointByUserIdAndCompanyIdTwo(@Param("uid") Long uid, @Param("groupId") Long groupId);
-
 
 
     @Select("SELECT id FROM bp_platform_info WHERE uid = #{uid}")
@@ -190,7 +192,7 @@ public interface MemberPointDao {
     @Select("SELECT bp_point_record.num,TYPE,bp_point_record.created_at,bp_company_info.company_name as name FROM bp_point_record " +
             "LEFT JOIN bp_user ON bp_user.id = bp_point_record.uid " +
             "LEFT JOIN bp_point_info ON bp_point_info.id = bp_point_record.point_id " +
-            "LEFT JOIN bp_company_info ON bp_point_info.company = bp_company_info.id WHERE bp_point_record.uid = #{id} AND  "+
+            "LEFT JOIN bp_company_info ON bp_point_info.company = bp_company_info.id WHERE bp_point_record.uid = #{id} AND  " +
             "role = 4")
     List<ExchangePointDTO> findUserPointInfo(PagePointDTO pagePointDTO);
 
@@ -207,6 +209,7 @@ public interface MemberPointDao {
 
     /**
      * 查出某个集团积分明细的使用详情
+     *
      * @param exchangePointDTO
      * @return
      */
@@ -216,8 +219,10 @@ public interface MemberPointDao {
             "LEFT JOIN bp_user ON bp_point_record.opposite_uid = bp_user.id " +
             "WHERE bp_point_record.id = #{id}")
     PointRecordAPPVO findPointListInfoCompany(ExchangePointDTO exchangePointDTO);
+
     /**
      * 查出某个通用积分明细的使用详情
+     *
      * @param exchangePointDTO
      * @return
      */
@@ -229,6 +234,7 @@ public interface MemberPointDao {
 
     /**
      * 根据积分id修改已使用的积分
+     *
      * @param pointId
      * @param numberUsed
      */
@@ -237,6 +243,7 @@ public interface MemberPointDao {
 
     /**
      * 根据uid查找集团名称
+     *
      * @param uid
      * @return
      */
@@ -247,6 +254,7 @@ public interface MemberPointDao {
 
     /**
      * 获取用户对应集团的可用会员积分(lmm)
+     *
      * @param uid uid
      * @param gid 集团id
      * @return
@@ -256,7 +264,7 @@ public interface MemberPointDao {
             "LEFT JOIN bp_point_info AS point ON relation.point_id = point.id " +
             "WHERE point.status = 1 AND relation.user_id =#{uid} AND point.company = #{gid} " +
             "GROUP BY relation.user_id , point.company ")
-    BigDecimal getCompanyPointSum(@Param("uid") Long uid ,@Param("gid") Long gid);
+    BigDecimal getCompanyPointSum(@Param("uid") Long uid, @Param("gid") Long gid);
 
     @Update("<script>" +
             " update bp_point_relation set num = 0 " +

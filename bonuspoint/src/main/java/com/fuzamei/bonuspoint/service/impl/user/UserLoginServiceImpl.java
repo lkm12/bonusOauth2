@@ -31,10 +31,12 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RefreshScope
 @Transactional(rollbackFor = Exception.class)
-public class UserLoginServiceImpl implements UserLoginService{
+public class UserLoginServiceImpl implements UserLoginService {
 
 
-    /** 加密密钥 */
+    /**
+     * 加密密钥
+     */
     @Value("${token.encrypt.key}")
     private String encryptKey;
 
@@ -58,9 +60,10 @@ public class UserLoginServiceImpl implements UserLoginService{
     private Long appOutTime;
 
     private final RedisTemplate redisTemplate;
+
     @Autowired
-    public UserLoginServiceImpl(AccountMapper accountMapper,PlatformInfoMapper platformInfoMapper,RedisTemplateUtil redisTemplateUtil,
-            RedisTemplate redisTemplate){
+    public UserLoginServiceImpl(AccountMapper accountMapper, PlatformInfoMapper platformInfoMapper, RedisTemplateUtil redisTemplateUtil,
+                                RedisTemplate redisTemplate) {
         this.accountMapper = accountMapper;
         this.platformInfoMapper = platformInfoMapper;
         this.redisTemplateUtil = redisTemplateUtil;
@@ -68,18 +71,17 @@ public class UserLoginServiceImpl implements UserLoginService{
     }
 
 
-
     @Override
     public ResponseVO browserLogin(UserDTO userDTO) {
 
         Example examplePlatform = new Example(PlatformInfoPO.class);
         Example.Criteria criteriaPlatform = examplePlatform.createCriteria();
-        criteriaPlatform.andEqualTo("mark",userDTO.getMark());
+        criteriaPlatform.andEqualTo("mark", userDTO.getMark());
         //通过平台mark查出平台信息
         PlatformInfoPO platformInfoPO = platformInfoMapper.selectOneByExample(examplePlatform);
 
         //平台不存在
-        if(platformInfoPO == null){
+        if (platformInfoPO == null) {
             return new ResponseVO(CommonResponseEnum.PLATFORM_NOT_EXIST);
         }
 
@@ -91,29 +93,29 @@ public class UserLoginServiceImpl implements UserLoginService{
         Example example = new Example(AccountPO.class);
         Example.Criteria criteria = example.createCriteria();
         AccountPO accountPO;
-        switch (userDTO.getRole()){
+        switch (userDTO.getRole()) {
             //为商户时
-            case 2:{
+            case 2: {
                 criteria.andEqualTo("username", userDTO.getUsername());
                 criteria.andEqualTo("passwordHash", userDTO.getPasswordHash());
-                criteria.andEqualTo("pId",platformInfoPO.getUid());
-                criteria.andEqualTo("role",userDTO.getRole());
-                 accountPO = accountMapper.selectOneByExample(example);
-                if(accountPO == null){
+                criteria.andEqualTo("pId", platformInfoPO.getUid());
+                criteria.andEqualTo("role", userDTO.getRole());
+                accountPO = accountMapper.selectOneByExample(example);
+                if (accountPO == null) {
                     return new ResponseVO(UserResponseEnum.USERNAME_PASSWORD_FAIL);
                 }
             }
             break;
             //为平台与总平台时
-            default:{
+            default: {
                 criteria.andEqualTo("username", userDTO.getUsername());
                 criteria.andEqualTo("passwordHash", userDTO.getPasswordHash());
                 criteria.andEqualTo("role", userDTO.getRole());
                 accountPO = accountMapper.selectOneByExample(example);
-                if(accountPO == null){
+                if (accountPO == null) {
                     return new ResponseVO(UserResponseEnum.USERNAME_PASSWORD_FAIL);
                 }
-                if(!platformInfoPO.getUid().equals(accountPO.getId())){
+                if (!platformInfoPO.getUid().equals(accountPO.getId())) {
                     return new ResponseVO(CommonResponseEnum.PLATFORM_LOGIN_ERROR);
                 }
             }
@@ -163,12 +165,12 @@ public class UserLoginServiceImpl implements UserLoginService{
 
         Example examplePlatform = new Example(PlatformInfoPO.class);
         Example.Criteria criteriaPlatform = examplePlatform.createCriteria();
-        criteriaPlatform.andEqualTo("mark",userDTO.getMark());
+        criteriaPlatform.andEqualTo("mark", userDTO.getMark());
         //通过平台mark查出平台信息
         PlatformInfoPO platformInfoPO = platformInfoMapper.selectOneByExample(examplePlatform);
 
         //平台不存在
-        if(platformInfoPO == null){
+        if (platformInfoPO == null) {
             return new ResponseVO(CommonResponseEnum.PLATFORM_NOT_EXIST);
         }
 
@@ -178,11 +180,11 @@ public class UserLoginServiceImpl implements UserLoginService{
 
         criteria.andEqualTo("username", userDTO.getUsername());
         criteria.andEqualTo("passwordHash", userDTO.getPasswordHash());
-        criteria.andEqualTo("pId",platformInfoPO.getUid());
-        criteria.andEqualTo("role",Roles.MEMBER);
+        criteria.andEqualTo("pId", platformInfoPO.getUid());
+        criteria.andEqualTo("role", Roles.MEMBER);
         AccountPO accountPO = accountMapper.selectOneByExample(example);
-        if(accountPO == null){
-         return new ResponseVO(UserResponseEnum.USERNAME_PASSWORD_FAIL);
+        if (accountPO == null) {
+            return new ResponseVO(UserResponseEnum.USERNAME_PASSWORD_FAIL);
         }
 
         userDTO.setId(accountPO.getId());

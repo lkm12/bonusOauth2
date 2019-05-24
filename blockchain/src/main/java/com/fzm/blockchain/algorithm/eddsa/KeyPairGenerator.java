@@ -1,13 +1,12 @@
 /**
  * EdDSA-Java by str4d
- *
+ * <p>
  * To the extent possible under law, the person who associated CC0 with
  * EdDSA-Java has waived all copyright and related or neighboring rights
  * to EdDSA-Java.
- *
+ * <p>
  * You should have received a copy of the CC0 legalcode along with this
  * work. If not, see <https://creativecommons.org/publicdomain/zero/1.0/>.
- *
  */
 package com.fzm.blockchain.algorithm.eddsa;
 
@@ -18,7 +17,7 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.util.Hashtable;
 
 /**
- *  Default keysize is 256 (Ed25519)
+ * Default keysize is 256 (Ed25519)
  */
 public final class KeyPairGenerator extends KeyPairGeneratorSpi {
     private static final int DEFAULT_KEYSIZE = 256;
@@ -62,7 +61,7 @@ public final class KeyPairGenerator extends KeyPairGeneratorSpi {
         if (!initialized)
             initialize(DEFAULT_KEYSIZE, new SecureRandom());
 
-        byte[] seed = new byte[edParams.getCurve().getField().getb()/8];
+        byte[] seed = new byte[edParams.getCurve().getField().getb() / 8];
         random.nextBytes(seed);
 
         EdDSAPrivateKeySpec privKey = new EdDSAPrivateKeySpec(seed, edParams);
@@ -74,6 +73,7 @@ public final class KeyPairGenerator extends KeyPairGeneratorSpi {
     /**
      * Create an EdDSANamedCurveSpec from the provided curve name. The current
      * implementation fetches the pre-created curve spec from a table.
+     *
      * @param curveName the EdDSA named curve.
      * @return the specification for the named curve.
      * @throws InvalidAlgorithmParameterException if the named curve is unknown.

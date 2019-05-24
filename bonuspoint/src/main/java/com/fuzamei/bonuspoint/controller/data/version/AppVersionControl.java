@@ -54,18 +54,19 @@ public class AppVersionControl {
        }*/
     @LogAnnotation(note = "获取版本更新列表")
     @PostMapping("/bonus-point/main-platform/list-app-version")
-    public ResponseVO listAppVersions(@RequestBody PageDTO pageDTO){
+    public ResponseVO listAppVersions(@RequestBody PageDTO pageDTO) {
         if (pageDTO.getPage() == null || pageDTO.getPage() < 1) {
             pageDTO.setPage(1);
         }
-        if (pageDTO.getPageSize() == null || pageDTO.getPageSize()<1 ) {
+        if (pageDTO.getPageSize() == null || pageDTO.getPageSize() < 1) {
             pageDTO.setPageSize(1);
         }
-        if (pageDTO.getPageSize()>maxSize){
+        if (pageDTO.getPageSize() > maxSize) {
             pageDTO.setPageSize(maxSize);
         }
         return appVersionService.listAppVersion(pageDTO);
     }
+
     @LogAnnotation(note = "获取安卓最新版本信息")
     @GetMapping("/data/app-version")
     public ResponseVO getNewestAppVersion() {

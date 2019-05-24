@@ -47,7 +47,7 @@ public class PointInfoServiceImpl implements PointInfoService {
     private boolean chainSwitch;
 
     @Autowired
-    public PointInfoServiceImpl(PointInfoMapper pointInfoMapper, AccountDao accountDao,CompanyInfoDao companyInfoDao,BlockInfoDao blockInfoDao , PointBC pointBC,BlockChainUtil blockChainUtil) {
+    public PointInfoServiceImpl(PointInfoMapper pointInfoMapper, AccountDao accountDao, CompanyInfoDao companyInfoDao, BlockInfoDao blockInfoDao, PointBC pointBC, BlockChainUtil blockChainUtil) {
         this.pointInfoMapper = pointInfoMapper;
         this.accountDao = accountDao;
         this.companyInfoDao = companyInfoDao;
@@ -63,10 +63,10 @@ public class PointInfoServiceImpl implements PointInfoService {
 
     @Override
     public int setPointExpired(Long pointId) {
-        log.info("使id:{}的积分过期",pointId);
+        log.info("使id:{}的积分过期", pointId);
         int result = pointInfoMapper.handelExpiredPointById(pointId);
         PointInfoPO pointInfoPO = pointInfoMapper.selectByPrimaryKey(pointId);
-        if (result == 1){
+        if (result == 1) {
             if (chainSwitch) {
                 KeyDTO platformKey = accountDao.getUserKeyById(pointInfoPO.getIssuePlatform());
                 /*

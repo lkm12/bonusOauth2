@@ -9,6 +9,7 @@ public class HexUtil {
 
     /**
      * 16进制转字节数组
+     *
      * @param s
      * @return
      */
@@ -17,18 +18,19 @@ public class HexUtil {
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
             data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
-                    + Character.digit(s.charAt(i+1), 16));
+                    + Character.digit(s.charAt(i + 1), 16));
         }
         return data;
     }
 
     /**
      * 字节数组转16进制
+     *
      * @param raw
      * @return
      */
     public static String bytesToHex(byte[] raw) {
-        if ( raw == null ) {
+        if (raw == null) {
             return null;
         }
         final StringBuilder hex = new StringBuilder(2 * raw.length);

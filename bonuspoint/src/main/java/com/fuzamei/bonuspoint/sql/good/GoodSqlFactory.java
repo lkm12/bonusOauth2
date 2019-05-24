@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 商品SQL工厂类
+ *
  * @author liumeng
  * @create 2018年4月18日
  */
@@ -22,6 +23,7 @@ public class GoodSqlFactory {
 
     /**
      * 获取更新商品子类sql
+     *
      * @param goodSubTypePO
      * @return sql
      */
@@ -31,7 +33,8 @@ public class GoodSqlFactory {
 
     /**
      * 添加商品信息(不生成主键)
-     * @param goodPO    商品信息
+     *
+     * @param goodPO 商品信息
      * @return SQL
      */
     public String savaGoodWithOutKey(GoodPO goodPO) {
@@ -41,7 +44,8 @@ public class GoodSqlFactory {
 
     /**
      * 添加商品信息
-     * @param goodPO    商品信息
+     *
+     * @param goodPO 商品信息
      * @return SQL
      */
     public String savaGood(GoodPO goodPO) {
@@ -50,6 +54,7 @@ public class GoodSqlFactory {
 
     /**
      * 更新商品信息
+     *
      * @param goodPO
      * @return
      */
@@ -59,6 +64,7 @@ public class GoodSqlFactory {
 
     /**
      * 根据商品id查询商品信息
+     *
      * @param id 商品id
      * @return
      */
@@ -68,6 +74,7 @@ public class GoodSqlFactory {
 
     /**
      * 根据查询条件获取商品信息
+     *
      * @param queryGoodDTO
      * @return SQL
      */
@@ -79,6 +86,7 @@ public class GoodSqlFactory {
 
     /**
      * 添加订单信息
+     *
      * @param goodOrderPO 订单信息
      * @return sql
      */
@@ -88,6 +96,7 @@ public class GoodSqlFactory {
 
     /**
      * 更新订单信息
+     *
      * @param goodOrderPO
      * @return sql
      */
@@ -97,6 +106,7 @@ public class GoodSqlFactory {
 
     /**
      * 根据流水号获取订单信息
+     *
      * @param id 流水号
      * @return sql
      */
@@ -106,7 +116,8 @@ public class GoodSqlFactory {
 
     /**
      * 根据流水号和 uid 获取订单信息
-     * @param id 流水号
+     *
+     * @param id  流水号
      * @param uid uid
      * @return sql
      */
@@ -116,6 +127,7 @@ public class GoodSqlFactory {
 
     /**
      * 根据查询条件获取订单信息
+     *
      * @param queryOrderDTO
      * @return
      */
@@ -127,6 +139,7 @@ public class GoodSqlFactory {
 
     /**
      * 商品兑换详情查询
+     *
      * @param exchangeDTO 查询条件
      * @return SQL结果
      */
@@ -138,12 +151,13 @@ public class GoodSqlFactory {
 
     /**
      * f分类预览sql
+     *
      * @param tid 分类id
-     * @param  pid 平台id
+     * @param pid 平台id
      * @return
      */
-    public static String previewGood(Long tid , Long pid) {
-        String sql = GoodSql.previewGood(tid,pid);
+    public static String previewGood(Long tid, Long pid) {
+        String sql = GoodSql.previewGood(tid, pid);
         log.info(sql);
         return sql;
     }

@@ -47,13 +47,12 @@ public class GoodTypeServiceImpl implements GoodTypeService {
     }
 
 
-
-
     /**
      * 保存商品分类信息
+     *
      * @param goodTypeDTO 商品分类信息
-     * @param uid 操作员id
-     * @throws Exception 
+     * @param uid         操作员id
+     * @throws Exception
      */
     @Override
     @Transactional
@@ -124,7 +123,6 @@ public class GoodTypeServiceImpl implements GoodTypeService {
     }
 
 
-
     /**
      * 获取所有商品分类
      */
@@ -137,11 +135,10 @@ public class GoodTypeServiceImpl implements GoodTypeService {
     @Override
     public ResponseVO deleteGoodType(Long id) {
         List<GoodSubTypePO> goodSubTypePOS = goodSubTypeDao.getSubTypeByPid(id);
-        if (goodSubTypePOS==null|| goodSubTypePOS.size()<1){
+        if (goodSubTypePOS == null || goodSubTypePOS.size() < 1) {
             goodTypeDao.deleteGoodType(id);
             return new ResponseVO(CommonResponseEnum.DELETE_SUCCESS);
-        }
-        else {
+        } else {
             return new ResponseVO(GoodResponseEnum.GOOD_DELETE_SUB_TYPE_FIRST);
         }
     }

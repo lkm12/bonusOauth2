@@ -57,7 +57,7 @@ public class GoodManageController {
         if (goodDTO.getWorth() == null) {
             return new ResponseVO(GoodResponseEnum.GOOD_WORTH);
         }
-        if (goodDTO.getRate()!=null&&goodDTO.getRate()<=0){
+        if (goodDTO.getRate() != null && goodDTO.getRate() <= 0) {
             return new ResponseVO(CommonResponseEnum.PARAMETER_ERROR);
         }
 

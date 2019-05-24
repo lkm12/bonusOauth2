@@ -15,11 +15,17 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MerchantPoint {
-    /** 积分id*/
-    private Long id ;
-    /** 积分数量*/
+    /**
+     * 积分id
+     */
+    private Long id;
+    /**
+     * 积分数量
+     */
     private BigDecimal quantity;
-    /** 过期时间*/
+    /**
+     * 过期时间
+     */
     private Long expiration;
 
 }

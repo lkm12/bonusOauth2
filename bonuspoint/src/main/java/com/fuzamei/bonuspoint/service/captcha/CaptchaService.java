@@ -6,9 +6,9 @@ import com.fuzamei.common.model.vo.ResponseVO;
 
 public interface CaptchaService {
 
-    ResponseVO saveCaptcha(Message message );
+    ResponseVO saveCaptcha(Message message);
 
-    ResponseVO saveCaptcha(Message message , AccountDTO accountDTO);
+    ResponseVO saveCaptcha(Message message, AccountDTO accountDTO);
 
-    boolean checkCaptcha(Message message );
+    boolean checkCaptcha(Message message);
 }

@@ -10,7 +10,8 @@ public interface MainPlatformService {
 
     /**
      * 添加平台
-     * @param accountDTO 平台管理员用户
+     *
+     * @param accountDTO      平台管理员用户
      * @param platformInfoDTO 平台信息
      * @return
      */
@@ -18,6 +19,7 @@ public interface MainPlatformService {
 
     /**
      * 查看平台列表
+     *
      * @param pageDTO
      * @return
      */

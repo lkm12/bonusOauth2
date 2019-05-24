@@ -19,33 +19,49 @@ import javax.validation.constraints.NotNull;
 @Data
 public class PlatformBaseInfoFORM {
 
-    /** 平台名称 */
-    @NotBlank(message = "PARAMETER_ERROR" )
+    /**
+     * 平台名称
+     */
+    @NotBlank(message = "PARAMETER_ERROR")
     private String platformName;
-    /** 平台的注册公司名称*/
+    /**
+     * 平台的注册公司名称
+     */
     @NotBlank(message = "PARAMETER_ERROR")
     private String companyName;
-    /** 平台负责人*/
-    @NotBlank(message = "PARAMETER_ERROR" )
+    /**
+     * 平台负责人
+     */
+    @NotBlank(message = "PARAMETER_ERROR")
     private String platformLeader;
-    /** 平台负责人手机号*/
+    /**
+     * 平台负责人手机号
+     */
     @Phone
-    @NotBlank(message = "PARAMETER_ERROR" )
+    @NotBlank(message = "PARAMETER_ERROR")
     private String platformLeaderMobile;
 
     @IDCard
     private String platformLeaderIdCard;
-    /** 平台电话*/
+    /**
+     * 平台电话
+     */
     @TelePhone
     private String platformTelephone;
-    /** 平台邮箱*/
-    @Email(message = "EMAIL_FORMAT_ERROR" )
+    /**
+     * 平台邮箱
+     */
+    @Email(message = "EMAIL_FORMAT_ERROR")
     private String platformEmail;
-    /**平台税号 */
+    /**
+     * 平台税号
+     */
     @NotBlank(message = "PARAMETER_ERROR")
     private String taxNumber;
     private String logoUrl;
-    /**积分兑换人民币 比率*/
+    /**
+     * 积分兑换人民币 比率
+     */
     @NotNull(message = "PARAMETER_ERROR")
     private Float pointRate;
 }

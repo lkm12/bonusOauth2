@@ -12,7 +12,7 @@ import javax.validation.ConstraintValidatorContext;
  * @author: WangJie
  * @create: 2018-07-13 15:47
  **/
-public class IDCardValidator implements ConstraintValidator<IDCard,String> {
+public class IDCardValidator implements ConstraintValidator<IDCard, String> {
     @Override
     public void initialize(IDCard constraintAnnotation) {
 
@@ -21,7 +21,7 @@ public class IDCardValidator implements ConstraintValidator<IDCard,String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         // 为空 不校验
-        if (value==null){
+        if (value == null) {
             return true;
         }
         return RegxUtils.isIDNumber(value);

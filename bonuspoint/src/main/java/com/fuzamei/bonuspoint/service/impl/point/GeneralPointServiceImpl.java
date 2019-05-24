@@ -116,39 +116,39 @@ public class GeneralPointServiceImpl implements GeneralPointService {
 */
         //插入发起方减少记录
         GeneralPointRecordPO recordFrom = new GeneralPointRecordPO();
-        BeanUtils.copyProperties(sendPointDTO,recordFrom);
+        BeanUtils.copyProperties(sendPointDTO, recordFrom);
         recordFrom.setUid(sendPointDTO.getFromId());
         recordFrom.setOppositeUid(sendPointDTO.getToId());
         recordFrom.setType(GeneralPointRecordConstant.POINT_SUB);
         recordFrom.setCategory(GeneralPointRecordConstant.CATEGORY_PLATFORM_GRANT_OUT);
-       // recordFrom.setHeight(height);
-      //  recordFrom.setHash(hash);
+        // recordFrom.setHeight(height);
+        //  recordFrom.setHash(hash);
         CompletableFuture.supplyAsync(() -> generalPointRecordMapper.insertSelective(recordFrom))
-        .whenComplete((result,e)->{
-            if (e!=null || result!=1){
-                if (e!=null){
-                    log.error(e.getMessage());
-                }
-                log.error("上链成功，写入数据库失败！平台发通用积分给用户,记录发起方减少积分记录写入数据库失败，待写入信息为:{}",recordFrom);
-            }
-        });
+                .whenComplete((result, e) -> {
+                    if (e != null || result != 1) {
+                        if (e != null) {
+                            log.error(e.getMessage());
+                        }
+                        log.error("上链成功，写入数据库失败！平台发通用积分给用户,记录发起方减少积分记录写入数据库失败，待写入信息为:{}", recordFrom);
+                    }
+                });
         //插入接收方积分增加记录
         GeneralPointRecordPO recordTo = new GeneralPointRecordPO();
-        BeanUtils.copyProperties(sendPointDTO,recordTo);
+        BeanUtils.copyProperties(sendPointDTO, recordTo);
         recordTo.setCreatedAt(TimeUtil.timestamp());
         recordTo.setUid(sendPointDTO.getToId());
         recordTo.setOppositeUid(sendPointDTO.getFromId());
         recordTo.setType(GeneralPointRecordConstant.POINT_ADD);
         recordTo.setCategory(GeneralPointRecordConstant.CATEGORY_USER_GRANT_IN);
-       // recordTo.setHeight(height);
-       // recordTo.setHash(hash);
+        // recordTo.setHeight(height);
+        // recordTo.setHash(hash);
         CompletableFuture.supplyAsync(() -> generalPointRecordMapper.insertSelective(recordTo)
-        ).whenComplete((result,e)->{
-            if (e!=null || result!=1){
-                if (e!=null){
+        ).whenComplete((result, e) -> {
+            if (e != null || result != 1) {
+                if (e != null) {
                     log.error(e.getMessage());
                 }
-                log.error("上链成功，写入数据库失败！平台发通用积分给用户,记录接收方增加积分记录写入数据库失败，待写入信息为:{}",recordTo);
+                log.error("上链成功，写入数据库失败！平台发通用积分给用户,记录接收方增加积分记录写入数据库失败，待写入信息为:{}", recordTo);
             }
         });
         //用户通用积分数量增加

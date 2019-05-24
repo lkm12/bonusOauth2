@@ -21,7 +21,9 @@ public class MemberPointPO {
     private Integer role;
     private List<PointPO> pointPOList;
     private List<CompanyPointPO> companyPointPOList;
-    /**用户变为集团用户的时间*/
+    /**
+     * 用户变为集团用户的时间
+     */
     private Long joinAt;
     /**
      * 用户id
@@ -32,12 +34,14 @@ public class MemberPointPO {
      */
     private String mobile;
 
-    /** 用户注册时间**/
+    /**
+     * 用户注册时间
+     **/
     private Long createdAt;
     /**
      * 地址
      */
-    private String  publicKey;
+    private String publicKey;
     /**
      * 拥有会员身份所属集团的积分总量
      */

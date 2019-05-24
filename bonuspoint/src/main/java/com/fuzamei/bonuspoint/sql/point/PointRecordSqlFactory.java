@@ -162,7 +162,7 @@ public class PointRecordSqlFactory {
     }
 
 
-    public String queryPointRecordList(PointRecordDTO pointRecordDTO){
+    public String queryPointRecordList(PointRecordDTO pointRecordDTO) {
         String sql = new SQL() {
             {
                 SELECT("bp_point_record.id");
@@ -181,16 +181,16 @@ public class PointRecordSqlFactory {
                 INNER_JOIN(" bp_user on bp_user.id = bp_point_record.opposite_uid ");
                 INNER_JOIN("bp_point_info on bp_point_record.point_id = bp_point_info.id");
                 WHERE("bp_point_record.uid = " + pointRecordDTO.getUid());
-                WHERE(" type = "+pointRecordDTO.getType());
-                WHERE(" category = "+pointRecordDTO.getCategory());
-                if (pointRecordDTO.getMobile()!=null){
-                    WHERE(" mobile like '%"+pointRecordDTO.getMobile()+"%' ");
+                WHERE(" type = " + pointRecordDTO.getType());
+                WHERE(" category = " + pointRecordDTO.getCategory());
+                if (pointRecordDTO.getMobile() != null) {
+                    WHERE(" mobile like '%" + pointRecordDTO.getMobile() + "%' ");
                 }
-                if (pointRecordDTO.getStartTime()!=null){
-                    WHERE("bp_point_record.created_at >"+pointRecordDTO.getStartTime());
+                if (pointRecordDTO.getStartTime() != null) {
+                    WHERE("bp_point_record.created_at >" + pointRecordDTO.getStartTime());
                 }
-                if (pointRecordDTO.getEndTime()!=null){
-                    WHERE("bp_point_record.created_at <"+pointRecordDTO.getEndTime());
+                if (pointRecordDTO.getEndTime() != null) {
+                    WHERE("bp_point_record.created_at <" + pointRecordDTO.getEndTime());
                 }
                 ORDER_BY("bp_point_record.created_at desc ");
 

@@ -13,75 +13,75 @@ import org.apache.ibatis.jdbc.SQL;
 @Log
 public class UserAddressSqlFactory {
 
-    public String getUserAddress(UserAddressDTO userAddressDTO){
-        SQL sql = new SQL(){
+    public String getUserAddress(UserAddressDTO userAddressDTO) {
+        SQL sql = new SQL() {
             {
 
                 SELECT("*");
                 FROM("bp_user_address");
-                WHERE("uid="+userAddressDTO.getUid());
+                WHERE("uid=" + userAddressDTO.getUid());
 
             }
         };
-        log.info("\nsql--------------------------\n"+sql.toString());
+        log.info("\nsql--------------------------\n" + sql.toString());
         return sql.toString();
     }
 
-    public String saveUserAddress(UserAddressDTO userAddressDTO){
-        SQL sql = new SQL(){
+    public String saveUserAddress(UserAddressDTO userAddressDTO) {
+        SQL sql = new SQL() {
             {
                 INSERT_INTO("bp_user_address");
-                VALUES("uid","'"+userAddressDTO.getUid()+"'");
-                VALUES("receiver","'"+userAddressDTO.getReceiver()+"'");
-                VALUES("mobile",""+userAddressDTO.getMobile());
-                VALUES("district_code",""+userAddressDTO.getDistrictCode());
-                VALUES("area_detail","'"+userAddressDTO.getAreaDetail()+"'");
-                VALUES("created_at","'"+userAddressDTO.getCreatedAt()+"'");
-                if (userAddressDTO.getUpdateAt()!=null){
-                    VALUES("updated_at","'"+userAddressDTO.getUpdateAt()+"'");
+                VALUES("uid", "'" + userAddressDTO.getUid() + "'");
+                VALUES("receiver", "'" + userAddressDTO.getReceiver() + "'");
+                VALUES("mobile", "" + userAddressDTO.getMobile());
+                VALUES("district_code", "" + userAddressDTO.getDistrictCode());
+                VALUES("area_detail", "'" + userAddressDTO.getAreaDetail() + "'");
+                VALUES("created_at", "'" + userAddressDTO.getCreatedAt() + "'");
+                if (userAddressDTO.getUpdateAt() != null) {
+                    VALUES("updated_at", "'" + userAddressDTO.getUpdateAt() + "'");
 
                 }
             }
         };
-        log.info("\nsql--------------------------\n"+sql.toString());
+        log.info("\nsql--------------------------\n" + sql.toString());
         return sql.toString();
     }
 
-    public String updateUserAddress(UserAddressDTO userAddressDTO){
-        SQL sql = new SQL(){
+    public String updateUserAddress(UserAddressDTO userAddressDTO) {
+        SQL sql = new SQL() {
             {
                 UPDATE("bp_user_address");
-                if (userAddressDTO.getReceiver()!=null){
-                    SET("receiver='"+userAddressDTO.getReceiver()+"'");
+                if (userAddressDTO.getReceiver() != null) {
+                    SET("receiver='" + userAddressDTO.getReceiver() + "'");
                 }
-                if (userAddressDTO.getMobile()!=null){
-                    SET("mobile='"+userAddressDTO.getMobile()+"'");
+                if (userAddressDTO.getMobile() != null) {
+                    SET("mobile='" + userAddressDTO.getMobile() + "'");
                 }
 
-                if (userAddressDTO.getDistrictCode()!=null){
-                    SET("district_code="+userAddressDTO.getDistrictCode());
+                if (userAddressDTO.getDistrictCode() != null) {
+                    SET("district_code=" + userAddressDTO.getDistrictCode());
                 }
-                if (userAddressDTO.getAreaDetail()!=null){
-                    SET("area_detail='"+userAddressDTO.getAreaDetail()+"'");
+                if (userAddressDTO.getAreaDetail() != null) {
+                    SET("area_detail='" + userAddressDTO.getAreaDetail() + "'");
                 }
-                SET("updated_at="+userAddressDTO.getUpdateAt());
-                WHERE("id="+userAddressDTO.getId());
-                WHERE("uid="+userAddressDTO.getUid());
+                SET("updated_at=" + userAddressDTO.getUpdateAt());
+                WHERE("id=" + userAddressDTO.getId());
+                WHERE("uid=" + userAddressDTO.getUid());
             }
         };
-        log.info("\nsql----------------------\n"+sql.toString());
+        log.info("\nsql----------------------\n" + sql.toString());
         return sql.toString();
     }
 
-    public String deleteUserAddress(UserAddressDTO userAddressDTO){
-        SQL sql = new SQL(){
+    public String deleteUserAddress(UserAddressDTO userAddressDTO) {
+        SQL sql = new SQL() {
             {
                 DELETE_FROM("bp_user_address");
-                WHERE("id="+userAddressDTO.getId());
-                WHERE("uid="+userAddressDTO.getUid());
+                WHERE("id=" + userAddressDTO.getId());
+                WHERE("uid=" + userAddressDTO.getUid());
             }
         };
-        log.info("\nsql---------------------\n"+sql.toString());
+        log.info("\nsql---------------------\n" + sql.toString());
         return sql.toString();
     }
 }

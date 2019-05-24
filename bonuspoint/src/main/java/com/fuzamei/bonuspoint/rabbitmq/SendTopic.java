@@ -10,8 +10,9 @@ public class SendTopic {
 
     @Autowired
     private AmqpTemplate rabbitTemplate;
-@Autowired
+    @Autowired
     private MqQueue mqQueue;
+
     public void send() {
         String msg1 = "I am topic.mesaage msg======";
         System.out.println("sender1 : " + msg1);

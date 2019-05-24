@@ -26,36 +26,36 @@ public class SecrecyFORM {
     /**
      * 角色
      */
-    @NotNull(message = "PARAMETER_ERROR",groups = {UserSecrecy.ResetPassword.class})
+    @NotNull(message = "PARAMETER_ERROR", groups = {UserSecrecy.ResetPassword.class})
     private Integer role;
     /**
      * 原密码
      */
-    @NotBlank(message = "PARAMETER_ERROR",groups = {UserSecrecy.UpdatePassword.class})
+    @NotBlank(message = "PARAMETER_ERROR", groups = {UserSecrecy.UpdatePassword.class})
     private String oldPassword;
 
     /**
      * 密码 ，新密码
      */
-    @NotBlank(message = "PARAMETER_ERROR",groups = {UserSecrecy.UpdatePassword.class,UserSecrecy.ResetPassword.class})
+    @NotBlank(message = "PARAMETER_ERROR", groups = {UserSecrecy.UpdatePassword.class, UserSecrecy.ResetPassword.class})
     private String password;
 
     /**
      * 确认密码
      */
-    @NotBlank(message = "PARAMETER_ERROR",groups = {UserSecrecy.UpdatePassword.class,UserSecrecy.ResetPassword.class})
+    @NotBlank(message = "PARAMETER_ERROR", groups = {UserSecrecy.UpdatePassword.class, UserSecrecy.ResetPassword.class})
     private String passwordRepeat;
 
     /**
      * 支付密码
      */
-    @NotBlank(message = "PARAMETER_ERROR",groups = {UserSecrecy.UpdatePayWord.class})
+    @NotBlank(message = "PARAMETER_ERROR", groups = {UserSecrecy.UpdatePayWord.class})
     private String payword;
 
     /**
      * 确认支付密码
      */
-    @NotBlank(message = "PARAMETER_ERROR",groups = {UserSecrecy.UpdatePayWord.class})
+    @NotBlank(message = "PARAMETER_ERROR", groups = {UserSecrecy.UpdatePayWord.class})
     private String paywordRepeat;
 
     /**
@@ -67,7 +67,7 @@ public class SecrecyFORM {
      * 手机号
      */
     @Phone
-    @NotBlank(message = "PARAMETER_ERROR",groups = {UserSecrecy.ResetPassword.class,
+    @NotBlank(message = "PARAMETER_ERROR", groups = {UserSecrecy.ResetPassword.class,
             UserSecrecy.UpdatePayWord.class,
             UserSecrecy.UserMobile.class,
             UserSecrecy.UpdateMobile.class})
@@ -77,7 +77,7 @@ public class SecrecyFORM {
      * 验证码
      */
     @Captcha
-    @NotBlank(message = "PARAMETER_ERROR",groups = {UserSecrecy.ResetPassword.class,
+    @NotBlank(message = "PARAMETER_ERROR", groups = {UserSecrecy.ResetPassword.class,
             UserSecrecy.UpdatePayWord.class,
             UserSecrecy.UserMobile.class,
             UserSecrecy.UpdateMobile.class,
@@ -88,13 +88,13 @@ public class SecrecyFORM {
     /**
      * 验证码token，用于修改手机和邮箱的第二步
      */
-    @NotBlank(message = "PARAMETER_ERROR",groups = {UserSecrecy.UpdateMobile.class,UserSecrecy.UpdateEmail.class})
+    @NotBlank(message = "PARAMETER_ERROR", groups = {UserSecrecy.UpdateMobile.class, UserSecrecy.UpdateEmail.class})
     private String codeToken;
 
     /**
      * 邮箱
      */
-    @Email(message = "EMAIL_FORMAT_ERROR" ,groups = {UserSecrecy.UserEmail.class,UserSecrecy.UpdateEmail.class})
+    @Email(message = "EMAIL_FORMAT_ERROR", groups = {UserSecrecy.UserEmail.class, UserSecrecy.UpdateEmail.class})
     private String email;
 
 

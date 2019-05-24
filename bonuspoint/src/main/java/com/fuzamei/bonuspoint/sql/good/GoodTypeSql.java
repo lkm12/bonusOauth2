@@ -8,6 +8,7 @@ import com.fuzamei.bonuspoint.util.StringUtil;
 
 /**
  * 商品分类和子分类Sql
+ *
  * @author liumeng
  * @create 2018年4月24日
  */
@@ -18,6 +19,7 @@ public class GoodTypeSql {
 
     /**
      * 更新新子分类信息SQL
+     *
      * @param goodSubTypePO 子分类信息
      * @return sql
      */
@@ -50,8 +52,10 @@ public class GoodTypeSql {
             }
         }.toString();
     }
+
     /**
      * 更新商品分类SQL
+     *
      * @param goodTypePO 分类信息
      * @return sql
      */
@@ -63,10 +67,10 @@ public class GoodTypeSql {
                     SET("name" + " = '" + goodTypePO.getName() + "'");
                 }
                 //更新时输入空字符串表示删除图像
-                if (goodTypePO.getImg() != null){
-                    if ("".equals(goodTypePO.getImg())){
-                        SET("img" + " = NULL " );
-                    }else{
+                if (goodTypePO.getImg() != null) {
+                    if ("".equals(goodTypePO.getImg())) {
+                        SET("img" + " = NULL ");
+                    } else {
                         SET("img" + " = '" + goodTypePO.getImg() + "'");
                     }
                 }

@@ -42,7 +42,7 @@ public class SendMessageController {
     public ResponseVO sendMobileOrEmailMessage(@RequestAttribute("token") Token token,
                                                @RequestBody @Validated(Captcha.MobileCaptcha.class) Message message,
                                                BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -51,12 +51,13 @@ public class SendMessageController {
         return captchaService.saveCaptcha(message, accountDTO);
 
     }
+
     @LogAnnotation(note = "发送邮箱验证码")
     @PostMapping("/send-email-verification-code")
     public ResponseVO sendEmailMessage(@RequestAttribute("token") Token token,
                                        @RequestBody @Validated(Captcha.EmailCaptcha.class) Message message,
                                        BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -66,28 +67,29 @@ public class SendMessageController {
 
     }
 
-    @LogAnnotation(note="注册发送验证码")
+    @LogAnnotation(note = "注册发送验证码")
     @PostMapping({"/register/send-SMS-verification-code"})
     public ResponseVO sendMobileCodeForRegister(@RequestBody @Validated(Captcha.MobileCaptcha.class) Message message, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
-        if (message.getType()!=CodeType.REGISETER){
+        if (message.getType() != CodeType.REGISETER) {
             return new ResponseVO(SafeResponseEnum.CAPTCHA_TYPE_WRONG);
         }
         return captchaService.saveCaptcha(message);
 
 
     }
+
     @LogAnnotation(note = "重置密码发送验证码")
     @PostMapping({"/reset/send-SMS-verification-code"})
     public ResponseVO sendMobileCodeForReset(@RequestBody @Validated(Captcha.MobileCaptcha.class) Message message, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
-        if (message.getType()!=CodeType.RESET_PASSWORD){
+        if (message.getType() != CodeType.RESET_PASSWORD) {
             return new ResponseVO(SafeResponseEnum.CAPTCHA_TYPE_WRONG);
         }
         return captchaService.saveCaptcha(message);

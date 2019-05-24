@@ -105,20 +105,21 @@ public class CompanyCashQueryController {
     /**
      * 获取集团备付金流水
      * lkm
-     *
-     *
+     * <p>
+     * <p>
      * {
-     *  currentPage: 当前页 (required = false)
-     *  pageSize: 每页记录数 (required = false)
-     *  startTime:起始时间(required = false)
-     *  endTime:结束时间(required = false)
+     * currentPage: 当前页 (required = false)
+     * pageSize: 每页记录数 (required = false)
+     * startTime:起始时间(required = false)
+     * endTime:结束时间(required = false)
      * }
+     *
      * @param token
      * @param companyCashRecordDTO
      * @return
      */
     @PostMapping("/company-cash-flow")
-    public ResponseVO getCompanyCashFlow(@RequestAttribute("token") Token token,@RequestBody CompanyCashRecordDTO companyCashRecordDTO){
+    public ResponseVO getCompanyCashFlow(@RequestAttribute("token") Token token, @RequestBody CompanyCashRecordDTO companyCashRecordDTO) {
 
         companyCashRecordDTO.setUid(token.getUid());
 

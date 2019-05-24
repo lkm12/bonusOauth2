@@ -1,7 +1,6 @@
 package com.fuzamei.bonuspoint.service.impl.captcha;
 
 
-
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.fuzamei.bonuspoint.constant.CodeType;
@@ -58,11 +57,12 @@ public class CaptchaServiceImpl implements CaptchaService {
     private final SubmailSMSUtil submailSMSUtil;
 
     private final AccountMapper accountMapper;
+
     @Autowired
-    public CaptchaServiceImpl(RedisTemplate redisTemplate,SubmailSMSUtil submailSMSUtil,AccountMapper accountMapper) {
+    public CaptchaServiceImpl(RedisTemplate redisTemplate, SubmailSMSUtil submailSMSUtil, AccountMapper accountMapper) {
         this.redisTemplate = redisTemplate;
         this.submailSMSUtil = submailSMSUtil;
-        this.accountMapper =accountMapper;
+        this.accountMapper = accountMapper;
     }
 
 
@@ -78,7 +78,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         String codeSign = valueOperations.get(CodeType.REGISETER + "_" + message.getMobile() + "_sign");
         if (codeSign == null) {
             message.setCode(CaptchaUtil.getCode());
-            if (!smsSwitch){
+            if (!smsSwitch) {
                 message.setCode("123456");
             }
             valueOperations.set(message.getType() + "_" + message.getMobile() + "_sign", message.getCode(), keySignOutTime, TimeUnit.SECONDS);
@@ -96,11 +96,11 @@ public class CaptchaServiceImpl implements CaptchaService {
                     log.info("验证码发送失败：{}", sendSmsResponse.getMessage());
                     return new ResponseVO(CommonResponseEnum.SEND_CAPTCHA_ERROR);
                 }*/
-              boolean result = submailSMSUtil.sendCaptcha(message.getMobile(),message.getCode());
-              if (!result){
-                  log.info("手机号{},验证码类型：{} ,验证码发送失败",message.getMobile(),message.getType());
-                  return new ResponseVO(CommonResponseEnum.SEND_CAPTCHA_ERROR);
-              }
+                boolean result = submailSMSUtil.sendCaptcha(message.getMobile(), message.getCode());
+                if (!result) {
+                    log.info("手机号{},验证码类型：{} ,验证码发送失败", message.getMobile(), message.getType());
+                    return new ResponseVO(CommonResponseEnum.SEND_CAPTCHA_ERROR);
+                }
 
             }
             return new ResponseVO(CommonResponseEnum.SUCCESS);
@@ -124,14 +124,14 @@ public class CaptchaServiceImpl implements CaptchaService {
         String codeToken = null;
         if (codeSign == null) {
             message.setCode(CaptchaUtil.getCode());
-            if (!smsSwitch){
+            if (!smsSwitch) {
                 message.setCode("123456");
             }
             switch (message.getType()) {
-                case CodeType.BOUND_EMAIL:{
+                case CodeType.BOUND_EMAIL: {
                     valueOperations.set(message.getType() + "_" + message.getEmail() + "_" + accountDTO.getId() + "_sign", message.getCode(), keySignOutTime, TimeUnit.SECONDS);
                     valueOperations.set(message.getType() + "_" + message.getEmail() + "_" + accountDTO.getId(), message.getCode(), keyOutTime, TimeUnit.SECONDS);
-                    content=content.replaceFirst("code", message.getCode());
+                    content = content.replaceFirst("code", message.getCode());
                     if (smsSwitch) {
                         SendEmailUtil.sendEmail(message.getEmail(), title, content);
                     }
@@ -140,7 +140,7 @@ public class CaptchaServiceImpl implements CaptchaService {
                 case CodeType.EDIT_EMAIL_STEP_ONE:
                 case CodeType.EDIT_EMAIL_STEP_TWO: {
                     AccountPO accountPO = accountMapper.selectByPrimaryKey(accountDTO.getId());
-                    if (accountPO.getEmail()==null){
+                    if (accountPO.getEmail() == null) {
                         return new ResponseVO(SafeResponseEnum.EMAIL_UNBOUND);
                     }
                     if (message.getType() != CodeType.EDIT_EMAIL_STEP_TWO && !accountPO.getEmail().equals(message.getEmail())) {
@@ -154,13 +154,13 @@ public class CaptchaServiceImpl implements CaptchaService {
 
                     valueOperations.set(message.getType() + "_" + message.getEmail() + "_" + accountDTO.getId() + "_sign", message.getCode(), keySignOutTime, TimeUnit.SECONDS);
                     valueOperations.set(message.getType() + "_" + message.getEmail() + "_" + accountDTO.getId(), message.getCode(), keyOutTime, TimeUnit.SECONDS);
-                    content=content.replaceFirst("code", message.getCode());
+                    content = content.replaceFirst("code", message.getCode());
                     if (smsSwitch) {
                         SendEmailUtil.sendEmail(message.getEmail(), title, content);
                     }
                     break;
                 }
-                case CodeType.BOUND_MOBILE:{
+                case CodeType.BOUND_MOBILE: {
                     valueOperations.set(message.getType() + "_" + message.getMobile() + "_" + accountDTO.getId() + "_sign", message.getCode(), keySignOutTime, TimeUnit.SECONDS);
                     valueOperations.set(message.getType() + "_" + message.getMobile() + "_" + accountDTO.getId(), message.getCode(), keyOutTime, TimeUnit.SECONDS);
                     /**
@@ -179,9 +179,9 @@ public class CaptchaServiceImpl implements CaptchaService {
                             log.info("验证码发送失败：{}", sendSmsResponse.getMessage());
                             return new ResponseVO(CommonResponseEnum.SEND_CAPTCHA_ERROR);
                         }*/
-                        boolean result = submailSMSUtil.sendCaptcha(message.getMobile(),message.getCode());
-                        if (!result){
-                            log.info("手机号{},验证码类型：{} ,验证码发送失败",message.getMobile(),message.getType());
+                        boolean result = submailSMSUtil.sendCaptcha(message.getMobile(), message.getCode());
+                        if (!result) {
+                            log.info("手机号{},验证码类型：{} ,验证码发送失败", message.getMobile(), message.getType());
                             return new ResponseVO(CommonResponseEnum.SEND_CAPTCHA_ERROR);
                         }
 
@@ -190,7 +190,7 @@ public class CaptchaServiceImpl implements CaptchaService {
                 }
                 default: {
                     AccountPO accountPO = accountMapper.selectByPrimaryKey(accountDTO.getId());
-                    if (accountPO.getMobile()==null){
+                    if (accountPO.getMobile() == null) {
                         return new ResponseVO(SafeResponseEnum.MOBILE_UNBOUND);
                     }
                     if (message.getType() != CodeType.EDIT_MOBILE_STEP_TWO && !accountPO.getMobile().equals(message.getMobile())) {
@@ -199,7 +199,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 
                     if (message.getType() == CodeType.EDIT_MOBILE_STEP_ONE) {
                         codeToken = UUID.randomUUID().toString();
-                        valueOperations.set(message.getType()   + "_codeToken_" + accountDTO.getId() + "_token", codeToken, keyOutTime, TimeUnit.SECONDS);
+                        valueOperations.set(message.getType() + "_codeToken_" + accountDTO.getId() + "_token", codeToken, keyOutTime, TimeUnit.SECONDS);
                     }
                     valueOperations.set(message.getType() + "_" + message.getMobile() + "_" + accountDTO.getId() + "_sign", message.getCode(), keySignOutTime, TimeUnit.SECONDS);
                     valueOperations.set(message.getType() + "_" + message.getMobile() + "_" + accountDTO.getId(), message.getCode(), keyOutTime, TimeUnit.SECONDS);
@@ -219,9 +219,9 @@ public class CaptchaServiceImpl implements CaptchaService {
                             log.info("验证码发送失败：{}", sendSmsResponse.getMessage());
                             return new ResponseVO(CommonResponseEnum.SEND_CAPTCHA_ERROR);
                         }*/
-                       boolean result = submailSMSUtil.sendCaptcha(message.getMobile(),message.getCode());
-                        if (!result){
-                            log.info("手机号{},验证码类型：{} ,验证码发送失败",message.getMobile(),message.getType());
+                        boolean result = submailSMSUtil.sendCaptcha(message.getMobile(), message.getCode());
+                        if (!result) {
+                            log.info("手机号{},验证码类型：{} ,验证码发送失败", message.getMobile(), message.getType());
                             return new ResponseVO(CommonResponseEnum.SEND_CAPTCHA_ERROR);
                         }
 
@@ -230,12 +230,12 @@ public class CaptchaServiceImpl implements CaptchaService {
                 }
 
             }
-            if (codeToken!=null){
-                Map<String , String> map = new HashMap<>(1);
-                map.put("codeToken",codeToken);
+            if (codeToken != null) {
+                Map<String, String> map = new HashMap<>(1);
+                map.put("codeToken", codeToken);
                 return new ResponseVO<>(CommonResponseEnum.SUCCESS, map);
             }
-            return new ResponseVO<>(CommonResponseEnum.SUCCESS );
+            return new ResponseVO<>(CommonResponseEnum.SUCCESS);
         } else {
             return new ResponseVO(CommonResponseEnum.CAPTCHA_SENT);
         }

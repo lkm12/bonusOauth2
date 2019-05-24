@@ -12,26 +12,24 @@ public class Send {
     private User user;
 
     @Autowired
-    public Send(AmqpTemplate amqpTemplate,MqQueue mqQueue,User user){
+    public Send(AmqpTemplate amqpTemplate, MqQueue mqQueue, User user) {
         this.amqpTemplate = amqpTemplate;
         this.mqQueue = mqQueue;
         this.user = user;
     }
 
 
+    public void send() {
+        User user = new User();
+        user.setAge(10);
+        user.setName("kuoming");
 
+        String sendMessage = "send + " + user;
 
-   public void send(){
-       User user = new User();
-       user.setAge(10);
-       user.setName("kuoming");
+        System.out.println("send");
 
-       String sendMessage = "send + "+ user;
+        System.out.println(mqQueue.queueDan().getName());
+        amqpTemplate.convertAndSend(mqQueue.queueDan().getName(), user);
 
-       System.out.println("send");
-
-       System.out.println(mqQueue.queueDan().getName());
-       amqpTemplate.convertAndSend(mqQueue.queueDan().getName(),user);
-
-   }
+    }
 }

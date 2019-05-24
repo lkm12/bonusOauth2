@@ -25,19 +25,20 @@ import org.springframework.test.context.web.WebAppConfiguration;
 public class RedisTest {
 
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     private GoodService goodService;
 
     @Test
-    public void stringTest(){
-        ValueOperations<String,Object> valueOperations = redisTemplate.opsForValue();
+    public void stringTest() {
+        ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
         valueOperations.set("hello", "redis");
         System.out.println("useRedisDao = " + valueOperations.get("hello"));
     }
+
     @Test
-    public void cacheTest(){
+    public void cacheTest() {
         goodService.getCompanyGoodsInfo(5L);
         goodService.getCompanyGoodsInfo(5L);
         goodService.getCompanyGoodsInfo(4L);

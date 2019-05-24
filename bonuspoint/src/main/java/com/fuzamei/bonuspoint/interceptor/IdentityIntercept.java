@@ -27,18 +27,19 @@ public class IdentityIntercept extends HandlerInterceptorAdapter {
     private static final String MEMBER = "/member/";
     private static final String PLATFORM = "/platform/";
     private static final String OPTIONS = "OPTIONS";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         // 处理预查询
-        if(OPTIONS.equals(request.getMethod())){
+        if (OPTIONS.equals(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             return true;
         }
 
 
-        Token token = (Token)request.getAttribute("token");
-        if (token!=null) {
+        Token token = (Token) request.getAttribute("token");
+        if (token != null) {
             Integer role = token.getRole();
             String uri = request.getRequestURI();
             boolean rightAuthorization = true;
@@ -63,7 +64,7 @@ public class IdentityIntercept extends HandlerInterceptorAdapter {
             if (!rightAuthorization) {
                 ResponseVO responseVO = new ResponseVO(SafeResponseEnum.AUTHORITY_WRONG);
                 request.setAttribute("responseVO", responseVO);
-                request.getRequestDispatcher("/token-error").forward(request,response);
+                request.getRequestDispatcher("/token-error").forward(request, response);
                 return false;
             }
         }

@@ -38,7 +38,7 @@ public class UserAddressDataMove {
         CompletableFuture<Void> t = future.thenApply(Collection::stream)
                 .thenAccept(userAddressPOStream -> userAddressPOStream.forEach(
                         userAddressPO -> {
-                            log.info("正在迁移收货地址{}",userAddressPO);
+                            log.info("正在迁移收货地址{}", userAddressPO);
                             userAddressMapper.insert(userAddressPO);
 
                         })
@@ -46,10 +46,11 @@ public class UserAddressDataMove {
         t.join();
 
     }
+
     @Test
-    public void testDB(){
+    public void testDB() {
         oldUserAddressDao.getAllAddress();
-        log.info(oldUserAddressDao.getAllAddress().size()+"");
+        log.info(oldUserAddressDao.getAllAddress().size() + "");
         log.error("test");
     }
 

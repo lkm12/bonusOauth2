@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  **/
 @Component
 @RefreshScope
-public class PaywordValidator implements ConstraintValidator<Payword,String> {
+public class PaywordValidator implements ConstraintValidator<Payword, String> {
     @Value("${reg.payword}")
     private String paywordReg;
 
@@ -30,7 +30,7 @@ public class PaywordValidator implements ConstraintValidator<Payword,String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         //为空 不校验
-        if (value==null){
+        if (value == null) {
             return true;
         }
         return Pattern.matches(paywordReg, String.valueOf(value));

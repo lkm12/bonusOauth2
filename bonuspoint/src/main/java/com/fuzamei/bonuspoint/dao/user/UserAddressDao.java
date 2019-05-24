@@ -20,7 +20,7 @@ import java.util.List;
 public interface UserAddressDao {
 
     @Select("select * from bp_user_address where uid = #{uid} and is_delete = 0 order by created_at  ")
-    List<UserAddressPO> getUserAddressList(Long  uid);
+    List<UserAddressPO> getUserAddressList(Long uid);
 
     @InsertProvider(type = UserAddressSqlFactory.class, method = "saveUserAddress")
     @Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)
@@ -36,6 +36,7 @@ public interface UserAddressDao {
 
     /**
      * 设置地址是否失效
+     *
      * @param id 地址id
      * @return
      */
@@ -53,6 +54,7 @@ public interface UserAddressDao {
 
     /**
      * 获取用户的默认收货地址
+     *
      * @param uid uid
      * @return
      */
@@ -61,7 +63,8 @@ public interface UserAddressDao {
 
     /**
      * 获取用户地址信息
-     * @param uid 用户收货地址
+     *
+     * @param uid       用户收货地址
      * @param addressId 地址信息
      * @return
      */

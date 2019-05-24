@@ -30,14 +30,16 @@ public class MemberPointExcel {
     @ExcelField(name = "用户手机号")
     private String mobile;
 
-    /** 用户注册时间**/
+    /**
+     * 用户注册时间
+     **/
     @ExcelField(name = "用户注册时间")
     private String createdAt;
     /**
      * 地址
      */
     @ExcelField(name = "用户公钥")
-    private String  publicKey;
+    private String publicKey;
     /**
      * 拥有会员身份所属集团的积分总量
      */

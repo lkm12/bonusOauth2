@@ -11,13 +11,11 @@ package com.fuzamei.bonuspoint.util;
  *
  * @author wangtao
  * @create 2018/5/8
- *
  */
 
 public enum SnowFlakeUtil {
 
-    CHAIN(2,2),
-    ;
+    CHAIN(2, 2),;
 
 
     /**
@@ -28,11 +26,17 @@ public enum SnowFlakeUtil {
     /**
      * 每一部分占用的位数
      */
-    /** 序列号占用的位数 */
+    /**
+     * 序列号占用的位数
+     */
     private final static long SEQUENCE_BIT = 3;
-    /** 机器标识占用的位数 */
+    /**
+     * 机器标识占用的位数
+     */
     private final static long MACHINE_BIT = 3;
-    /** 数据中心占用的位数 */
+    /**
+     * 数据中心占用的位数
+     */
     private final static long DATACENTER_BIT = 3;
 
     /**
@@ -48,13 +52,21 @@ public enum SnowFlakeUtil {
     private final static long MACHINE_LEFT = SEQUENCE_BIT;
     private final static long DATACENTER_LEFT = SEQUENCE_BIT + MACHINE_BIT;
     private final static long TIMESTMP_LEFT = DATACENTER_LEFT + DATACENTER_BIT;
-    /** 数据中心 */
+    /**
+     * 数据中心
+     */
     private long datacenterId;
-    /** 机器标识 */
+    /**
+     * 机器标识
+     */
     private long machineId;
-    /** 序列号 */
+    /**
+     * 序列号
+     */
     private long sequence = 0L;
-    /** 上一次时间戳 */
+    /**
+     * 上一次时间戳
+     */
     private long lastStmp = -1L;
 
     SnowFlakeUtil(long datacenterId, long machineId) {

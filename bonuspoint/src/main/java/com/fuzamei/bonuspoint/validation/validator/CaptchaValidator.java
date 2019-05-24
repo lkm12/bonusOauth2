@@ -13,10 +13,11 @@ import java.util.regex.Pattern;
  * @author: WangJie
  * @create: 2018-07-12 10:21
  **/
-public class CaptchaValidator implements ConstraintValidator<Captcha , String> {
+public class CaptchaValidator implements ConstraintValidator<Captcha, String> {
 
     @Value("${reg.captcha}")
     private String captchaReg;
+
     @Override
     public void initialize(Captcha constraintAnnotation) {
 
@@ -25,9 +26,9 @@ public class CaptchaValidator implements ConstraintValidator<Captcha , String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         // 为空 不校验
-        if (value==null){
+        if (value == null) {
             return true;
         }
-        return Pattern.matches(captchaReg,value);
+        return Pattern.matches(captchaReg, value);
     }
 }

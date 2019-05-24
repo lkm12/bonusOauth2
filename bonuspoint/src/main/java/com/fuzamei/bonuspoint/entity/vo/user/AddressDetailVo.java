@@ -13,15 +13,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddressDetailVo {
-    /** 地址id*/
+    /**
+     * 地址id
+     */
     private Long addressId;
-    /**收货人姓名*/
+    /**
+     * 收货人姓名
+     */
     private String addressName;
-    /** 收货人电话*/
+    /**
+     * 收货人电话
+     */
     private String addressMobile;
-    /** 收货地址 */
+    /**
+     * 收货地址
+     */
     private String addressDistrict;
-    /** 收货详情*/
+    /**
+     * 收货详情
+     */
     private String addressDetail;
 
 }

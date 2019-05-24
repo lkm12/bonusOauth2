@@ -73,9 +73,9 @@ public class CompanyPointQueryControllerTest {
     @Test
     public void grantPointList() throws Exception {
         log.info(JSON.toJSONString("获取集团已发放积分"));
-        authorizationValue="bb&242";
+        authorizationValue = "bb&242";
 
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         this.mockMvc
                 .perform(post("/bonus-point/point/company/grant-list")
                         .header(authorizationName, authorizationValue)
@@ -95,7 +95,7 @@ public class CompanyPointQueryControllerTest {
     }
 
     @Test
-    public  void listActivity() throws Exception {
+    public void listActivity() throws Exception {
         log.info("测试获取集团进行的活动");
         this.mockMvc
                 .perform(get("/bonus-point/point/company/activities")

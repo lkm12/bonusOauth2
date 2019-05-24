@@ -1,5 +1,7 @@
 package com.fuzamei.bonuspoint.enums;
+
 import com.fuzamei.common.enums.ResponseEnum;
+
 /**
  * @author qbanxiaoli
  * @description

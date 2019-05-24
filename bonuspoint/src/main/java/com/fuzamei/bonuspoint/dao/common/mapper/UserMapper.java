@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface UserMapper extends TkMapper<AccountPO>  {
+public interface UserMapper extends TkMapper<AccountPO> {
 }

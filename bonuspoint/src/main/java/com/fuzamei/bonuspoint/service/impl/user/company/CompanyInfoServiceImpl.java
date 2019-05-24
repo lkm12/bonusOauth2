@@ -379,7 +379,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     @Override
     public ResponseVO deleteCompany(Long platformUid, Long companyId) {
         int result = companyInfoDao.deleteCompany(platformUid, companyId);
-        if (result == 0){
+        if (result == 0) {
             return new ResponseVO(CommonResponseEnum.DELETE_FAIL);
         }
         //该商家所有积分过期
@@ -388,7 +388,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         companyInfoCriteria.andEqualTo("company", companyId);
         companyInfoCriteria.andNotEqualTo("status", PointInfoConstant.point_out_time);
         List<PointInfoPO> pointInfoPOList = pointInfoMapper.selectByExample(companyInfoExample);
-        if (pointInfoPOList!=null && pointInfoPOList.size()>0) {
+        if (pointInfoPOList != null && pointInfoPOList.size() > 0) {
             pointInfoPOList.stream().map(pointInfoPO -> pointInfoService.setPointExpired(pointInfoPO.getId())).toArray();
         }
 
@@ -399,7 +399,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         goodCriteria.andNotEqualTo("status", GoodStatusConstant.DROP);
         goodCriteria.andNotEqualTo("status", GoodStatusConstant.DELETE);
         List<GoodPO> goodPOList = goodMapper.selectByExample(goodExample);
-        if (goodPOList!=null && goodPOList.size()>0){
+        if (goodPOList != null && goodPOList.size() > 0) {
             List<Long> goodIdList = goodPOList.stream().map(GoodPO::getId).collect(Collectors.toList());
             goodDao.dropGoods(goodIdList);
         }
@@ -409,11 +409,11 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         Example.Criteria rewardCriteria = rewardExample.createCriteria();
         rewardCriteria.andEqualTo("companyId", companyId);
         rewardCriteria.andNotEqualTo("status", RewardRuleStatus.DELETE);
-        List<RewardPO>rewardPOList = rewardMapper.selectByExample(rewardExample);
-        if (rewardPOList!=null && rewardPOList.size()>0){
+        List<RewardPO> rewardPOList = rewardMapper.selectByExample(rewardExample);
+        if (rewardPOList != null && rewardPOList.size() > 0) {
             rewardPOList.stream().map(rewardPO -> {
                 rewardPO.setStatus(RewardRuleStatus.DELETE);
-                return  rewardMapper.updateByPrimaryKeySelective(rewardPO);
+                return rewardMapper.updateByPrimaryKeySelective(rewardPO);
             }).toArray();
         }
         return new ResponseVO(CommonResponseEnum.DELETE_SUCCESS);
@@ -424,7 +424,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
         CompanyInfoDTO companyInfoDTO = new CompanyInfoDTO();
         companyInfoDTO.setPId(platformUid);
-        List<String> fields = Arrays.asList("bp_company_info.id","company_name");
-        return  companyInfoDao.getCampanyInfoList(fields,companyInfoDTO);
+        List<String> fields = Arrays.asList("bp_company_info.id", "company_name");
+        return companyInfoDao.getCampanyInfoList(fields, companyInfoDTO);
     }
 }

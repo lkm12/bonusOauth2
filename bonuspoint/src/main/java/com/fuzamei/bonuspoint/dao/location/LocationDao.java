@@ -19,6 +19,7 @@ import java.util.List;
 public interface LocationDao {
     /**
      * 通过省编码得到省份
+     *
      * @param provinceCode 省编码
      * @return
      */
@@ -27,6 +28,7 @@ public interface LocationDao {
 
     /**
      * 获取所有省份
+     *
      * @return
      */
     @Select("select code , area_name from cn_province ")
@@ -34,6 +36,7 @@ public interface LocationDao {
 
     /**
      * 通过市编码得到市信息
+     *
      * @param cityCode 市编码
      * @return
      */
@@ -42,6 +45,7 @@ public interface LocationDao {
 
     /**
      * 通过省编码获取下属的所有市
+     *
      * @param provinceCode 省编码
      * @return
      */
@@ -50,6 +54,7 @@ public interface LocationDao {
 
     /**
      * 通过县编码获取县信息
+     *
      * @param districtCode 区县编码
      * @return
      */
@@ -58,6 +63,7 @@ public interface LocationDao {
 
     /**
      * 通过市编码获取所有下属县信息
+     *
      * @param cityCode 市编码
      * @return
      */
@@ -67,6 +73,7 @@ public interface LocationDao {
 
     /**
      * 通过街道编码获取街道信息
+     *
      * @param streetCode 街道编码
      * @return
      */
@@ -75,6 +82,7 @@ public interface LocationDao {
 
     /**
      * 通过区县编码获取下属街道
+     *
      * @param districtCode
      * @return
      */
@@ -83,6 +91,7 @@ public interface LocationDao {
 
     /**
      * 通过街道编码获得地址
+     *
      * @param streetCode 街道编码
      * @return
      */
@@ -96,6 +105,7 @@ public interface LocationDao {
 
     /**
      * 通过区县编码获得地址
+     *
      * @param districtCode 区县编码
      * @return
      */
@@ -105,8 +115,10 @@ public interface LocationDao {
             " inner join cn_province on cn_province.code = cn_district.province_code " +
             " where cn_district.code = #{districtCode} ")
     LocationPO getLocationByDistrictCode(Long districtCode);
+
     /**
      * 是否是真实存在的街道编码
+     *
      * @param streetCode
      * @return
      */
@@ -115,6 +127,7 @@ public interface LocationDao {
 
     /**
      * 是否是真实存在的区县编码
+     *
      * @param districtCode
      * @return
      */
@@ -123,6 +136,7 @@ public interface LocationDao {
 
     /**
      * 获取所有市
+     *
      * @return
      */
     @Select("select code , area_name , province_code from cn_city ")
@@ -131,11 +145,11 @@ public interface LocationDao {
 
     /**
      * 获取所有县信息
+     *
      * @return
      */
     @Select("select code , area_name , city_code , zip_code from cn_district ")
     List<DistrictPO> getAllDistricts();
-
 
 
 }

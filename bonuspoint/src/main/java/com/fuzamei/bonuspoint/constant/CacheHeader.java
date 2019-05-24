@@ -13,9 +13,10 @@ public class CacheHeader {
         throw new AssertionError("不能实例化 CacheHeader");
     }
 
-    /** token缓存头 */
+    /**
+     * token缓存头
+     */
     public static final String TOKEN = "token_";
-
 
 
 }

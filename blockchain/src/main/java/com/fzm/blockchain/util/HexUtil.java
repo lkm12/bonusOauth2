@@ -20,7 +20,7 @@ public class HexUtil {
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
             data[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
-                    + Character.digit(hex.charAt(i+1), 16));
+                    + Character.digit(hex.charAt(i + 1), 16));
         }
         return data;
     }
@@ -32,7 +32,7 @@ public class HexUtil {
      * @return
      */
     public static String bytesToHex(byte[] bytes) {
-        if ( bytes == null ) {
+        if (bytes == null) {
             return null;
         }
         final StringBuilder hex = new StringBuilder(2 * bytes.length);
@@ -49,7 +49,7 @@ public class HexUtil {
      * @param hex
      * @return
      */
-    public static String hexToStr(String hex){
+    public static String hexToStr(String hex) {
         return new String(hexToBytes(hex), StandardCharsets.UTF_8);
     }
 
@@ -59,7 +59,7 @@ public class HexUtil {
      * @param str
      * @return
      */
-    public static String strToHex(String str){
+    public static String strToHex(String str) {
         return bytesToHex(str.getBytes(StandardCharsets.UTF_8));
     }
 

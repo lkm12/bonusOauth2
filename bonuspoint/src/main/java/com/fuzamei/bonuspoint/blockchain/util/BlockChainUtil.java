@@ -33,7 +33,7 @@ import java.nio.charset.StandardCharsets;
 @RefreshScope
 public class BlockChainUtil {
 
-   @Value("${blockChain.url}")
+    @Value("${blockChain.url}")
     private String blockChainUrl;
     @Value("${blockChain.to}")
     private String blockChainTo;
@@ -43,7 +43,7 @@ public class BlockChainUtil {
     private static final String TX_NOT_EXIST = "tx not exist";
 
 
-    public ResponseBean<String> sendTransaction(String publicKey, String privateKey, Brokerpoints.PointsAction pointsAction ) throws Exception{
+    public ResponseBean<String> sendTransaction(String publicKey, String privateKey, Brokerpoints.PointsAction pointsAction) throws Exception {
         // 构建并设置Transaction
         Brokerpoints.Transaction.Builder transaction = Brokerpoints.Transaction.newBuilder();
 
@@ -81,18 +81,19 @@ public class BlockChainUtil {
         // 发送区块链
         String httpPostResult = HttpClientUtil.httpPost(blockChainUrl, requestBeanStr);
         log.info("区块链返回结果：\n\r{}", httpPostResult);
-        return JSONObject.parseObject(httpPostResult, new TypeReference<ResponseBean<String>>(){});
+        return JSONObject.parseObject(httpPostResult, new TypeReference<ResponseBean<String>>() {
+        });
     }
 
     /**
      * 根据哈希查询交易信息
      */
-    public ResponseBean<TransactionResultBean> queryTransaction(String hash){
-        for(int i=0; i<30; i++){
+    public ResponseBean<TransactionResultBean> queryTransaction(String hash) {
+        for (int i = 0; i < 30; i++) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                log.info("查询区块链时线程休眠出错{}",e.getMessage());
+                log.info("查询区块链时线程休眠出错{}", e.getMessage());
             }
             DataBean bean = new DataBean();
             bean.setHash(hash);
@@ -101,17 +102,18 @@ public class BlockChainUtil {
             // 发送区块链
             String httpPostResult = HttpClientUtil.httpPost(blockChainUrl, requestBeanStr);
 
-            ResponseBean<TransactionResultBean> queryTransaction = JSONObject.parseObject(httpPostResult, new TypeReference<ResponseBean<TransactionResultBean>>(){});
-            if(queryTransaction == null){
+            ResponseBean<TransactionResultBean> queryTransaction = JSONObject.parseObject(httpPostResult, new TypeReference<ResponseBean<TransactionResultBean>>() {
+            });
+            if (queryTransaction == null) {
                 continue;
             }
-            if(queryTransaction.getError() != null || queryTransaction.getResult() == null){
-                if(TX_NOT_EXIST.equals(queryTransaction.getError())){
+            if (queryTransaction.getError() != null || queryTransaction.getResult() == null) {
+                if (TX_NOT_EXIST.equals(queryTransaction.getError())) {
                     continue;
                 }
                 log.info("区块链返回结果：\n\r{}", httpPostResult);
                 return checkQueryTransaction(queryTransaction);
-            }else {
+            } else {
                 log.info("区块链返回结果：\n\r{}", httpPostResult);
                 return checkQueryTransaction(queryTransaction);
             }
@@ -120,17 +122,17 @@ public class BlockChainUtil {
         return null;
     }
 
-    private ResponseBean<TransactionResultBean> checkQueryTransaction(ResponseBean<TransactionResultBean> queryTransaction){
-        if(queryTransaction == null){
+    private ResponseBean<TransactionResultBean> checkQueryTransaction(ResponseBean<TransactionResultBean> queryTransaction) {
+        if (queryTransaction == null) {
             log.info("根据哈希查询交易信息失败：null");
             return null;
         }
-        if(queryTransaction.getError() != null || queryTransaction.getResult() == null){
+        if (queryTransaction.getError() != null || queryTransaction.getResult() == null) {
             log.info("根据哈希查询交易信息失败：{}", queryTransaction.getError());
             return null;
         }
 
-        if(queryTransaction.getResult().getReceipt().getTy() != 2){
+        if (queryTransaction.getResult().getReceipt().getTy() != 2) {
             log.info("根据哈希查询交易信息失败：{}", queryTransaction.getResult().getReceipt().getLogs().get(0).getLog());
             return null;
         }

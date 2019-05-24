@@ -5,9 +5,7 @@ import com.fuzamei.common.enums.ResponseEnum;
 public enum BlockChainResponseEnum implements ResponseEnum {
 
     ADD_BLOCK_FAILED("false", "ADD_BLOCK_FAILED", "500"),
-    BLOCK_CHAIN_ERROR("false","BLOCK_CHAIN_ERROR","500"),
-
-    ;
+    BLOCK_CHAIN_ERROR("false", "BLOCK_CHAIN_ERROR", "500"),;
 
     private String success;
     private String message;

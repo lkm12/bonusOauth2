@@ -12,22 +12,38 @@ import java.math.BigDecimal;
  **/
 @Data
 public class SendPointDTO {
-    /** 转账发起人id */
+    /**
+     * 转账发起人id
+     */
     private Long fromId;
-    /** 转账积分id */
+    /**
+     * 转账积分id
+     */
     private Long pointId;
-    /** 接收积分用户id */
+    /**
+     * 接收积分用户id
+     */
     private Long toId;
-    /** 积分数量 */
+    /**
+     * 积分数量
+     */
     private BigDecimal num;
-    /** 备注 */
+    /**
+     * 备注
+     */
     private String memo;
-    /** 交易类型**/
+    /**
+     * 交易类型
+     **/
     private Integer category;
-    /** 加减积分标志 */
+    /**
+     * 加减积分标志
+     */
     private Integer type;
 
-    /** 支付密码*/
+    /**
+     * 支付密码
+     */
     private String payword;
 
 }

@@ -13,8 +13,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodPayDTO {
-    /** 支付方式*/
+    /**
+     * 支付方式
+     */
     private Integer payModel;
-    /** 交易密码*/
+    /**
+     * 交易密码
+     */
     private String payword;
 }

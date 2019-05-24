@@ -7,13 +7,21 @@ package com.fuzamei.bonuspoint.constant;
  * @create: 2018-04-24 10:01
  **/
 public class Roles {
-    /** 超级管理员用户*/
+    /**
+     * 超级管理员用户
+     */
     public static final Integer SUPER_MANAGER = 0;
-    /** 平台用户*/
+    /**
+     * 平台用户
+     */
     public static final Integer PLATFORM = 1;
-    /** 集团用户*/
+    /**
+     * 集团用户
+     */
     public static final Integer COMPANY = 2;
-    /** 会员用户*/
+    /**
+     * 会员用户
+     */
     public static final Integer MEMBER = 4;
 
 

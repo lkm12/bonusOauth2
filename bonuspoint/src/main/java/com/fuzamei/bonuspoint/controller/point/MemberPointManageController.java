@@ -38,15 +38,15 @@ public class MemberPointManageController {
     private String salt;
 
 
-
     private final UserService userService;
 
     private final MemberPointService memberPointService;
     private final MemberPointServiceImplDan memberPointServiceImplDan;
     private final PlatformInfoMapper platformInfoMapper;
+
     @Autowired
     public MemberPointManageController(UserService userService, MemberPointService memberPointService,
-                                       MemberPointServiceImplDan memberPointServiceImplDan,PlatformInfoMapper platformInfoMapper ) {
+                                       MemberPointServiceImplDan memberPointServiceImplDan, PlatformInfoMapper platformInfoMapper) {
 
         this.userService = userService;
         this.memberPointService = memberPointService;
@@ -57,31 +57,29 @@ public class MemberPointManageController {
     /**
      * 积分转账
      *
-     * @param
-     *                 {
-     *                 groupId： 所要转账积分的集团id（非必要）
-     *                 exNum: 兑换数量
-     *                 payword: 交易密码(非必需)
-     *                 opPubKey: 对方公钥
-     *                 pointType: 积分类型（1>集团商户积分，2>通用积分)
-     *
-     *                 memo:备注
-     *                 }
-     *                 lkm
+     * @param { groupId： 所要转账积分的集团id（非必要）
+     *          exNum: 兑换数量
+     *          payword: 交易密码(非必需)
+     *          opPubKey: 对方公钥
+     *          pointType: 积分类型（1>集团商户积分，2>通用积分)
+     *          <p>
+     *          memo:备注
+     *          }
+     *          lkm
      * @return 响应
      */
     @PostMapping("transfer")
     public ResponseVO memberTranPoint(@RequestAttribute("token") Token token, @RequestBody @Validated(Point.PointTranfer.class) ExchangePointDTO exchangeDTO,
                                       BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
 
         //将密码加密以进行比较
         try {
-            if(StringUtil.isNotBlank(exchangeDTO.getPayWord())){
+            if (StringUtil.isNotBlank(exchangeDTO.getPayWord())) {
                 exchangeDTO.setPayWordHash(MD5HashUtil.md5SaltEncrypt(exchangeDTO.getPayWord(), salt));
             }
         } catch (Exception e) {
@@ -102,19 +100,17 @@ public class MemberPointManageController {
      * 兑换平台积分
      * lkm
      *
-     * @param
-     *                 {
-     *                 groupId: 所要兑换的集团积分所属集团id
-     *                 exNum: 兑换数量
-     *                 payword: 交易密码
-     *
-     *                 }
+     * @param { groupId: 所要兑换的集团积分所属集团id
+     *          exNum: 兑换数量
+     *          payword: 交易密码
+     *          <p>
+     *          }
      * @return 响应
      */
     @PostMapping("exchange")
     public ResponseVO memberExchange(@RequestAttribute("token") Token token, @RequestBody @Validated(Point.PointExchange.class) ExchangePointDTO exchangeDTO,
                                      BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }

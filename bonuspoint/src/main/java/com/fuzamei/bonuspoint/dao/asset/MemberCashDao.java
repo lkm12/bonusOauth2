@@ -42,5 +42,5 @@ public interface MemberCashDao {
      * @description 获取会员用户集团积分详情
      */
     @SelectProvider(type = MemberCashSqlFactory.class, method = "getMemberPointCashRecordDetail")
-    List<MemberCashRecordVO>  getMemberPointCashRecordDetail(Long uid);
+    List<MemberCashRecordVO> getMemberPointCashRecordDetail(Long uid);
 }

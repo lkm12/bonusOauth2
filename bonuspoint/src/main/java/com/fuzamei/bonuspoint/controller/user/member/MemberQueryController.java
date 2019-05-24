@@ -53,8 +53,9 @@ public class MemberQueryController {
     private String platformPrivate;
 
     private final UserLoginService userLoginService;
+
     @Autowired
-    public MemberQueryController(UserLoginService userLoginService,ContactService contactService, UserService userService) {
+    public MemberQueryController(UserLoginService userLoginService, ContactService contactService, UserService userService) {
         this.contactService = contactService;
         this.userService = userService;
 
@@ -73,7 +74,7 @@ public class MemberQueryController {
      */
     @SuppressWarnings("unchecked")
     @PostMapping("/contacts/list")
-    public ResponseVO listContact(@RequestAttribute("token") Token token, @RequestBody PagePointDTO pagePointDTO ) {
+    public ResponseVO listContact(@RequestAttribute("token") Token token, @RequestBody PagePointDTO pagePointDTO) {
 
 
         pagePointDTO.setId(token.getUid());
@@ -116,6 +117,7 @@ public class MemberQueryController {
      * username
      * password
      * mark:平台uuid
+     *
      * @param
      * @return
      */
@@ -125,12 +127,12 @@ public class MemberQueryController {
 
         UserDTO userDTO;
         try {
-            userDTO = JSON.parseObject(jsonData,UserDTO.class);
-        }catch (Exception e){
+            userDTO = JSON.parseObject(jsonData, UserDTO.class);
+        } catch (Exception e) {
             log.info("参数错误");
             return new ResponseVO(CommonResponseEnum.PARAMETER_ERROR);
         }
-        if(StringUtil.isBlank(userDTO.getUsername()) || StringUtil.isBlank(userDTO.getPassword()) || StringUtil.isBlank(userDTO.getMark())){
+        if (StringUtil.isBlank(userDTO.getUsername()) || StringUtil.isBlank(userDTO.getPassword()) || StringUtil.isBlank(userDTO.getMark())) {
             log.info("参数不能为空");
             return new ResponseVO(CommonResponseEnum.PARAMETER_BLANK);
         }
@@ -156,9 +158,6 @@ public class MemberQueryController {
     public ResponseVO findUserInfoAPP(@RequestAttribute("token") Token token) {
         return userService.findUserInfoByIdAPP(token.getUid());
     }
-
-
-
 
 
 }

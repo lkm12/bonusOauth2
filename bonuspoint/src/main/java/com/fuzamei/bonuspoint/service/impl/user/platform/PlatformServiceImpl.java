@@ -38,38 +38,37 @@ import tk.mybatis.mapper.entity.Example;
 @Transactional(rollbackFor = Exception.class)
 public class PlatformServiceImpl implements PlatformService {
     @Autowired
-    private  PlatformInfoMapper platformInfoMapper;
+    private PlatformInfoMapper platformInfoMapper;
     @Autowired
-    private  AccountDao accountDao;
+    private AccountDao accountDao;
     @Autowired
-    private  PlatformBC platformBC;
+    private PlatformBC platformBC;
     @Autowired
     private BlockChainUtil blockChainUtil;
     @Autowired
     private BlockInfoDao blockInfoDao;
 
 
-
     @Override
     public ResponseVO<PlatformBaseInfoVO> getSelfPlatformBaseInfo(Long uid) {
         Example example = new Example(PlatformInfoPO.class);
-        example.createCriteria().andEqualTo("uid",uid);
+        example.createCriteria().andEqualTo("uid", uid);
         PlatformInfoPO platformInfoPO = platformInfoMapper.selectOneByExample(example);
         PlatformBaseInfoVO platformBaseInfoVO = new PlatformBaseInfoVO();
-        BeanUtils.copyProperties(platformInfoPO,platformBaseInfoVO);
-        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS,platformBaseInfoVO);
+        BeanUtils.copyProperties(platformInfoPO, platformBaseInfoVO);
+        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS, platformBaseInfoVO);
     }
 
     @Override
     public ResponseVO updatePlatformBaseInfo(PlatformInfoDTO platformInfoDTO) {
 
         PlatformInfoPO platformInfoPO = new PlatformInfoPO();
-        BeanUtils.copyProperties(platformInfoDTO,platformInfoPO);
+        BeanUtils.copyProperties(platformInfoDTO, platformInfoPO);
         Example example = new Example(PlatformInfoPO.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("uid",platformInfoDTO.getUid());
-        int result = platformInfoMapper.updateByExampleSelective(platformInfoPO,example);
-        if (result==1){
+        criteria.andEqualTo("uid", platformInfoDTO.getUid());
+        int result = platformInfoMapper.updateByExampleSelective(platformInfoPO, example);
+        if (result == 1) {
             return new ResponseVO(SafeResponseEnum.UPDATE_SUCCESS);
         }
         return new ResponseVO(SafeResponseEnum.UPDATE_FAIL);
@@ -82,11 +81,11 @@ public class PlatformServiceImpl implements PlatformService {
         platformInfoPO.setPointRate(pointRate);
         Example example = new Example(PlatformInfoPO.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("uid",platformUid);
+        criteria.andEqualTo("uid", platformUid);
         platformInfoPO = platformInfoMapper.selectOneByExample(example);
         platformInfoPO.setPointRate(pointRate);
         int result = platformInfoMapper.updateByPrimaryKeySelective(platformInfoPO);
-        if (result ==0){
+        if (result == 0) {
             return new ResponseVO(CommonResponseEnum.UPDATE_FALL);
         }
         KeyDTO platformKey = accountDao.getUserKeyById(platformUid);

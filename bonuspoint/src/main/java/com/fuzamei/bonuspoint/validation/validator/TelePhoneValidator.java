@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  **/
 @Component
 @RefreshScope
-public class TelePhoneValidator implements ConstraintValidator<TelePhone,String> {
+public class TelePhoneValidator implements ConstraintValidator<TelePhone, String> {
     @Value("${reg.telephone}")
     private String telephoneReg;
 
@@ -30,7 +30,7 @@ public class TelePhoneValidator implements ConstraintValidator<TelePhone,String>
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         //为空 不校验
-        if (value==null){
+        if (value == null) {
             return true;
         }
         return Pattern.matches(telephoneReg, String.valueOf(value));

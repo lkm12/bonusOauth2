@@ -60,8 +60,9 @@ public class CompanyPointSqlFactory {
 
     /**
      * 列出集团活动信息
-     * @param uid 集团管理UID
-     * @param  showOutTime 是否显示过期活动
+     *
+     * @param uid         集团管理UID
+     * @param showOutTime 是否显示过期活动
      * @return
      */
     public String listActivity(Long uid, Boolean showOutTime) {

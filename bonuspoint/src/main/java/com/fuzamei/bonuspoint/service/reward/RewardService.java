@@ -8,6 +8,7 @@ public interface RewardService {
 
     /**
      * 添加邀请奖励规则
+     *
      * @param rewardDTO
      * @return
      */
@@ -15,6 +16,7 @@ public interface RewardService {
 
     /**
      * 使邀请奖励规则生效
+     *
      * @param id
      * @param platformId
      * @return
@@ -23,6 +25,7 @@ public interface RewardService {
 
     /**
      * 暂停奖励规则
+     *
      * @param id
      * @param platformId
      * @return
@@ -32,6 +35,7 @@ public interface RewardService {
 
     /**
      * 删除奖励规则
+     *
      * @param id
      * @param uid
      * @return
@@ -40,6 +44,7 @@ public interface RewardService {
 
     /**
      * 查看奖励规则列表
+     *
      * @param rewardQuery
      * @return
      */
@@ -47,8 +52,9 @@ public interface RewardService {
 
     /**
      * 查看商户能够用于奖励的积分
+     *
      * @param companyId
      * @return
      */
-    ResponseVO listCompanyRewardPoints(Long companyId,Long platformId);
+    ResponseVO listCompanyRewardPoints(Long companyId, Long platformId);
 }

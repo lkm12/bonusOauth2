@@ -26,6 +26,7 @@ import java.util.List;
 @Service
 public class AppVersionServiceImpl implements AppVersionService {
     private final AppVersionMapper appVersionMapper;
+
     @Autowired
     public AppVersionServiceImpl(AppVersionMapper appVersionMapper) {
         this.appVersionMapper = appVersionMapper;
@@ -34,10 +35,10 @@ public class AppVersionServiceImpl implements AppVersionService {
     @Override
     public ResponseVO addAppVersion(AppVersioinDTO appVersioinDTO) {
         AppVersioinPO appVersioinPO = new AppVersioinPO();
-        BeanUtils.copyProperties(appVersioinDTO,appVersioinPO);
+        BeanUtils.copyProperties(appVersioinDTO, appVersioinPO);
         appVersioinPO.setCreatedAt(System.currentTimeMillis());
         int result = appVersionMapper.insertSelective(appVersioinPO);
-        if (result==1) {
+        if (result == 1) {
             return new ResponseVO(CommonResponseEnum.ADD_SUCCESS);
         }
         return new ResponseVO(CommonResponseEnum.ADD_FAIL);
@@ -46,19 +47,19 @@ public class AppVersionServiceImpl implements AppVersionService {
     @Override
     public ResponseVO getNewestAppVersionForAndroid() {
         AppVersioinPO appVersioinPO = appVersionMapper.getNewestAndroidVersion();
-        if (appVersioinPO == null){
+        if (appVersioinPO == null) {
             return new ResponseVO(CommonResponseEnum.QUERY_FAIL);
         }
-        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS,appVersioinPO);
+        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS, appVersioinPO);
     }
 
     @Override
     public ResponseVO getNewestAppVersionForIOS() {
         AppVersioinPO appVersioinPO = appVersionMapper.getNewestIOSVersion();
-        if (appVersioinPO==null){
+        if (appVersioinPO == null) {
             return new ResponseVO(CommonResponseEnum.QUERY_FAIL);
         }
-        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS,appVersioinPO);
+        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS, appVersioinPO);
     }
 
     @Override
@@ -66,14 +67,14 @@ public class AppVersionServiceImpl implements AppVersionService {
 
         Example example = new Example(AppVersioinPO.class);
         Example.Criteria criteria = example.createCriteria();
-        if (pageDTO.getFuzzyMatch()!=null) {
+        if (pageDTO.getFuzzyMatch() != null) {
             criteria.andEqualTo("system", pageDTO.getFuzzyMatch());
         }
         example.setOrderByClause("created_at desc");
         Page page = PageHelper.startPage(pageDTO.getPage(), pageDTO.getPageSize());
-        List<AppVersioinPO> appVersionPOList =appVersionMapper.selectByExample(example);
+        List<AppVersioinPO> appVersionPOList = appVersionMapper.selectByExample(example);
         int total = Integer.valueOf(String.valueOf(page.getTotal()));
         PageBean pageBean = new PageBean<>(appVersionPOList, pageDTO.getPage(), pageDTO.getPageSize(), total);
-        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS,pageBean);
+        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS, pageBean);
     }
 }

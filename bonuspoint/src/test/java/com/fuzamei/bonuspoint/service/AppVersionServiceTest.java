@@ -26,7 +26,7 @@ public class AppVersionServiceTest {
     private AppVersionService appVersionService;
 
     @Test
-    public void listAppVersionTest(){
+    public void listAppVersionTest() {
         PageDTO pageDTO = new PageDTO();
         pageDTO.setFuzzyMatch("Android");
         pageDTO.setPage(1);

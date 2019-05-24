@@ -41,6 +41,7 @@ public class GoodQueryController {
 
     /**
      * 查询商品信息
+     *
      * @param queryGoodDTO 查询条件
      * @return
      */
@@ -51,6 +52,7 @@ public class GoodQueryController {
 
     /**
      * 集团用户查询商品信息（只显示本集团）
+     *
      * @param token
      * @param queryGoodDTO
      * @return
@@ -62,6 +64,7 @@ public class GoodQueryController {
 
     /**
      * 查询商品状态
+     *
      * @return
      */
     @GetMapping("/status/list")
@@ -71,6 +74,7 @@ public class GoodQueryController {
 
     /**
      * 查询商品兑换信息
+     *
      * @param exchangeDTO 查询条件
      * @return
      */
@@ -82,36 +86,39 @@ public class GoodQueryController {
 
     /**
      * app 首页显示
+     *
      * @param size 首页显示条数
-     * @param pid 平台id
+     * @param pid  平台id
      * @return
      */
     @GetMapping("/appshow")
     public ResponseVO appshow(@RequestParam(required = false, defaultValue = "40") Integer size,
-                              @RequestParam (required = false,defaultValue = "1") Long pid) {
-        return goodService.appshow(size,pid);
+                              @RequestParam(required = false, defaultValue = "1") Long pid) {
+        return goodService.appshow(size, pid);
     }
 
     /**
      * app 分类预览
+     *
      * @return
      */
     @GetMapping("/typeshow")
-    public ResponseVO appTypeShow(@RequestParam (required = false,defaultValue = "1" ) Long pid) {
+    public ResponseVO appTypeShow(@RequestParam(required = false, defaultValue = "1") Long pid) {
         return goodService.previewTypeGood(pid);
     }
 
     /**
      * app 预览商家品牌
+     *
      * @return
      */
     @GetMapping("/companyshow")
-    public ResponseVO previewCompany(@RequestParam (required = false,defaultValue = "1" ) Long pid){
+    public ResponseVO previewCompany(@RequestParam(required = false, defaultValue = "1") Long pid) {
         return goodService.previewCompany(pid);
     }
 
     @GetMapping("/company-goods-info/{companyId}")
-    public ResponseVO getCompanyGoodsInfo(@PathVariable("companyId") Long companyId){
+    public ResponseVO getCompanyGoodsInfo(@PathVariable("companyId") Long companyId) {
         return goodService.getCompanyGoodsInfo(companyId);
     }
 

@@ -5,10 +5,11 @@
     <Properties>
         <Property name="log.level" value="info"/>
         <Property name="log.pattern.file" value="%d [%thread] %-5level %logger{36} %line - %msg%n"/>
-        <Property name="log.pattern.console" value="%clr{%d{HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint}  %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx"/>
+        <Property name="log.pattern.console"
+                  value="%clr{%d{HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint}  %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx"/>
         <Property name="log.path" value="/logs/bonuspoint/log"/>
         <Property name="log.name" value="bonuspoint"/>
-        <Property name="log.zip" value="/logs/bonuspoint/zip" />
+        <Property name="log.zip" value="/logs/bonuspoint/zip"/>
     </Properties>
 
 
@@ -16,7 +17,6 @@
         <console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="${log.pattern.console}"/>
         </console>
-
 
 
         <!-- 打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
@@ -28,8 +28,6 @@
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
             <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
-
-
 
 
             <!-- 指定每天的最大压缩包个数，默认7个，超过了会覆盖之前的 -->
@@ -62,7 +60,6 @@
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
             <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
-
 
 
             <!-- 指定每天的最大压缩包个数，默认7个，超过了会覆盖之前的 -->

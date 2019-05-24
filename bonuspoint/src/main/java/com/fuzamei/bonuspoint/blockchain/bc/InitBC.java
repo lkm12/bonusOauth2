@@ -29,6 +29,7 @@ import org.springframework.stereotype.Component;
 public class InitBC {
 
     private final BlockChainUtil blockChainUtil;
+
     @Autowired
     public InitBC(BlockChainUtil blockChainUtil) {
         this.blockChainUtil = blockChainUtil;

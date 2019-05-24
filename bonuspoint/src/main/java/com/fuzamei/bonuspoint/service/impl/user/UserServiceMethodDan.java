@@ -33,7 +33,6 @@ import java.util.*;
 public class UserServiceMethodDan {
 
 
-
     private final InviteMapper inviteMapper;
 
     private final CompanyInfoMapper companyInfoMapper;
@@ -58,13 +57,13 @@ public class UserServiceMethodDan {
 
     private Map<String, String> sendGeneralPointToUser(Long uid, Long pId, BigDecimal point, String j, Map<String, String> map) {
 
-        map.put("general" + j , point + ":" + uid+":"+pId);
+        map.put("general" + j, point + ":" + uid + ":" + pId);
 
         return map;
     }
 
 
-    public Map<String, String> inviteCodeMethodDan( InviteAPPVO invitePO, PlatformInfoPO platformInfoPO, AccountPO accountPO) {
+    public Map<String, String> inviteCodeMethodDan(InviteAPPVO invitePO, PlatformInfoPO platformInfoPO, AccountPO accountPO) {
 
         //取出插入用户表后的用户id
         Long uid = accountPO.getId();
@@ -210,16 +209,16 @@ public class UserServiceMethodDan {
                 }
             }
             String code = null;
-            while (true){
+            while (true) {
                 //生成4位随机数
                 String st = String.format("%.0f", Math.random() * 8999 + 1000);
                 //生成8位邀请码
                 code = RC4.encry_RC4_string(st, UUID.randomUUID().toString()).toUpperCase();
-                Example examplet= new Example(InvitePO.class);
+                Example examplet = new Example(InvitePO.class);
                 Example.Criteria criteriat = examplet.createCriteria();
-                criteriat.andEqualTo("inviteCode",code);
+                criteriat.andEqualTo("inviteCode", code);
                 List<InvitePO> listInvi = inviteMapper.selectByExample(examplet);
-                if(listInvi.size() == 0){
+                if (listInvi.size() == 0) {
                     break;
                 }
             }
@@ -237,18 +236,18 @@ public class UserServiceMethodDan {
 
             return map;
 
-        }else {
+        } else {
             String code = null;
-            while (true){
+            while (true) {
                 //生成4位随机数
                 String st = String.format("%.0f", Math.random() * 8999 + 1000);
                 //生成8位邀请码
                 code = RC4.encry_RC4_string(st, UUID.randomUUID().toString()).toUpperCase();
-                Example examplet= new Example(InvitePO.class);
+                Example examplet = new Example(InvitePO.class);
                 Example.Criteria criteriat = examplet.createCriteria();
-                criteriat.andEqualTo("inviteCode",code);
+                criteriat.andEqualTo("inviteCode", code);
                 List<InvitePO> listInvi = inviteMapper.selectByExample(examplet);
-                if(listInvi.size() == 0){
+                if (listInvi.size() == 0) {
                     break;
                 }
             }
@@ -267,12 +266,13 @@ public class UserServiceMethodDan {
         }
 
     }
+
     private Map<String, String> sendPointToUser(Long userId, BigDecimal rewardNum, PointInfoPO pointInfoPO, CompanyInfoPO companyInfoPO, String u,
                                                 Map<String, String> map) {
         Long pointId = pointInfoPO.getId();
         Long companyId = companyInfoPO.getId();
 
-        map.put("point" + u , companyId + ":" + rewardNum + ":" + pointId + ":" + pointInfoPO.getEndAt() + ":"+userId);
+        map.put("point" + u, companyId + ":" + rewardNum + ":" + pointId + ":" + pointInfoPO.getEndAt() + ":" + userId);
 
         return map;
     }
@@ -280,7 +280,7 @@ public class UserServiceMethodDan {
     public InvitePO saveInviteCode(InviteAPPVO invitePO, Long uid, Long currentTime) {
 
         //邀请码的上级链
-        String chain =  (invitePO.getChains() == null?"":invitePO.getChains()) + (invitePO.getChains() == null?"":"->") + invitePO.getUid();
+        String chain = (invitePO.getChains() == null ? "" : invitePO.getChains()) + (invitePO.getChains() == null ? "" : "->") + invitePO.getUid();
 
 
         InvitePO invitePO1 = new InvitePO();
@@ -291,15 +291,15 @@ public class UserServiceMethodDan {
         invitePO1.setGpid(invitePO.getPId());
 
         //插入邀请码
-        int i =  inviteMapper.insertUseGeneratedKeys(invitePO1);
-        if(i < 0){
+        int i = inviteMapper.insertUseGeneratedKeys(invitePO1);
+        if (i < 0) {
             throw new RuntimeException("邀请码插入失败");
         }
-        return  invitePO1;
+        return invitePO1;
     }
 
 
-    public void addBlockInfo(String hash,Long height, Integer operationType, Long uid){
+    public void addBlockInfo(String hash, Long height, Integer operationType, Long uid) {
 
         BlockInfoDTO blockInfoDTO = new BlockInfoDTO();
 
@@ -309,8 +309,8 @@ public class UserServiceMethodDan {
         blockInfoDTO.setOperationType(operationType);
         blockInfoDTO.setCreatedAt(TimeUtil.timestamp());
         //将上链信息插入bp_block_info表
-        Integer i =  userDao.addBlockInfo(blockInfoDTO);
-        if(i < 1){
+        Integer i = userDao.addBlockInfo(blockInfoDTO);
+        if (i < 1) {
             throw new RuntimeException("插入操作哈希记录表失败");
         }
     }

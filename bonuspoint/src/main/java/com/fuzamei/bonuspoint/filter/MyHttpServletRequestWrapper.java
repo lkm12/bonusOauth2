@@ -1,7 +1,6 @@
 package com.fuzamei.bonuspoint.filter;
 
 
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -25,16 +24,16 @@ import javax.servlet.http.HttpServletRequestWrapper;
  * @author: WangJie
  * @create: 2018-07-19 15:49
  **/
-public class MyHttpServletRequestWrapper extends HttpServletRequestWrapper{
+public class MyHttpServletRequestWrapper extends HttpServletRequestWrapper {
     private final byte[] body;
 
     public MyHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
-        Enumeration e = request.getHeaderNames()   ;
-        while(e.hasMoreElements()){
+        Enumeration e = request.getHeaderNames();
+        while (e.hasMoreElements()) {
             String name = (String) e.nextElement();
             String value = request.getHeader(name);
-            System.out.println(name+" = "+value);
+            System.out.println(name + " = " + value);
 
         }
         body = getBodyString(request).getBytes(Charset.forName("UTF-8"));

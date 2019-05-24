@@ -30,10 +30,10 @@ public class CompanyPointManageController {
     @Value("${md5.salt}")
     private String MD5Salt;
     private final CompanyPointService companyPointService;
-    private final AccountService accountService ;
+    private final AccountService accountService;
 
     @Autowired
-    public CompanyPointManageController(AccountService accountService ,CompanyPointService companyPointService) {
+    public CompanyPointManageController(AccountService accountService, CompanyPointService companyPointService) {
         this.companyPointService = companyPointService;
         this.accountService = accountService;
     }
@@ -84,8 +84,8 @@ public class CompanyPointManageController {
             return new ResponseVO(CommonResponseEnum.PAYWORD_WRONG);
         }
         //根据集团管理用户uid和交易密码哈希判断是否存在
-        boolean isPayWordRight = accountService.checkPayword(companyPointDTO.getPayword(),token.getUid());
-        if (!isPayWordRight ) {
+        boolean isPayWordRight = accountService.checkPayword(companyPointDTO.getPayword(), token.getUid());
+        if (!isPayWordRight) {
             log.info("交易密码错误");
             return new ResponseVO(PointResponseEnum.COMPANY_OR_PAYWORD_ERROR);
         }

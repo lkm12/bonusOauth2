@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class ProtobufTest {
 
-   // @Autowired
-   // private MemberProtobuf memberProtobuf;
+    // @Autowired
+    // private MemberProtobuf memberProtobuf;
 /*
     @Test
     public void userRegister() throws Exception {

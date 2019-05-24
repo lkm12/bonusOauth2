@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * 商品父分类Dao
+ *
  * @author liumeng
  * @create 2018年4月17日
  */
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Repository;
 public interface GoodTypeDao {
     /**
      * 保存商品父分类信息
+     *
      * @param goodTypePO 商品分类信息
      * @return 记录数
      */
@@ -28,14 +30,16 @@ public interface GoodTypeDao {
 
     /**
      * 更新商品分类信息
+     *
      * @param goodTypePO 商品分类信息
      * @return
      */
-    @UpdateProvider(type=GoodTypeSql.class,method="updateGoodType")
+    @UpdateProvider(type = GoodTypeSql.class, method = "updateGoodType")
     int updateGoodType(GoodTypePO goodTypePO);
 
     /**
      * 分类是否被使用
+     *
      * @param id 分类id
      * @return
      */
@@ -47,6 +51,7 @@ public interface GoodTypeDao {
 
     /**
      * 根据商品分类标识返回分类信息
+     *
      * @param id 商品分类标识
      * @return 分类信息
      */
@@ -55,24 +60,28 @@ public interface GoodTypeDao {
 
     /**
      * 查询所有商品分类信息
+     *
      * @return 分类信息集合
      */
     @Select("select  id , name,img from bp_good_type")
     List<GoodTypePO> listGoodType();
+
     /**
      * 获取所有商品分类和子分类信息
+     *
      * @return
      */
     @Select("select id , name,img from bp_good_type")
     @Results({
-        @Result(id=true,column="id",property="id"),
-        @Result(column="id",property="subTypes",javaType=List.class,
-        many=@Many(select="com.fuzamei.bonuspoint.dao.good.GoodSubTypeDao.getSubTypeByPid"))
-    })  
+            @Result(id = true, column = "id", property = "id"),
+            @Result(column = "id", property = "subTypes", javaType = List.class,
+                    many = @Many(select = "com.fuzamei.bonuspoint.dao.good.GoodSubTypeDao.getSubTypeByPid"))
+    })
     List<GoodTypeVO> listAllTypes();
 
     /**
      * 删除分类
+     *
      * @param id
      * @return
      */

@@ -19,22 +19,38 @@ import javax.persistence.Table;
 
 @NoArgsConstructor
 public class UserAddressPO {
-    /** 地址id*/
+    /**
+     * 地址id
+     */
     @Id
     private Long id;
-    /** 用户id*/
+    /**
+     * 用户id
+     */
     private Long uid;
-    /** 收件人*/
+    /**
+     * 收件人
+     */
     private String receiver;
-    /** mobile*/
+    /**
+     * mobile
+     */
     private String mobile;
-    /** 区县编码 */
+    /**
+     * 区县编码
+     */
     private Long districtCode;
-    /** 详细地址*/
+    /**
+     * 详细地址
+     */
     private String areaDetail;
-    /** 创建时间*/
+    /**
+     * 创建时间
+     */
     private Long createdAt;
-    /** 修改时间 */
+    /**
+     * 修改时间
+     */
     private Long updatedAt;
 
 

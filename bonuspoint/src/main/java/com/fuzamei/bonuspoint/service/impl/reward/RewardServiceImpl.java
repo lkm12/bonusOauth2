@@ -82,8 +82,7 @@ public class RewardServiceImpl implements RewardService {
             pointInfoPO.setId(rewardDTO.getPointId());
             pointInfoPO.setStatus(PointInfoConstant.CHECK_PASS);
             int result = pointInfoMapper.selectCount(pointInfoPO);
-            if ( result!= 1)
-            {
+            if (result != 1) {
                 log.info("添加奖励规则service，商户积分不存在，或状态不是已审核，添加失败。");
                 return new ResponseVO(CommonResponseEnum.ADD_FAIL);
             }
@@ -194,18 +193,18 @@ public class RewardServiceImpl implements RewardService {
         CompletableFuture.allOf(futures).join();
         int total = Integer.valueOf(String.valueOf(page.getTotal()));
         PageBean<RewardVO> pageBean = new PageBean<>(rewardVOList, rewardQuery.getPage(), rewardQuery.getPageSize(), total);
-        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS,pageBean);
+        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS, pageBean);
     }
 
     @Override
-    public ResponseVO listCompanyRewardPoints(Long companyId,Long platformId) {
+    public ResponseVO listCompanyRewardPoints(Long companyId, Long platformId) {
         Example example = new Example(PointInfoPO.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("issuePlatform",platformId);
-        criteria.andEqualTo("company",companyId);
-        criteria.andEqualTo("status",PointInfoConstant.CHECK_PASS);
-        criteria.andGreaterThanOrEqualTo("numRemain",minPointNum);
+        criteria.andEqualTo("issuePlatform", platformId);
+        criteria.andEqualTo("company", companyId);
+        criteria.andEqualTo("status", PointInfoConstant.CHECK_PASS);
+        criteria.andGreaterThanOrEqualTo("numRemain", minPointNum);
         List<PointInfoPO> pointInfoPOList = pointInfoMapper.selectByExample(example);
-        return new ResponseVO(CommonResponseEnum.QUERY_SUCCESS,pointInfoPOList);
+        return new ResponseVO(CommonResponseEnum.QUERY_SUCCESS, pointInfoPOList);
     }
 }

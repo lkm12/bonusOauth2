@@ -41,27 +41,27 @@ public class MemberAddressManageController {
 
     /**
      * 添加收货地址
-     * @param userAddressDTO
-     *                      {
-     *                          receiver              收货人
-     *                          mobile                收货人名称
-     *                          streetCode            街道编码
-     *                          areaDetail            详细地址
-     *                      }
+     *
+     * @param userAddressDTO {
+     *                       receiver              收货人
+     *                       mobile                收货人名称
+     *                       streetCode            街道编码
+     *                       areaDetail            详细地址
+     *                       }
      * @return
      */
     @LogAnnotation(note = "添加收货地址")
     @PostMapping("/create")
-    public ResponseVO createUserAddress(@RequestAttribute("token") Token token ,
-                                        @RequestBody @Validated(Address.CreateAddress.class)  UserAddressDTO userAddressDTO,
+    public ResponseVO createUserAddress(@RequestAttribute("token") Token token,
+                                        @RequestBody @Validated(Address.CreateAddress.class) UserAddressDTO userAddressDTO,
                                         BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
         boolean realAddress;
         realAddress = locationService.isRealDistrict(userAddressDTO.getDistrictCode());
-        if(!realAddress){
+        if (!realAddress) {
             return new ResponseVO(UserResponseEnum.WRONG_ADDRESS);
         }
         userAddressDTO.setUid(token.getUid());
@@ -71,28 +71,28 @@ public class MemberAddressManageController {
 
     /**
      * 更新收货地址
-     * @param userAddressDTO
-     *                      {
-     *                          id               收货地址id
-     *                          receiver         收货人
-     *                          mobile           收货人手机号
-     *                          streetCode       街道编码
-     *                          areaDetail       详细地址
-     *                      }
+     *
+     * @param userAddressDTO {
+     *                       id               收货地址id
+     *                       receiver         收货人
+     *                       mobile           收货人手机号
+     *                       streetCode       街道编码
+     *                       areaDetail       详细地址
+     *                       }
      * @return
      */
     @LogAnnotation(note = "更新收货地址")
-    @RequestMapping(value = "/update",method = {RequestMethod.POST , RequestMethod.PUT})
+    @RequestMapping(value = "/update", method = {RequestMethod.POST, RequestMethod.PUT})
     public ResponseVO updateUserAddress(@RequestAttribute("token") Token token,
                                         @RequestBody @Validated(Address.UpdateAddress.class) UserAddressDTO userAddressDTO,
                                         BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
         boolean realAddress;
         realAddress = locationService.isRealDistrict(userAddressDTO.getDistrictCode());
-        if(!realAddress){
+        if (!realAddress) {
             return new ResponseVO(UserResponseEnum.WRONG_ADDRESS);
         }
         userAddressDTO.setUid(token.getUid());
@@ -108,20 +108,21 @@ public class MemberAddressManageController {
      */
     @LogAnnotation(note = "删除收货地址")
     //@DeleteMapping("/delete/{id}")
-    @RequestMapping(value = "/delete/{id}",method = {RequestMethod.GET , RequestMethod.DELETE})
-    public ResponseVO deleteUserAddress(@RequestAttribute("token") Token token,@PathVariable("id") Long id){
-        return userAddressService.deleteUserAddress( id,token.getUid());
+    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public ResponseVO deleteUserAddress(@RequestAttribute("token") Token token, @PathVariable("id") Long id) {
+        return userAddressService.deleteUserAddress(id, token.getUid());
     }
 
     /**
      * 设置默认收货地址
+     *
      * @param token
      * @param addressId
      * @return
      */
     @LogAnnotation(note = "设置默认收货地址")
     @GetMapping("/set-default-address/{addressId}")
-    public ResponseVO updateDefaultAddress(@RequestAttribute("token") Token token,@PathVariable("addressId") Long addressId){
-        return userAddressService.updateDefaultAddress(token.getUid(),addressId);
+    public ResponseVO updateDefaultAddress(@RequestAttribute("token") Token token, @PathVariable("addressId") Long addressId) {
+        return userAddressService.updateDefaultAddress(token.getUid(), addressId);
     }
 }

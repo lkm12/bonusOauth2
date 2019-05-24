@@ -29,18 +29,18 @@ public class SafeQueryController {
     private final SafeService safeService;
 
     @Autowired
-    public SafeQueryController( SafeService safeService) {
+    public SafeQueryController(SafeService safeService) {
         this.safeService = safeService;
     }
 
     /**
-     *
      * 获取安全状态信息
+     *
      * @return
      */
     @LogAnnotation(note = "获取安全状态信息")
     @GetMapping("/index")
-    public ResponseVO<UserDTO> getSafeStatusInfo(@RequestAttribute("token") Token token){
+    public ResponseVO<UserDTO> getSafeStatusInfo(@RequestAttribute("token") Token token) {
         log.info("获取安全状态信息开始");
 
         return safeService.getSafeStatusInfo(token.getUid());

@@ -34,6 +34,7 @@ public class PlatformQueryController {
     private final MainPlatformService mainStationService;
     private final CompanyInfoService companyInfoService;
     private final PlatformService platformService;
+
     @Autowired
     public PlatformQueryController(UserService userService, MainPlatformService mainStationService, CompanyInfoService companyInfoService, PlatformService platformService) {
         this.userService = userService;
@@ -54,7 +55,7 @@ public class PlatformQueryController {
      * @return
      * @author wangjie
      */
-    @LogAnnotation(note="平台模糊查询下属集团信息")
+    @LogAnnotation(note = "平台模糊查询下属集团信息")
     @PostMapping("/list-companyInfo")
     public ResponseVO getCompanyInfoList(@RequestAttribute("token") Token token, @RequestBody PageDTO pageDTO) {
         CompanyInfoDTO companyInfoDTO = new CompanyInfoDTO();
@@ -67,16 +68,15 @@ public class PlatformQueryController {
      * 平台查询用户信息(平台)
      *
      * @param token
-     * @param  {
-     *                均为非必须
-     *                fuzzyMatch        模糊查询内容
-     *                page              目标页
-     *                pageSize          页大小
-     *                }
+     * @param {     均为非必须
+     *              fuzzyMatch        模糊查询内容
+     *              page              目标页
+     *              pageSize          页大小
+     *              }
      * @return
      * @author lkm
      */
-    @LogAnnotation(note="平台查询用户信息")
+    @LogAnnotation(note = "平台查询用户信息")
     @PostMapping("/list-userInfo")
     public ResponseVO getUserInfoListFromPlatform(@RequestAttribute("token") Token token, @RequestBody PagePointDTO pagePointDTO) {
         pagePointDTO.setId(token.getUid());
@@ -88,22 +88,20 @@ public class PlatformQueryController {
      * 平台查询集团备付金比例    支持分页
      *
      * @param token
-     * @param  companyInfoVO{
-     *
-     *                companyName       公司名，支持模糊查询
-     *                page              目标页
-     *                pageSize          页大小    page和pageSize都为-1时不分页
-     *                orderType         排序类型
-     *         }
+     * @param companyInfoVO{ companyName       公司名，支持模糊查询
+     *                       page              目标页
+     *                       pageSize          页大小    page和pageSize都为-1时不分页
+     *                       orderType         排序类型
+     *                       }
      * @return
      * @author wangjie
      */
-    @LogAnnotation(note="平台查询集团备付金比例")
+    @LogAnnotation(note = "平台查询集团备付金比例")
     @PostMapping("/list-companyCashRateInfo")
     public ResponseVO getCompanyCashRateList(@RequestAttribute("token") Token token, @RequestBody CompanyInfoVO companyInfoVO) {
 
         CompanyInfoDTO companyInfoDTO = new CompanyInfoDTO();
-        BeanUtils.copyProperties(companyInfoVO,companyInfoDTO);
+        BeanUtils.copyProperties(companyInfoVO, companyInfoDTO);
         companyInfoDTO.setPId(token.getUid());
         return companyInfoService.getCompanyCashRateList(companyInfoDTO);
     }
@@ -112,13 +110,11 @@ public class PlatformQueryController {
      * 平台查询集团积分兑换比例    支持分页
      *
      * @param token
-     * @param  companyInfoVO{
-     *
-     *                companyName       公司名，支持模糊查询
-     *                page              目标页
-     *                pageSize          页大小    page和pageSize都为-1时不分页
-     *                orderType         排序类型
-     *         }
+     * @param companyInfoVO{ companyName       公司名，支持模糊查询
+     *                       page              目标页
+     *                       pageSize          页大小    page和pageSize都为-1时不分页
+     *                       orderType         排序类型
+     *                       }
      * @return
      * @author wangjie
      */
@@ -126,13 +122,10 @@ public class PlatformQueryController {
     @PostMapping("/list-companyPointRateInfo")
     public ResponseVO getCompanyPointRateList(@RequestAttribute("token") Token token, @RequestBody CompanyInfoVO companyInfoVO) {
         CompanyInfoDTO companyInfoDTO = new CompanyInfoDTO();
-        BeanUtils.copyProperties(companyInfoVO,companyInfoDTO);
+        BeanUtils.copyProperties(companyInfoVO, companyInfoDTO);
         companyInfoDTO.setPId(token.getUid());
         return companyInfoService.getCompanyPointRateList(companyInfoDTO);
     }
-
-
-
 
 
     /**
@@ -145,7 +138,7 @@ public class PlatformQueryController {
      * @return
      */
     @PostMapping("/inviteInfo")
-    public ResponseVO inviteInfo(@RequestAttribute("token") Token token,@RequestBody String jsonData){
+    public ResponseVO inviteInfo(@RequestAttribute("token") Token token, @RequestBody String jsonData) {
 
         PagePointDTO pagePointDTO;
 
@@ -160,16 +153,16 @@ public class PlatformQueryController {
     }
 
 
-
     /**
      * 平台查看自己平台基本信息
+     *
      * @param token
-     * @author wangjie
      * @return
+     * @author wangjie
      */
     @LogAnnotation(note = "平台查看自己平台基本信息")
     @GetMapping("/platform-base-info")
-    public ResponseVO<PlatformBaseInfoVO> getCompanyBaseInfo(@RequestAttribute("token") Token token){
+    public ResponseVO<PlatformBaseInfoVO> getCompanyBaseInfo(@RequestAttribute("token") Token token) {
         log.info("平台查看自己平台基本信息开始");
         return platformService.getSelfPlatformBaseInfo(token.getUid());
     }

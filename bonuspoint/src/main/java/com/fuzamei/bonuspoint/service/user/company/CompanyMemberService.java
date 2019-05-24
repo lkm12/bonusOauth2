@@ -6,8 +6,9 @@ import com.fuzamei.common.model.vo.ResponseVO;
 public interface CompanyMemberService {
     /**
      * 统计集团会员活跃数据
+     *
      * @param companyId
      * @return
      */
-    ResponseVO getMemberActivity(Long  companyId);
+    ResponseVO getMemberActivity(Long companyId);
 }

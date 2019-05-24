@@ -12,8 +12,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ProvincePO {
-    /** 省份编码*/
+    /**
+     * 省份编码
+     */
     private Long code;
-    /** 省份名称*/
+    /**
+     * 省份名称
+     */
     private String areaName;
 }

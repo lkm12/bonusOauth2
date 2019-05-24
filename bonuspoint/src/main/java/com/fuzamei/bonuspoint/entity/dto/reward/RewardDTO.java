@@ -30,7 +30,7 @@ public class RewardDTO {
      * 积分类型 1通用积分 2商户积分
      */
     @NotBlank(message = "PARAMETER_ERROR")
-    @Pattern(regexp = "[1-2]",message = "PARAMETER_ERROR")
+    @Pattern(regexp = "[1-2]", message = "PARAMETER_ERROR")
     private String pointType;
 
     /**
@@ -51,24 +51,23 @@ public class RewardDTO {
     /**
      * 注册人奖励
      */
-    @Min(value = 0,message = "PARAMETER_ERROR")
+    @Min(value = 0, message = "PARAMETER_ERROR")
     private BigDecimal registerReward;
     /**
      * 一级奖励数量
      */
-    @Min(value = 0,message = "PARAMETER_ERROR")
+    @Min(value = 0, message = "PARAMETER_ERROR")
     private BigDecimal firstInviteReward;
     /**
      * 二级奖励数量
      */
-    @Min(value = 0,message = "PARAMETER_ERROR")
+    @Min(value = 0, message = "PARAMETER_ERROR")
     private BigDecimal secondInviteReward;
     /**
      * 三级奖励数量
      */
-    @Min(value = 0,message = "PARAMETER_ERROR")
+    @Min(value = 0, message = "PARAMETER_ERROR")
     private BigDecimal thirdInviteReward;
-
 
 
 }

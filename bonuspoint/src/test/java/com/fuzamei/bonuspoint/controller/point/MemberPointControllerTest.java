@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * Created by 18519 on 2018/5/6.
- *
+ * <p>
  * lkm
  */
 @RunWith(SpringRunner.class)
@@ -46,22 +46,21 @@ public class MemberPointControllerTest {
     }
 
 
-
-
     /**
      * 会员查看积分使用明细
-     * @author wangjie
+     *
      * @throws Exception
+     * @author wangjie
      */
     @Test
-    public void memberPointListDetailTest()throws  Exception{
-        Map<String,Object> map = new HashMap<>(6);
-        map.put("type",1);
-      //  map.put("startTime",1524537954113L);
-       // map.put("endTime",1524637954113L);
-        map.put("pointType",1);
+    public void memberPointListDetailTest() throws Exception {
+        Map<String, Object> map = new HashMap<>(6);
+        map.put("type", 1);
+        //  map.put("startTime",1524537954113L);
+        // map.put("endTime",1524637954113L);
+        map.put("pointType", 1);
         this.mockMvc.perform(post("/bonus-point/point/member/point-list-detail")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JSON.toJSONBytes(map)))
                 .andExpect(status().isOk()).andDo(print())
@@ -71,12 +70,13 @@ public class MemberPointControllerTest {
 
     /**
      * 会员查看持有通用积分列表
+     *
      * @author wangjie
      */
     @Test
-    public void memberPointListRelation()throws  Exception{
+    public void memberPointListRelation() throws Exception {
         this.mockMvc.perform(get("/bonus-point/point/member/point-list-relation")
-                .header(authorizationName,authorizationValue))
+                .header(authorizationName, authorizationValue))
                 .andExpect(status().isOk()).andDo(print())
                 .andReturn().getResponse().getContentAsString();
     }

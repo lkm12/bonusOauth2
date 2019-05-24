@@ -16,19 +16,26 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Commodity {
-    /** 商户id*/
+    /**
+     * 商户id
+     */
     private Long merchantId;
-    /** 积分类型*/
+    /**
+     * 积分类型
+     */
     private Integer pointType;
-    /** 会员积分数量*/
+    /**
+     * 会员积分数量
+     */
     private List<MerchantPoint> merchantPoints;
-    /** 通用积分数量*/
+    /**
+     * 通用积分数量
+     */
     private BigDecimal general;
-    /** 总平台数量*/
+    /**
+     * 总平台数量
+     */
     private BigDecimal tgeneral;
-
-
-
 
 
 }

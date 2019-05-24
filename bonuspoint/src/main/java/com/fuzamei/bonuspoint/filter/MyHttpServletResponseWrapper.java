@@ -16,15 +16,13 @@ import javax.servlet.http.HttpServletResponse;
  **/
 
 
-public class MyHttpServletResponseWrapper extends HttpServletResponseWrapper
-{
+public class MyHttpServletResponseWrapper extends HttpServletResponseWrapper {
 
     private ByteArrayOutputStream buffer;
 
     private ServletOutputStream out;
 
-    public MyHttpServletResponseWrapper(HttpServletResponse httpServletResponse)
-    {
+    public MyHttpServletResponseWrapper(HttpServletResponse httpServletResponse) {
         super(httpServletResponse);
         buffer = new ByteArrayOutputStream();
         out = new WrapperOutputStream(buffer);
@@ -32,47 +30,39 @@ public class MyHttpServletResponseWrapper extends HttpServletResponseWrapper
 
     @Override
     public ServletOutputStream getOutputStream()
-            throws IOException
-    {
+            throws IOException {
         return out;
     }
 
     @Override
     public void flushBuffer()
-            throws IOException
-    {
-        if (out != null)
-        {
+            throws IOException {
+        if (out != null) {
             out.flush();
         }
     }
 
     public byte[] getContent()
-            throws IOException
-    {
+            throws IOException {
         flushBuffer();
         return buffer.toByteArray();
     }
 
-    class WrapperOutputStream extends ServletOutputStream
-    {
+    class WrapperOutputStream extends ServletOutputStream {
         private ByteArrayOutputStream bos;
 
-        public WrapperOutputStream(ByteArrayOutputStream bos)
-        {
+        public WrapperOutputStream(ByteArrayOutputStream bos) {
             this.bos = bos;
         }
 
         @Override
         public void write(int b)
-                throws IOException
-        {
+                throws IOException {
             bos.write(b);
         }
 
         @Override
-        public boolean isReady()
-        {
+        public boolean isReady() {
 
             // TODO Auto-generated method stub
             return false;
@@ -80,8 +70,7 @@ public class MyHttpServletResponseWrapper extends HttpServletResponseWrapper
         }
 
         @Override
-        public void setWriteListener(WriteListener arg0)
-        {
+        public void setWriteListener(WriteListener arg0) {
 
             // TODO Auto-generated method stub
 

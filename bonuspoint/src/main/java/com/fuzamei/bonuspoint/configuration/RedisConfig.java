@@ -48,9 +48,9 @@ import java.util.Set;
 public class RedisConfig extends CachingConfigurerSupport {
 
 
-
     /**
      * json序列化
+     *
      * @return
      */
     @Bean
@@ -89,6 +89,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         template.setConnectionFactory(lettuceConnectionFactory);
         return template;
     }
+
     /**
      * 在使用@Cacheable时，如果不指定key，则使用找个默认的key生成器生成的key
      *
@@ -145,7 +146,7 @@ public class RedisConfig extends CachingConfigurerSupport {
                 // 设置 key为string序列化
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 // 设置value为json序列化
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer() ))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer()))
                 // 不缓存空值
                 .disableCachingNullValues();
 
@@ -165,7 +166,6 @@ public class RedisConfig extends CachingConfigurerSupport {
                 .build();
         return cacheManager;
     }
-
 
 
 }

@@ -40,7 +40,7 @@ public class PlatformPointQueryControllerTest {
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
     private final static String authorizationName = "Authorization";
-    private  static String authorizationValue = "token&1";
+    private static String authorizationValue = "token&1";
 
     @Before
     public void setup() {
@@ -49,15 +49,16 @@ public class PlatformPointQueryControllerTest {
 
 
     /**
-     *  集团查看发行记录
+     * 集团查看发行记录
+     *
      * @throws Exception
      */
     @Test
     public void companyGetIssuePointListTest() throws Exception {
         Map<String, Object> map = new HashMap<>();
-        authorizationValue="token&343";
+        authorizationValue = "token&343";
         map.put("name", "test");
-      //  map.put("status", 0);
+        //  map.put("status", 0);
         this.mockMvc.perform(post("/bonus-point/point/company/point-issue-list")
                 .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -68,12 +69,13 @@ public class PlatformPointQueryControllerTest {
 
     /**
      * 平台查看积分审批记录
+     *
      * @throws Exception
      */
     @Test
     public void platformGetIssuePointListTest() throws Exception {
         Map<String, Object> map = new HashMap<>();
-       // map.put("fuzzyMatch", "test");
+        // map.put("fuzzyMatch", "test");
         this.mockMvc.perform(post("/bonus-point/point/platform/point-issue-list")
                 .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -85,14 +87,15 @@ public class PlatformPointQueryControllerTest {
 
     /**
      * 平台查看发放积分记录
+     *
      * @throws Exception
      */
     @Test
-    public void grantGeneralPointListTest()throws  Exception{
+    public void grantGeneralPointListTest() throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("mobile", "178");
-        map.put("startTime","1530705282190");
-        map.put("endTime","1530705494308");
+        map.put("startTime", "1530705282190");
+        map.put("endTime", "1530705494308");
         this.mockMvc.perform(post("/bonus-point/point/platform/point-grant-list")
                 .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)

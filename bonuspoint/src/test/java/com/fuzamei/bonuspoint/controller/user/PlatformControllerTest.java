@@ -49,16 +49,17 @@ public class PlatformControllerTest {
 
     /**
      * 平台模糊查询下属集团（商户）信息
-     * @author wangjie
+     *
      * @throws Exception
+     * @author wangjie
      */
     @Test
-    public void testGetCompanyInfoList()throws Exception{
-        Map<String,String> map = new HashMap<String,String>(1);
-       // map.put("fuzzyMatch","吴");
+    public void testGetCompanyInfoList() throws Exception {
+        Map<String, String> map = new HashMap<String, String>(1);
+        // map.put("fuzzyMatch","吴");
         authorizationValue = "token&1";
         this.mockMvc.perform(post("/bonus-point/platform/list-companyInfo")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())
@@ -66,29 +67,29 @@ public class PlatformControllerTest {
     }
 
 
-
     /**
      * 平台添加集团
-     * @author wangjie
+     *
      * @throws Exception
+     * @author wangjie
      */
     @Test
-    public void testAddCompanyInfo()throws Exception{
-        Map<String,String> map = new HashMap<String,String>(1);
+    public void testAddCompanyInfo() throws Exception {
+        Map<String, String> map = new HashMap<String, String>(1);
         authorizationValue = "token&1";
-        map.put("username","WangJieTest3");
-        map.put("companyAddress","地球村");
-        map.put("companyLeader","海");
-        map.put("companyLeaderMobile","17826873177");
-        map.put("companyTelephone","99999999");
-        map.put("companyName","复杂美");
-        map.put("companyEmail","89@qq.com");
-        map.put("cashRate","0.1");
-        map.put("pointRate","0.1");
-        map.put("password","a123455");
-        map.put("payword","123456");
+        map.put("username", "WangJieTest3");
+        map.put("companyAddress", "地球村");
+        map.put("companyLeader", "海");
+        map.put("companyLeaderMobile", "17826873177");
+        map.put("companyTelephone", "99999999");
+        map.put("companyName", "复杂美");
+        map.put("companyEmail", "89@qq.com");
+        map.put("cashRate", "0.1");
+        map.put("pointRate", "0.1");
+        map.put("password", "a123455");
+        map.put("payword", "123456");
         this.mockMvc.perform(post("/bonus-point/platform/add-companyInfo")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())
@@ -97,37 +98,40 @@ public class PlatformControllerTest {
 
     /**
      * 平台修改集团备付金比例
-     * @author wangjie
+     *
      * @throws Exception
+     * @author wangjie
      */
     @Test
-    public void testUpdateCompanyCashRate()throws Exception{
-        Map<String,Object> map = new HashMap<String,Object>(1);
+    public void testUpdateCompanyCashRate() throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>(1);
         authorizationValue = "token&1";
-        map.put("id","78");
-        map.put("payword","123456");
-        map.put("cashRate",0.18);
+        map.put("id", "78");
+        map.put("payword", "123456");
+        map.put("cashRate", 0.18);
         this.mockMvc.perform(put("/bonus-point/platform/edit-cashrate")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())
                 .andReturn().getResponse().getContentAsString();
     }
+
     /**
      * 平台修改集团积分兑换比例
-     * @author wangjie
+     *
      * @throws Exception
+     * @author wangjie
      */
     @Test
-    public void testUpdateCompanyPointRate()throws Exception{
-        Map<String,Object> map = new HashMap<String,Object>(1);
+    public void testUpdateCompanyPointRate() throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>(1);
         authorizationValue = "token&1";
-        map.put("id","78");
-        map.put("payword","123456");
-        map.put("pointRate",14.88);
+        map.put("id", "78");
+        map.put("payword", "123456");
+        map.put("pointRate", 14.88);
         this.mockMvc.perform(put("/bonus-point/platform/edit-pointrate")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())
@@ -135,29 +139,29 @@ public class PlatformControllerTest {
     }
 
     @Test
-    public void testListCompanyCashRateInfo() throws Exception{
-        Map<String ,Object> map = new HashMap<>(5);
-        authorizationValue = "token&1";
-      //  map.put("companyName","复杂");
-        map.put("orderType",1);
-        this.mockMvc.perform(post("/bonus-point/platform/list-companyCashRateInfo")
-                .header(authorizationName,authorizationValue)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.toJsonBytes(map)))
-                .andExpect(status().isOk()).andDo(print())
-                .andReturn().getResponse().getContentAsString();
-    }
-
-    @Test
-    public void testListCompanyPointRateInfo() throws Exception{
-        Map<String ,Object> map = new HashMap<>(5);
+    public void testListCompanyCashRateInfo() throws Exception {
+        Map<String, Object> map = new HashMap<>(5);
         authorizationValue = "token&1";
         //  map.put("companyName","复杂");
-        map.put("orderType",1);
-        map.put("page",-1);
-        map.put("pageSize",-1);
+        map.put("orderType", 1);
+        this.mockMvc.perform(post("/bonus-point/platform/list-companyCashRateInfo")
+                .header(authorizationName, authorizationValue)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.toJsonBytes(map)))
+                .andExpect(status().isOk()).andDo(print())
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    public void testListCompanyPointRateInfo() throws Exception {
+        Map<String, Object> map = new HashMap<>(5);
+        authorizationValue = "token&1";
+        //  map.put("companyName","复杂");
+        map.put("orderType", 1);
+        map.put("page", -1);
+        map.put("pageSize", -1);
         this.mockMvc.perform(post("/bonus-point/platform/list-companyPointRateInfo")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())

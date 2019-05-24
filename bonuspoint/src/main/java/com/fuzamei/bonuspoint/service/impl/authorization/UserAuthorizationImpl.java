@@ -27,7 +27,7 @@ public class UserAuthorizationImpl implements UserAuthorizationService {
 
     @Override
     public boolean isRightToken(UserTokenDTO userTokenDTO) {
-        return userAuthorizationDao.countByTokenAndUid(userTokenDTO)==1? true:false;
+        return userAuthorizationDao.countByTokenAndUid(userTokenDTO) == 1 ? true : false;
     }
 
     @Override

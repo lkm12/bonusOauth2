@@ -25,8 +25,9 @@ public class MainPlatformServiceTest {
 
     @Autowired
     private MainPlatformService mainPlatformService;
+
     @Test
-    public void addPlatform(){
+    public void addPlatform() {
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setPId(0L);
         accountDTO.setUsername("main-platform-admin");
@@ -35,10 +36,11 @@ public class MainPlatformServiceTest {
         platformInfoDTO.setCashRate(0.5F);
         platformInfoDTO.setPointRate(2.1F);
 
-        mainPlatformService.addPlatform(accountDTO,platformInfoDTO);
+        mainPlatformService.addPlatform(accountDTO, platformInfoDTO);
     }
+
     @Test
-    public void listPlatform(){
+    public void listPlatform() {
         PageDTO pageDTO = new PageDTO();
         pageDTO.setPageSize(5);
         pageDTO.setPage(1);

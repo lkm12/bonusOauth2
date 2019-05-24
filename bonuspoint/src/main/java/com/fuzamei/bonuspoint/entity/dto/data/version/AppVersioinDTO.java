@@ -15,24 +15,24 @@ import javax.validation.constraints.Pattern;
 @Data
 public class AppVersioinDTO {
 
-    @NotBlank(message = "PARAMETER_ERROR" )
+    @NotBlank(message = "PARAMETER_ERROR")
     private String version;
 
-    @NotBlank(message = "PARAMETER_ERROR" )
+    @NotBlank(message = "PARAMETER_ERROR")
     private String code;
 
-    @NotBlank(message = "PARAMETER_ERROR" )
+    @NotBlank(message = "PARAMETER_ERROR")
     private String downUrl;
 
-    @NotBlank(message = "PARAMETER_ERROR" )
+    @NotBlank(message = "PARAMETER_ERROR")
     private String description;
 
     @NotBlank(message = "PARAMETER_ERROR")
-    @Pattern(regexp = "Andorid|IOS",message = "PARAMETER_ERROR")
+    @Pattern(regexp = "Andorid|IOS", message = "PARAMETER_ERROR")
     private String system;
 
     @NotBlank(message = "PARAMETER_ERROR")
-    @Pattern(regexp = "[0-1]",message = "PARAMETER_ERROR")
+    @Pattern(regexp = "[0-1]", message = "PARAMETER_ERROR")
     private String forcedUpdate;
 
 }

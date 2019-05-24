@@ -21,7 +21,7 @@ public class Keccak {
     /**
      * Do hash.
      *
-     * @param message input data
+     * @param message   input data
      * @param parameter keccak param
      * @return byte-array result
      */

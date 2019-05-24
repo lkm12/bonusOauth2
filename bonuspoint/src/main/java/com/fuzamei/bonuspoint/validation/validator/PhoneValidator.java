@@ -13,9 +13,10 @@ import java.util.regex.Pattern;
  * @author: WangJie
  * @create: 2018-07-12 10:40
  **/
-public class PhoneValidator implements ConstraintValidator<Phone,String> {
+public class PhoneValidator implements ConstraintValidator<Phone, String> {
     @Value("${reg.phone}")
     private String phoneReg;
+
     @Override
     public void initialize(Phone constraintAnnotation) {
 
@@ -24,9 +25,9 @@ public class PhoneValidator implements ConstraintValidator<Phone,String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         //为空 不校验
-        if (value==null){
+        if (value == null) {
             return true;
         }
-        return Pattern.matches(phoneReg,value);
+        return Pattern.matches(phoneReg, value);
     }
 }

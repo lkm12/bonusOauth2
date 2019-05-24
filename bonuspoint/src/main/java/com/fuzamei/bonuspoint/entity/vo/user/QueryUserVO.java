@@ -13,9 +13,13 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class QueryUserVO extends PageVO {
-    /** 用户id*/
-    private Long uid ;
-    /**集团信息id*/
+    /**
+     * 用户id
+     */
+    private Long uid;
+    /**
+     * 集团信息id
+     */
     private Long companyId;
 
     private String mobile;

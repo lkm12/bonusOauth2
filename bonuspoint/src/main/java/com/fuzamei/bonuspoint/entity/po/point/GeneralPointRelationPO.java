@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 /**
  * 通用积分关联表
+ *
  * @author liumeng
  * @create 2018年5月9日
  */
@@ -17,15 +18,23 @@ import java.math.BigDecimal;
 @Table(name = "bp_general_point_relation")
 public class GeneralPointRelationPO {
 
-    /** 主键 */
+    /**
+     * 主键
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    /** 平台id */
+    /**
+     * 平台id
+     */
     private Long platformId;
-    /** 用户id */
+    /**
+     * 用户id
+     */
     private Long userId;
-    /** 持有通用积分数量 */
+    /**
+     * 持有通用积分数量
+     */
     private BigDecimal num;
 
 }

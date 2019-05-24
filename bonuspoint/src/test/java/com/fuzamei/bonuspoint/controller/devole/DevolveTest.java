@@ -30,7 +30,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**s
+/**
+ * s
+ *
  * @author lmm
  * @description 转移数据库记录
  * @create 2018/8/17 10:15
@@ -98,7 +100,7 @@ public class DevolveTest {
     public void goodDevolve() throws Exception {
         log.info("开始转储商品信息");
 //        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql ="SELECT good.id, (SELECT company.id FROM ld_company_info AS company WHERE company.uid =good.gid ) AS gid , good.`name`, good.price, good.global_price, good.num, good.num_used, good.worth, ( SELECT GROUP_CONCAT(img.img) FROM ld_img AS img WHERE FIND_IN_SET(img.id, good.img_ids)) AS img_src,good.details , good.order_level, good.is_life, good.start_at * 1000 AS start_at, good.end_at * 1000 AS end_at, CASE good.`status` WHEN - 1 THEN 4 ELSE good.`status` END AS `status`, good.created_at * 1000 AS created_at, good.updated_at * 1000 AS updated_at FROM ld_good AS good  \n" ;
+        String sql = "SELECT good.id, (SELECT company.id FROM ld_company_info AS company WHERE company.uid =good.gid ) AS gid , good.`name`, good.price, good.global_price, good.num, good.num_used, good.worth, ( SELECT GROUP_CONCAT(img.img) FROM ld_img AS img WHERE FIND_IN_SET(img.id, good.img_ids)) AS img_src,good.details , good.order_level, good.is_life, good.start_at * 1000 AS start_at, good.end_at * 1000 AS end_at, CASE good.`status` WHEN - 1 THEN 4 ELSE good.`status` END AS `status`, good.created_at * 1000 AS created_at, good.updated_at * 1000 AS updated_at FROM ld_good AS good  \n";
         List<GoodPO> goods = jdbcTemplate.query(sql, new GoodRowMapper());
         for (GoodPO good : goods) {
 //            log.info("————————————————————————————————》\n" + good.toString());
@@ -117,7 +119,6 @@ public class DevolveTest {
         }
 
     }
-
 
 
     /**
@@ -155,19 +156,21 @@ public class DevolveTest {
 
     /**
      * 解析商品时间
+     *
      * @param goodPO 商品信息
      */
-    private  void  resloveGoodLife(GoodPO goodPO){
-        if (goodPO.getStartAt() != null || goodPO.getEndAt() !=null){
+    private void resloveGoodLife(GoodPO goodPO) {
+        if (goodPO.getStartAt() != null || goodPO.getEndAt() != null) {
             goodPO.setIsLife(true);
         }
-        if (goodPO.getStartAt() < 0){
+        if (goodPO.getStartAt() < 0) {
             goodPO.setStartAt(0L);
         }
-        if (goodPO.getEndAt() < 0){
+        if (goodPO.getEndAt() < 0) {
             goodPO.setEndAt(0L);
         }
     }
+
     /**
      * 转换图像
      */
@@ -228,7 +231,7 @@ public class DevolveTest {
     }
 
 
-    private  class GoodRowMapper implements RowMapper<GoodPO> {
+    private class GoodRowMapper implements RowMapper<GoodPO> {
 
         @Override
         public GoodPO mapRow(ResultSet resultSet, int i) throws SQLException {

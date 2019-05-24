@@ -47,7 +47,7 @@ public interface CompanyPointDao {
     /**
      * 根据集团用户id和交易密码哈希判断是否存在
      *
-     * @param uid   集团管理用户id
+     * @param uid         集团管理用户id
      * @param payWordHash 交易密码哈希
      * @return 0 or 1
      */
@@ -57,16 +57,18 @@ public interface CompanyPointDao {
 
     /**
      * 列出集团活动信息id
-     * @param uid 集团管理UID
-     * @param  showOutTime 是否显示过期活动
+     *
+     * @param uid         集团管理UID
+     * @param showOutTime 是否显示过期活动
      * @return
      */
     @SelectProvider(type = CompanyPointSqlFactory.class, method = "listActivity")
-    List<PointActivityVO> listActivity(Long uid,Boolean showOutTime);
+    List<PointActivityVO> listActivity(Long uid, Boolean showOutTime);
 
     /**
      * 通过集团id查询商品兑换列表
-     *lkm
+     * lkm
+     *
      * @param
      * @return sql语句
      */
@@ -77,7 +79,7 @@ public interface CompanyPointDao {
     @Select("<script> " +
             " SELECT bp_point_record.id AS recordId,bp_user.mobile,a.public_key," +
             " bp_point_record.num AS pointNum, round((bp_point_record.num / bp_point_record.point_rate)* bp_point_record.platform_point_rate ,4) as cashNum ," +
-            " bp_point_record.platform_point_rate as platformPointRate,"+
+            " bp_point_record.platform_point_rate as platformPointRate," +
             " ROUND (bp_point_record.num / bp_point_record.point_rate,4) AS generalPoint,bp_point_record.point_rate,hash,height," +
             " bp_point_record.updated_at AS updateTime FROM bp_point_record " +
             " LEFT JOIN bp_user ON bp_point_record.uid = bp_user.id " +

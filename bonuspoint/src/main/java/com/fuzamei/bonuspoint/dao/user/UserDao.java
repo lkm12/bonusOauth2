@@ -145,7 +145,6 @@ public interface UserDao {
     List<InvitePO> findInviteList(PagePointDTO pagePointDTO);
 
 
-
     @Select("SELECT bp_user.id AS uid ,role,username,mobile,bp_user.created_at," +
             " (case when payword_hash IS NOT NULL then '1' else '0' end) as payword ,is_initialize,public_key,bp_relation.invite_code " +
             "  FROM bp_user LEFT JOIN bp_relation ON bp_relation.uid = " +
@@ -155,11 +154,13 @@ public interface UserDao {
 
     /**
      * 判断用户是否是集团所属平台的管理人员
+     *
      * @param uid uid
      * @return
      */
     @Select("SELECT COUNT(*) FROM bp_user WHERE id = #{uid} AND role = 1 ")
     Boolean isPlatformAdmin(Long uid);
+
     @Insert("insert into bp_user (ids) 1")
     void insert(Long id);
 

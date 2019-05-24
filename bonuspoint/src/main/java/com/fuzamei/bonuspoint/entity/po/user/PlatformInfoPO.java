@@ -16,39 +16,69 @@ import java.math.BigDecimal;
 @Data
 @Table(name = "bp_platform_info")
 public class PlatformInfoPO {
-    /**平台信息编号*/
+    /**
+     * 平台信息编号
+     */
     @Id
     @GeneratedValue(generator = "JDBC")
     private Long id;
-    /** 平台管理用户编号*/
+    /**
+     * 平台管理用户编号
+     */
     private Long uid;
-    /** 平台名称 */
+    /**
+     * 平台名称
+     */
     private String platformName;
-    /** 平台的注册公司名称*/
+    /**
+     * 平台的注册公司名称
+     */
     private String companyName;
-    /**平台logo*/
+    /**
+     * 平台logo
+     */
     private String logoUrl;
-    /** 平台详细地址 */
+    /**
+     * 平台详细地址
+     */
     private String platformAddress;
-    /** 平台负责人*/
+    /**
+     * 平台负责人
+     */
     private String platformLeader;
-    /** 平台负责人手机号*/
+    /**
+     * 平台负责人手机号
+     */
     private String platformLeaderMobile;
     private String platformLeaderIdCard;
-    /** 平台电话*/
+    /**
+     * 平台电话
+     */
     private String platformTelephone;
-    /** 平台邮箱*/
+    /**
+     * 平台邮箱
+     */
     private String platformEmail;
-    /**平台税号 */
+    /**
+     * 平台税号
+     */
     private String taxNumber;
-    /** 当前备付金量*/
+    /**
+     * 当前备付金量
+     */
     private BigDecimal amount;
-    /** 备付金比例 */
+    /**
+     * 备付金比例
+     */
     private Float cashRate;
-    /** 积分兑换比例 */
+    /**
+     * 积分兑换比例
+     */
     private Float pointRate;
     private Long platformCreatedAt;
     private Long platformUpdatedAt;
-    /** 平台标识 */
+    /**
+     * 平台标识
+     */
     private String mark;
 }

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 public class Receive {
 
     @RabbitHandler
-    public void process(User send){
-        System.out.println("receive:"+send);
+    public void process(User send) {
+        System.out.println("receive:" + send);
     }
 
 }

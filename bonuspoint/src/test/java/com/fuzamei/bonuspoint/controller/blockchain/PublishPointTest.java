@@ -34,7 +34,7 @@ public class PublishPointTest {
     private BlockChainUtil blockChainUtil;
 
     @Test
-    public void  publish() throws Exception {
+    public void publish() throws Exception {
         /*
         ResponseBean<String> res =  publishPointBC.publish(initPublicKey,initPrivateKey,535L,1L,new BigDecimal(100.1010),System.currentTimeMillis());
         log.info(JsonUtil.toJsonString(res));

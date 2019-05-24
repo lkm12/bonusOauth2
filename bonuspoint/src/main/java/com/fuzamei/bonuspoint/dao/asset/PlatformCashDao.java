@@ -25,7 +25,7 @@ public interface PlatformCashDao {
      * @param platformCashRecordDTO 用户资产分页查询数据传输类
      * @return List<PlatformCashRecordVO>
      * @author qbanxiaoli
-     * @description  获取会员用户资产信息
+     * @description 获取会员用户资产信息
      */
     @SelectProvider(type = PlatformCashSqlFactory.class, method = "listMemberCashRecord")
     List<PlatformCashRecordVO> listMemberCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
@@ -34,7 +34,7 @@ public interface PlatformCashDao {
      * @param platformCashRecordDTO 集团资产分页查询数据传输类
      * @return List<PlatformCashRecordVO>
      * @author qbanxiaoli
-     * @description  获取集团资产信息
+     * @description 获取集团资产信息
      */
     @SelectProvider(type = PlatformCashSqlFactory.class, method = "listCompanyCashRecord")
     List<PlatformCashRecordVO> listCompanyCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
@@ -52,7 +52,7 @@ public interface PlatformCashDao {
      * @param platformCashRecordDTO 提现记录分页查询数据传输类
      * @return List<PlatformCashRecordVO>
      * @author qbanxiaoli
-     * @description  获取集团提现记录
+     * @description 获取集团提现记录
      */
     @SelectProvider(type = PlatformCashSqlFactory.class, method = "getWithdrawCashRecord")
     List<PlatformCashRecordVO> getWithdrawCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
@@ -61,7 +61,7 @@ public interface PlatformCashDao {
      * @param platformCashRecordDTO 备付金充值分页查询数据传输类
      * @return List<CashRecordPO>
      * @author qbanxiaoli
-     * @description  获取备付金充值列表
+     * @description 获取备付金充值列表
      */
     @SelectProvider(type = PlatformCashSqlFactory.class, method = "listRechargeCashRecord")
     List<CompanyInfoPO> listRechargeCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
@@ -79,7 +79,7 @@ public interface PlatformCashDao {
      * @param platformCashRecordDTO 集团列表分页查询数据传输类
      * @return List<CashRecordPO>
      * @author qbanxiaoli
-     * @description  获取集团列表
+     * @description 获取集团列表
      */
     @SelectProvider(type = PlatformCashSqlFactory.class, method = "listCompany")
     List<CompanyInfoPO> listCompany(PlatformCashRecordDTO platformCashRecordDTO);
@@ -88,7 +88,7 @@ public interface PlatformCashDao {
      * @param platformCashRecordDTO 备付金预警通知分页查询数据传输类
      * @return List<CashRecordPO>
      * @author qbanxiaoli
-     * @description  获取备付金预警通知列表
+     * @description 获取备付金预警通知列表
      */
     @SelectProvider(type = PlatformCashSqlFactory.class, method = "listProvisionsNotice")
     List<PlatformCashRecordVO> listProvisionsNotice(PlatformCashRecordDTO platformCashRecordDTO);
@@ -97,7 +97,7 @@ public interface PlatformCashDao {
      * @param platformCashRecordDTO 集团积分分页查询数据传输类
      * @return List<CashRecordPO>
      * @author qbanxiaoli
-     * @description  获取会员用户集团积分列表
+     * @description 获取会员用户集团积分列表
      */
     @SelectProvider(type = PlatformCashSqlFactory.class, method = "listMemberPointCashRecord")
     List<CompanyInfoPO> listMemberPointCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
@@ -106,7 +106,7 @@ public interface PlatformCashDao {
      * @param platformCashRecordDTO 集团积分详情分页查询数据传输类
      * @return CashRecordPO
      * @author qbanxiaoli
-     * @description  获取会员用户集团积分详情
+     * @description 获取会员用户集团积分详情
      */
     @SelectProvider(type = PlatformCashSqlFactory.class, method = "getMemberPointCashRecordDetail")
     CompanyInfoPO getMemberPointCashRecordDetail(PlatformCashRecordDTO platformCashRecordDTO);
@@ -115,7 +115,7 @@ public interface PlatformCashDao {
      * @param platformCashRecordDTO 集团比例信息分页查询数据传输类
      * @return List<CashRecordPO>
      * @author qbanxiaoli
-     * @description  获取集团比例信息列表
+     * @description 获取集团比例信息列表
      */
     @SelectProvider(type = PlatformCashSqlFactory.class, method = "listCompanyRateCashRecord")
     List<PlatformCashRecordVO> listCompanyRateCashRecord(PlatformCashRecordDTO platformCashRecordDTO);

@@ -12,18 +12,31 @@ import lombok.NoArgsConstructor;
 @Data
 public class Token {
 
-    /** 客户端类型 APP , Browser**/
+    /**
+     * 客户端类型 APP , Browser
+     **/
     private String client;
-    /** 用户ID */
+    /**
+     * 用户ID
+     */
     private Long uid;
-    /** 随机token */
+    /**
+     * 随机token
+     */
     private String tokenStr;
-    /** 角色 */
+    /**
+     * 角色
+     */
     private Integer role;
-    /** 平台的uid */
+    /**
+     * 平台的uid
+     */
     private Long pId;
     private String accessToken;
-    public Token(){}
+
+    public Token() {
+    }
+
     public Token(String accessToken) {
         this.accessToken = accessToken;
     }

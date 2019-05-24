@@ -21,21 +21,22 @@ import java.util.List;
 @Repository
 public interface AccountDao extends TkMapper<AccountPO> {
 
-    @InsertProvider(type= AccountSqlFactory.class , method = "addAccountSql")
-    @Options(keyColumn = "id",keyProperty = "id",useGeneratedKeys = true)
+    @InsertProvider(type = AccountSqlFactory.class, method = "addAccountSql")
+    @Options(keyColumn = "id", keyProperty = "id", useGeneratedKeys = true)
     int addAccount(AccountPO accountPO);
 
-    @UpdateProvider(type=AccountSqlFactory.class,method = "updateUserSql")
+    @UpdateProvider(type = AccountSqlFactory.class, method = "updateUserSql")
     int updateUser(AccountPO accountPO);
 
     @Update("update bp_user set password_hash = #{passwordHash} , updated_at = #{updatedAt}, is_initialize = #{isInitialize}  where id = #{id} ")
-    int updatePassword(SecrecyDTO  secrecyDTO);
+    int updatePassword(SecrecyDTO secrecyDTO);
 
     @Update("update bp_user set payword_hash = #{paywordHash} , payword_at =#{paywordAt}  where id = #{id} ")
     int updatePayword(SecrecyDTO secrecyDTO);
 
     /**
      * 更新手机号
+     *
      * @param secrecyDTO
      * @return
      */
@@ -44,6 +45,7 @@ public interface AccountDao extends TkMapper<AccountPO> {
 
     /**
      * 修改邮箱
+     *
      * @param secrecyDTO
      * @return
      */
@@ -62,15 +64,17 @@ public interface AccountDao extends TkMapper<AccountPO> {
     /**
      * 通过userPO 的非空属性统计用户数 目前有 pid role mobile username loginAt createdat
      * 时间统计大于该时间的
+     *
      * @param accountPO
      * @return
      */
-    @SelectProvider(type = AccountSqlFactory.class , method ="countUserSql" )
+    @SelectProvider(type = AccountSqlFactory.class, method = "countUserSql")
     int countUser(AccountPO accountPO);
 
     /**
      * 检查同一父级下用户输入的手机号是否已经被使用
-     * @param pId 父级id
+     *
+     * @param pId    父级id
      * @param mobile 手机号
      * @return
      */
@@ -78,10 +82,9 @@ public interface AccountDao extends TkMapper<AccountPO> {
     int checkMobileAvailable(@Param("pId") Long pId, @Param("mobile") String mobile);
 
 
-
-
     /**
      * 通过公钥查用户
+     *
      * @param publicKey
      * @return
      */
@@ -90,6 +93,7 @@ public interface AccountDao extends TkMapper<AccountPO> {
 
     /**
      * 更新头像
+     *
      * @param accountDTO
      */
     @Update("update bp_user set headimgurl = #{headimgurl} ,updated_at=#{updatedAt} where id = #{id}")
@@ -97,10 +101,11 @@ public interface AccountDao extends TkMapper<AccountPO> {
 
     /**
      * 设置默认收货地址
+     *
      * @param uid
      * @param addressId
      * @return
      */
     @Update("update bp_user set default_address = #{addressId}  where id = #{uid}")
-    int updateDefaultAddress(@Param("uid") Long uid,@Param("addressId") Long addressId);
+    int updateDefaultAddress(@Param("uid") Long uid, @Param("addressId") Long addressId);
 }

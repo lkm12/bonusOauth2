@@ -69,7 +69,7 @@ public class CompanyDataMove {
                 companyInfoStream -> companyInfoStream.forEach(
                         companyInfoPO -> {
                             //集团数据迁移
-                            companyInfoPO.setCashRate(companyInfoPO.getCashRate()*0.01F);
+                            companyInfoPO.setCashRate(companyInfoPO.getCashRate() * 0.01F);
                             CompletableFuture<Void> f1 = CompletableFuture.supplyAsync(() -> companyInfoMapper.insert(companyInfoPO)).thenAccept(result -> {
                                 if (result == 0) {
                                     log.info("插入集团:{}失败", companyInfoPO);

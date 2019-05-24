@@ -11,8 +11,12 @@ import lombok.Data;
  **/
 @Data
 public class CompanyGoodsInfoDTO {
-    /** 商品种类总量*/
+    /**
+     * 商品种类总量
+     */
     private Integer goodsTotalNum;
-    /** 商品累计销售量*/
+    /**
+     * 商品累计销售量
+     */
     private Integer goodsTotalUsed;
 }

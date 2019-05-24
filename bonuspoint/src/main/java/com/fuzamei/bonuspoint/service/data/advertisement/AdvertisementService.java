@@ -5,7 +5,7 @@ import com.fuzamei.common.model.vo.ResponseVO;
 
 public interface AdvertisementService {
 
-    
+
     ResponseVO addAdvertisement(AdvertisementDTO advertisementDTO);
 
     ResponseVO deleteAdvertisement(Integer id);

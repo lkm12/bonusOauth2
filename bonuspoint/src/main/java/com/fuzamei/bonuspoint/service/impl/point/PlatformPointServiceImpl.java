@@ -63,14 +63,15 @@ public class PlatformPointServiceImpl implements PlatformPointService {
         this.pointInfoDao = pointInfoDao;
         this.generalPointRecordDao = generalPointRecordDao;
         this.companyInfoDao = companyInfoDao;
-        this.pointRecordMapper = pointRecordMapper ;
+        this.pointRecordMapper = pointRecordMapper;
     }
 
 
     /**
      * 同意发放积分
+     *
      * @param uid uid uid
-     * @param id id id
+     * @param id  id id
      * @return
      */
     @Override
@@ -118,8 +119,9 @@ public class PlatformPointServiceImpl implements PlatformPointService {
 
     /**
      * 审核拒绝发放积分
-     * @param uid 用户id 用户id
-     * @param id  申请记录 申请记录
+     *
+     * @param uid    用户id 用户id
+     * @param id     申请记录 申请记录
      * @param reason 拒绝原因 拒绝原因
      * @return
      */

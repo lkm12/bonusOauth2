@@ -33,22 +33,22 @@ public class PointScheduledTask {
 
     /**
      * m每天0点0分0秒处理过期积分
+     *
      * @author wangjie
      */
-    @Scheduled(cron = "0 0 0 * * ?",zone = "CST")
-    public void checkAndHandleExpiredPoint(){
+    @Scheduled(cron = "0 0 0 * * ?", zone = "CST")
+    public void checkAndHandleExpiredPoint() {
         log.info("处理过期积分任务开始");
         int count = 0;
-        long now = System.currentTimeMillis()+100;
+        long now = System.currentTimeMillis() + 100;
         List<PointInfoPO> pointInfoPOList = pointInfoService.listExpiredPoint(now);
-        for (PointInfoPO pointInfoPO : pointInfoPOList){
-            log.info("处理过期积分id:{},name:{}",pointInfoPO.getId(),pointInfoPO.getName());
+        for (PointInfoPO pointInfoPO : pointInfoPOList) {
+            log.info("处理过期积分id:{},name:{}", pointInfoPO.getId(), pointInfoPO.getName());
             count++;
             pointInfoService.setPointExpired(pointInfoPO.getId());
         }
-        log.info("处理过期积分任务结束，处理count:{}条。",count);
+        log.info("处理过期积分任务结束，处理count:{}条。", count);
     }
-
 
 
 }

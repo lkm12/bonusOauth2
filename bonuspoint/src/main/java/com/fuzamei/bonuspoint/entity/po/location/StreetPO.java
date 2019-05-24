@@ -10,10 +10,16 @@ import lombok.Data;
  **/
 @Data
 public class StreetPO {
-    /** 街道编码*/
+    /**
+     * 街道编码
+     */
     private Long code;
-    /** 街道名称*/
+    /**
+     * 街道名称
+     */
     private String areaName;
-    /** 所属省编码*/
+    /**
+     * 所属省编码
+     */
     private Long districtCode;
 }

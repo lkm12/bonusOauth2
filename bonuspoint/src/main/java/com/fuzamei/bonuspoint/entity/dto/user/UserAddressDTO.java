@@ -21,28 +21,44 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 public class UserAddressDTO {
-    /** 地址id*/
-    @NotNull(message = "{PARAMETER_ERROR}" ,groups = {Address.UpdateAddress.class})
-    @Min(value = 1,groups = {Address.UpdateAddress.class})
+    /**
+     * 地址id
+     */
+    @NotNull(message = "{PARAMETER_ERROR}", groups = {Address.UpdateAddress.class})
+    @Min(value = 1, groups = {Address.UpdateAddress.class})
     private Long id;
-    /** 用户id*/
+    /**
+     * 用户id
+     */
     private Long uid;
-    /** 收件人*/
-    @NotBlank(message = "{PARAMETER_ERROR}" ,groups = {Address.class})
+    /**
+     * 收件人
+     */
+    @NotBlank(message = "{PARAMETER_ERROR}", groups = {Address.class})
     private String receiver;
-    /** mobile*/
+    /**
+     * mobile
+     */
     @Phone(groups = {Address.class})
-    @NotBlank(message = "{PARAMETER_ERROR}",groups = {Address.class})
+    @NotBlank(message = "{PARAMETER_ERROR}", groups = {Address.class})
     private String mobile;
-    /** 街道编码*/
-    @Min(value = 0 ,message = "{PARAMETER_ERROR}" , groups = {Address.class})
+    /**
+     * 街道编码
+     */
+    @Min(value = 0, message = "{PARAMETER_ERROR}", groups = {Address.class})
     private Long districtCode;
-    /** 详细地址*/
-    @NotBlank(message = "{PARAMETER_ERROR}",groups = {Address.class})
+    /**
+     * 详细地址
+     */
+    @NotBlank(message = "{PARAMETER_ERROR}", groups = {Address.class})
     private String areaDetail;
-    /** 创建时间*/
+    /**
+     * 创建时间
+     */
     private Long createdAt;
-    /** 修改时间 */
+    /**
+     * 修改时间
+     */
     private Long updateAt;
 
     private String provinceName;

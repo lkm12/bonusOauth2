@@ -179,7 +179,7 @@ public class PointInfoSqlFactory {
                 FROM("bp_point_info ");
                 INNER_JOIN("bp_company_info  on company=bp_company_info.id");
                 INNER_JOIN("bp_point_record on bp_point_info.id = bp_point_record.point_id");
-                WHERE("bp_point_record.category = "+PointRecordConstant.CATEGORY_GROUP_APPLY );
+                WHERE("bp_point_record.category = " + PointRecordConstant.CATEGORY_GROUP_APPLY);
                 if (queryPointDTO.getIssuePlatform() != null) {
                     WHERE(" issue_platform =" + queryPointDTO.getIssuePlatform());
                 }
@@ -200,9 +200,9 @@ public class PointInfoSqlFactory {
                     WHERE("status =" + queryPointDTO.getStatus());
                 }
                 if (StringUtil.isNotBlank(queryPointDTO.getFuzzyMatch())) {
-                    WHERE("( point.name like '%" + queryPointDTO.getFuzzyMatch() + "%'"+" or "+"company_name like '%" + queryPointDTO.getFuzzyMatch() + "%')");
+                    WHERE("( point.name like '%" + queryPointDTO.getFuzzyMatch() + "%'" + " or " + "company_name like '%" + queryPointDTO.getFuzzyMatch() + "%')");
                 }
-                if (StringUtil.isNotBlank(queryPointDTO.getName())){
+                if (StringUtil.isNotBlank(queryPointDTO.getName())) {
                     WHERE("point.name like '%" + queryPointDTO.getName() + "%'");
                 }
 

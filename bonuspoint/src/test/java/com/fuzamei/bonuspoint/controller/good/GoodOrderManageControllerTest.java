@@ -16,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * test
+ *
  * @author liumeng
  * @create 2018年5月16日
  */
@@ -64,7 +65,7 @@ public class GoodOrderManageControllerTest extends BaseControllerTest {
         log.info("商家发货");
         this.mockMvc
                 .perform(get("/bonus-point/good/order/send").header(authorizationName, authorizationValue)
-                        .param("id","2").param("logisticsInfo", "1111"))
+                        .param("id", "2").param("logisticsInfo", "1111"))
                 .andExpect(status().isOk()).andDo(print()).andReturn().getResponse().getContentAsString();
     }
 
@@ -73,7 +74,7 @@ public class GoodOrderManageControllerTest extends BaseControllerTest {
         log.info("用户收货");
         this.mockMvc
                 .perform(get("/bonus-point/good/order/confirm").header(authorizationName, authorizationValue)
-                        .param("id","2"))
+                        .param("id", "2"))
                 .andExpect(status().isOk()).andDo(print()).andReturn().getResponse().getContentAsString();
     }
 

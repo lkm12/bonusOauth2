@@ -1,13 +1,12 @@
 /**
  * EdDSA-Java by str4d
- *
+ * <p>
  * To the extent possible under law, the person who associated CC0 with
  * EdDSA-Java has waived all copyright and related or neighboring rights
  * to EdDSA-Java.
- *
+ * <p>
  * You should have received a copy of the CC0 legalcode along with this
  * work. If not, see <https://creativecommons.org/publicdomain/zero/1.0/>.
- *
  */
 package com.fzm.blockchain.algorithm.eddsa;
 
@@ -16,11 +15,11 @@ package com.fzm.blockchain.algorithm.eddsa;
  * Not for external use, not maintained as a public API.
  *
  * @author str4d
- *
  */
 public class Utils {
     /**
      * Constant-time byte comparison.
+     *
      * @param b a byte
      * @param c a byte
      * @return 1 if b and c are equal, 0 otherwise.
@@ -36,6 +35,7 @@ public class Utils {
 
     /**
      * Constant-time byte[] comparison.
+     *
      * @param b a byte[]
      * @param c a byte[]
      * @return 1 if b and c are equal, 0 otherwise.
@@ -51,6 +51,7 @@ public class Utils {
 
     /**
      * Constant-time determine if byte is negative.
+     *
      * @param b the byte to check.
      * @return 1 if the byte is negative, 0 otherwise.
      */
@@ -60,6 +61,7 @@ public class Utils {
 
     /**
      * Get the i'th bit of a byte array.
+     *
      * @param h the byte array.
      * @param i the bit index.
      * @return 0 or 1, the value of the i'th bit in h
@@ -70,6 +72,7 @@ public class Utils {
 
     /**
      * Converts a hex string to bytes.
+     *
      * @param s the hex string to be converted.
      * @return the byte[]
      */
@@ -78,24 +81,25 @@ public class Utils {
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
             data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
-                    + Character.digit(s.charAt(i+1), 16));
+                    + Character.digit(s.charAt(i + 1), 16));
         }
         return data;
     }
 
     /**
      * Converts bytes to a hex string.
+     *
      * @param raw the byte[] to be converted.
      * @return the hex representation as a string.
      */
     public static String bytesToHex(byte[] raw) {
-        if ( raw == null ) {
+        if (raw == null) {
             return null;
         }
         final StringBuilder hex = new StringBuilder(2 * raw.length);
         for (final byte b : raw) {
             hex.append(Character.forDigit((b & 0xF0) >> 4, 16))
-            .append(Character.forDigit((b & 0x0F), 16));
+                    .append(Character.forDigit((b & 0x0F), 16));
         }
         return hex.toString();
     }

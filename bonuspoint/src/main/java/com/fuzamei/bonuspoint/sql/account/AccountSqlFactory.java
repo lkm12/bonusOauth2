@@ -47,7 +47,7 @@ public class AccountSqlFactory {
                     SET("nickname='" + accountPO.getNickname() + "'");
                 }
                 if (accountPO.getHeadimgurl() != null) {
-                    SET("headimgurl='" + accountPO.getHeadimgurl()+"'");
+                    SET("headimgurl='" + accountPO.getHeadimgurl() + "'");
                 }
                 if (accountPO.getQrCode() != null) {
                     SET("qr_code='" + accountPO.getQrCode() + "'");
@@ -61,11 +61,11 @@ public class AccountSqlFactory {
                 if (accountPO.getIsInitialize() != null) {
                     SET("is_initialize=" + accountPO.getIsInitialize());
                 }
-                if(accountPO.getPublicKey() != null){
-                    SET("public_key='" + accountPO.getPublicKey()+"'");
+                if (accountPO.getPublicKey() != null) {
+                    SET("public_key='" + accountPO.getPublicKey() + "'");
                 }
-                if(accountPO.getPrivateKey() != null){
-                    SET("private_key='" + accountPO.getPrivateKey()+"'");
+                if (accountPO.getPrivateKey() != null) {
+                    SET("private_key='" + accountPO.getPrivateKey() + "'");
                 }
                 if (accountPO.getCreatedAt() != null) {
                     SET("created_at=" + accountPO.getCreatedAt());
@@ -83,7 +83,7 @@ public class AccountSqlFactory {
         return sql.toString();
     }
 
-    public String countUserSql(AccountPO accountPO){
+    public String countUserSql(AccountPO accountPO) {
         SQL sql = new SQL() {
             {
                 SELECT("count(*)");
@@ -106,8 +106,8 @@ public class AccountSqlFactory {
                 if (accountPO.getUsername() != null) {
                     WHERE("username='" + accountPO.getUsername() + "'");
                 }
-                if (accountPO.getPublicKey()!=null){
-                    WHERE("public_key = '"+accountPO.getPublicKey()+"'");
+                if (accountPO.getPublicKey() != null) {
+                    WHERE("public_key = '" + accountPO.getPublicKey() + "'");
                 }
             }
         };
@@ -115,17 +115,17 @@ public class AccountSqlFactory {
         return sql.toString();
     }
 
-    public String addAccountSql(AccountPO accountPO){
-        SQL sql = new SQL(){
+    public String addAccountSql(AccountPO accountPO) {
+        SQL sql = new SQL() {
             {
                 INSERT_INTO("bp_user");
                 VALUES("p_id", "#{pId}");
                 VALUES("role", "#{role}");
                 VALUES("status", "#{status}");
                 //VALUES("username", "#{username}");
-                VALUES("username", "'"+accountPO.getUsername()+"'");
-                VALUES("mobile","#{mobile}");
-                VALUES("email","#{email}");
+                VALUES("username", "'" + accountPO.getUsername() + "'");
+                VALUES("mobile", "#{mobile}");
+                VALUES("email", "#{email}");
                 VALUES("password_hash", "#{passwordHash}");
                 VALUES("payword_hash", "#{paywordHash}");
                 VALUES("is_initialize", "#{isInitialize}");

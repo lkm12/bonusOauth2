@@ -55,6 +55,7 @@ public class PlatformPointManageController {
 
     /**
      * 同意集团发放积分
+     *
      * @param token token
      * @return
      */
@@ -62,14 +63,15 @@ public class PlatformPointManageController {
     public ResponseVO reviewPoint(@RequestAttribute("token") Token token, @PathVariable Long id) {
         log.info("集团审核积分同意");
 
-        ResponseVO result =  platformPointService.reviewPoint(token.getUid(), id);
-        return  result ;
+        ResponseVO result = platformPointService.reviewPoint(token.getUid(), id);
+        return result;
     }
 
     /**
      * 拒绝集团发放积分申请
-     * @param token token
-     * @param id id
+     *
+     * @param token  token
+     * @param id     id
      * @param reason 理由
      * @return
      */
@@ -82,20 +84,20 @@ public class PlatformPointManageController {
 
     /**
      * 平台转积分给用户
-     * @param token
-     * @param sendPointDTO{
-     *                        toId     对方用户id      require=true
-     *                        num      积分数量        require=true
-     *                        memo     备注           require=false
-     *                        payword  支付密码        require=true
      *
-     *                   }
+     * @param token
+     * @param sendPointDTO{ toId     对方用户id      require=true
+     *                      num      积分数量        require=true
+     *                      memo     备注           require=false
+     *                      payword  支付密码        require=true
+     *                      <p>
+     *                      }
      * @return
      */
     @LogAnnotation(note = "平台转积分给用户")
     @PostMapping("sendPoint")
     public ResponseVO sendGeneralPointToMember(@RequestAttribute("token") Token token, @RequestBody SendPointDTO sendPointDTO) {
-        if (sendPointDTO.getNum()==null ||sendPointDTO.getNum().compareTo(BigDecimal.ZERO)!=1){
+        if (sendPointDTO.getNum() == null || sendPointDTO.getNum().compareTo(BigDecimal.ZERO) != 1) {
             log.info("积分数量错误：");
             return new ResponseVO(CommonResponseEnum.PARAMETER_ERROR);
         }

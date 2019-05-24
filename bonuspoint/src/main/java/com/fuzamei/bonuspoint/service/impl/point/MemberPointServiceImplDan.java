@@ -46,7 +46,7 @@ import java.util.Map;
 
 @Slf4j
 @Service
-public class MemberPointServiceImplDan implements MemberPointServiceDan{
+public class MemberPointServiceImplDan implements MemberPointServiceDan {
 
     private final MemberPointDao memberPointDao;
     private final MemberPointServiceMethodDan memberPointServiceMethodDan;
@@ -65,12 +65,13 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
 
     @Value("${platform.publicKey}")
     private String platformPublicKey;
+
     @Autowired
     public MemberPointServiceImplDan(MemberPointDao memberPointDao, MemberPointServiceMethodDan memberPointServiceMethodDan,
                                      ContactDao contactDao, PlatformInfoMapper platformInfoMapper, AccountMapper accountMapper,
                                      CompanyInfoMapper companyInfoMapper, GeneralPointRelationMapper generalPointRelationMapper,
                                      MemberBC memberBC, BlockChainUtil blockChainUtil, PointRecordMapper pointRecordMapper, CompanyBC companyBC,
-                                     CashRecordMapper cashRecordMapper, UserServiceMethodDan userServiceMethodDan){
+                                     CashRecordMapper cashRecordMapper, UserServiceMethodDan userServiceMethodDan) {
         this.memberPointDao = memberPointDao;
         this.memberPointServiceMethodDan = memberPointServiceMethodDan;
         this.contactDao = contactDao;
@@ -98,7 +99,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
     public ResponseVO exchange(ExchangePointDTO exchangeDTO) {
 
         //积分数量不能为0
-        if(exchangeDTO.getExNum().equals(BigDecimal.ZERO)){
+        if (exchangeDTO.getExNum().equals(BigDecimal.ZERO)) {
             return new ResponseVO(PointResponseEnum.POINT_NUM_ZERO);
         }
 
@@ -106,11 +107,11 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
         Long platformUid = exchangeDTO.getPlatformUid();
 
         Example example = new Example(PlatformInfoPO.class);
-        example.createCriteria().andEqualTo("uid",platformUid);
+        example.createCriteria().andEqualTo("uid", platformUid);
         //通过平台uid查出平台信息
         PlatformInfoPO platformInfoPO = platformInfoMapper.selectOneByExample(example);
 
-        if(platformInfoPO == null){
+        if (platformInfoPO == null) {
             return new ResponseVO(CommonResponseEnum.PLATFORM_NOT_EXIST);
         }
 
@@ -131,7 +132,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
         }
 
         //检查交易密码是否正确
-       AccountPO accountPO = accountMapper.selectByPrimaryKey(exchangeDTO.getUid());
+        AccountPO accountPO = accountMapper.selectByPrimaryKey(exchangeDTO.getUid());
 
         if (!exchangeDTO.getPayWordHash().equals(accountPO.getPaywordHash())) {
             return new ResponseVO(CommonResponseEnum.PAYWORD_WRONG);
@@ -190,12 +191,10 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
              */
             try {
                 memberPointServiceMethodDan.updateSendOjbCpmpany(li, iNum);
-            }catch (Exception e){
+            } catch (Exception e) {
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return new ResponseVO(PointResponseEnum.POINT_UPDATE_ERROR);
             }
-
-
 
 
             //集团积分中被兑换的数量
@@ -214,7 +213,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
                 pointRecordPO.setType(PointRecordConstant.POINT_SUB);
 
                 PointPO pointPO = pointList.get(i);
-                if(String .valueOf(pointPO.getNumSend()).equals("0.0000")){
+                if (String.valueOf(pointPO.getNumSend()).equals("0.0000")) {
                     continue;
                 }
                 pointRecordPO.setNum(pointPO.getNumSend());
@@ -225,11 +224,11 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
                 pointRecordPO.setPlatformPointRate(platformInfoPO.getPointRate());
 
                 //兑换者减去的积分变动记录插入
-               int n = pointRecordMapper.insertSelective(pointRecordPO);
-               if(n < 1){
-                   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                   throw new RuntimeException("发送者减去的积分变动记录插入失败");
-               }
+                int n = pointRecordMapper.insertSelective(pointRecordPO);
+                if (n < 1) {
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                    throw new RuntimeException("发送者减去的积分变动记录插入失败");
+                }
 
                 pointRecordPOList.add(pointRecordPO);
 
@@ -239,25 +238,25 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
 
 
                 //修改已兑换的积分数
-               Integer d =  memberPointDao.updateUserdPointByPointId(pointPO.getPointId(), numberUsed);
-               if(d < 1){
-                   TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                   throw new RuntimeException("修改集团积分被兑换数失败");
-               }
+                Integer d = memberPointDao.updateUserdPointByPointId(pointPO.getPointId(), numberUsed);
+                if (d < 1) {
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                    throw new RuntimeException("修改集团积分被兑换数失败");
+                }
             }
 
             /**
              * 更改兑换者的平台积分，将兑换者的操作记录插表，减少集团备付金
              */
-            Map<String,Object> mapGeneralPoint = null;
+            Map<String, Object> mapGeneralPoint = null;
             try {
                 //返回值用于上链
                 mapGeneralPoint = memberPointServiceMethodDan.changeGeneralExchangeAccept(platformId, exchangeDTO, companyInfoPO, pointOpList, exchangeGeneralPoint);
-            }catch (RuntimeException e){
-                if(e.getMessage().equals("备付金不足")){
+            } catch (RuntimeException e) {
+                if (e.getMessage().equals("备付金不足")) {
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                   return new ResponseVO(AssetResponseEnum.COMPANY_PROVISIONS_LACK);
-                }else {
+                    return new ResponseVO(AssetResponseEnum.COMPANY_PROVISIONS_LACK);
+                } else {
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     throw new RuntimeException();
                 }
@@ -268,7 +267,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
              */
             GeneralPointRecordPO generalPointRecordPO = (GeneralPointRecordPO) mapGeneralPoint.get("generalPointRecordPO");
             CashRecordPO cashRecordPO = (CashRecordPO) mapGeneralPoint.get("cashRecordPO");
-            if(generalPointRecordPO == null || cashRecordPO == null){
+            if (generalPointRecordPO == null || cashRecordPO == null) {
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 throw new RuntimeException();
             }
@@ -286,7 +285,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
                    return new ResponseVO(PointResponseEnum.GENERALPOINT_BC_FAIL);
                 }
 */
-                //减少备付金上链
+            //减少备付金上链
             /*
             BigDecimal cash = exchangeGeneralPoint.multiply(new BigDecimal(platformInfoPO.getPointRate())).setScale(4,java.math.BigDecimal.ROUND_HALF_UP);
             ResponseBean<String> responseBean =  companyBC.accessCash(String.valueOf(companyInfoPO.getId()),String.valueOf(cash),false,accountPOKey.getPublicKey(),accountPOKey.getPrivateKey());
@@ -343,13 +342,13 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ResponseVO memberTranPoint(ExchangePointDTO exchangeDTO) {
-            //积分数量不能为0
-        if(exchangeDTO.getExNum().equals(BigDecimal.ZERO)){
+        //积分数量不能为0
+        if (exchangeDTO.getExNum().equals(BigDecimal.ZERO)) {
             return new ResponseVO(PointResponseEnum.POINT_NUM_ZERO);
         }
         Long uid = contactDao.findOpIdByPublickey(exchangeDTO.getOpPubKey());
 
-         //检查对方是否存在
+        //检查对方是否存在
         if (uid == null) {
             return new ResponseVO(PointResponseEnum.OTHER_NOT_EXIST);
         }
@@ -361,7 +360,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
         AccountPO accountPOAccept = accountMapper.selectByPrimaryKey(uid);
 
         //校验对方身份，只有对方为用户才可转积分
-        if(!accountPOAccept.getRole().equals(Roles.MEMBER)){
+        if (!accountPOAccept.getRole().equals(Roles.MEMBER)) {
             return new ResponseVO(PointResponseEnum.POINT_ROLE_TRANSFER_ERROR);
         }
         //检查交易密码是否正确
@@ -369,7 +368,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
         String paywordHash = accountPO.getPaywordHash();
 
 
-        if(exchangeDTO.getPayWordHash() != null){
+        if (exchangeDTO.getPayWordHash() != null) {
             //支付密码错误就报错
             if (!exchangeDTO.getPayWordHash().equals(paywordHash)) {
                 return new ResponseVO(CommonResponseEnum.PAYWORD_WRONG);
@@ -417,7 +416,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
                 int iNum = 0;
 
 
-                 //将集团积分发送者对象与接收者对象赋值
+                //将集团积分发送者对象与接收者对象赋值
                 Map numMap = memberPointServiceMethodDan.createPointObjCompany(listPointPo, pointOpList, exNum, iNum, uid);
                 exNum = (BigDecimal) numMap.get("exNum");
                 iNum = (int) numMap.get("iNum");
@@ -425,7 +424,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
                 pointOpList = (List<PointPO>) numMap.get("pointOpList");
 
 
-                if (exNum .compareTo(BigDecimal.ZERO)==1 ) {
+                if (exNum.compareTo(BigDecimal.ZERO) == 1) {
                     return new ResponseVO(PointResponseEnum.COMPANY_POINT_NOT_ENOUGH);
                 }
 
@@ -438,7 +437,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
                 //更新集团积分发送者的积分数
                 try {
                     memberPointServiceMethodDan.updateSendOjbCpmpany(li, iNum);
-                }catch (Exception e){
+                } catch (Exception e) {
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     return new ResponseVO(PointResponseEnum.POINT_UPDATE_ERROR);
                 }
@@ -452,7 +451,7 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
                     PointPO poo = listPointPo.get(i);
 
                     //去掉为0的积分，防止上链出错
-                    if(String .valueOf(poo.getNumSend()).equals("0.0000")){
+                    if (String.valueOf(poo.getNumSend()).equals("0.0000")) {
                         continue;
                     }
 
@@ -470,13 +469,13 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
                     pointRecordPO.setUid(poo.getUserId());
                     pointRecordPO.setOppositeUid(poo.getOpUserId());
                     //插入商户积分操作表失败
-                   int n = pointRecordMapper.insertSelective(pointRecordPO);
+                    int n = pointRecordMapper.insertSelective(pointRecordPO);
 
-                   if(n < 0){
-                       log.info("插入商户积分操作表失败");
-                       TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                       throw new RuntimeException("插入商户积分操作表失败");
-                   }
+                    if (n < 0) {
+                        log.info("插入商户积分操作表失败");
+                        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                        throw new RuntimeException("插入商户积分操作表失败");
+                    }
                     pointRecordPOListSend.add(pointRecordPO);
 
                 }
@@ -484,8 +483,8 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
                 List<PointRecordPO> pointRecordPOListAccept = null;
                 //改变接收者的集团积分信息，将集团积分操作记录插bp_point_record表
                 try {
-                     pointRecordPOListAccept =  memberPointServiceMethodDan.changeCompanyAccept(iNum,pointOpList,exchangeDTO);
-                }catch (Exception e){
+                    pointRecordPOListAccept = memberPointServiceMethodDan.changeCompanyAccept(iNum, pointOpList, exchangeDTO);
+                } catch (Exception e) {
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     throw new RuntimeException();
                 }
@@ -504,18 +503,18 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
             }
 
             //转账通用积分
-        } else if(exchangeDTO.getPointType() == PointInfoConstant.GENERAL_POINT){
+        } else if (exchangeDTO.getPointType() == PointInfoConstant.GENERAL_POINT) {
 
             Long platformUid = exchangeDTO.getPlatformUid();
             Example example = new Example(PlatformInfoPO.class);
-            example.createCriteria().andEqualTo("uid",platformUid);
+            example.createCriteria().andEqualTo("uid", platformUid);
 
             PlatformInfoPO platformInfoPO = platformInfoMapper.selectOneByExample(example);
 
             //检查平台是否存在
 
             if (platformInfoPO == null) {
-                    return new ResponseVO(CommonResponseEnum.PLATFORM_NOT_EXIST);
+                return new ResponseVO(CommonResponseEnum.PLATFORM_NOT_EXIST);
             }
 
             //平台id
@@ -523,8 +522,8 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
             //查询用户指定平台的通用积分
             Example examplee = new Example(GeneralPointRelationPO.class);
             Example.Criteria criteria = examplee.createCriteria();
-            criteria.andEqualTo("userId",exchangeDTO.getUid());
-            criteria.andEqualTo("platformId",platformId);
+            criteria.andEqualTo("userId", exchangeDTO.getUid());
+            criteria.andEqualTo("platformId", platformId);
 
             //查询接收者的通用积分信息
             GeneralPointRelationPO generalPointRelationPOOther = generalPointRelationMapper.selectOneByExample(examplee);
@@ -532,31 +531,30 @@ public class MemberPointServiceImplDan implements MemberPointServiceDan{
             //接收者的通用积分信息
             PointPO pointPOAccept = new PointPO();
 
-            BeanUtils.copyProperties(generalPointRelationPOOther,pointPOAccept);
+            BeanUtils.copyProperties(generalPointRelationPOOther, pointPOAccept);
 
             if (generalPointRelationPOOther == null) {
                 return new ResponseVO(PointResponseEnum.GENERAL_POINT_NOT_EXIST);
             } else {
 
                 pointPOAccept.setOpUserId(uid);
-                if (generalPointRelationPOOther.getNum().compareTo( exchangeDTO.getExNum())==-1) {
+                if (generalPointRelationPOOther.getNum().compareTo(exchangeDTO.getExNum()) == -1) {
                     return new ResponseVO(GoodResponseEnum.GOOD_PAY_GENERAL_POINT_OUTOF);
                 }
 
                 //转出用户
                 Long from = exchangeDTO.getUid();
 
-                Map<String ,GeneralPointRecordPO> map = null;
+                Map<String, GeneralPointRecordPO> map = null;
                 /**
                  * 改变发送者与接收者的通用积分数，并将两者的操作记录插表
                  */
                 try {
-                    map = memberPointServiceMethodDan.changeGeneralSendAndAccept(pointPOAccept,exchangeDTO,platformId);
-                }catch (Exception e){
+                    map = memberPointServiceMethodDan.changeGeneralSendAndAccept(pointPOAccept, exchangeDTO, platformId);
+                } catch (Exception e) {
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     throw new RuntimeException();
                 }
-
 
 
                 //上链

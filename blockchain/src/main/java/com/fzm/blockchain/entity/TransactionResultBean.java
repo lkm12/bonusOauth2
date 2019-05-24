@@ -5,7 +5,6 @@ import lombok.Data;
 import java.util.List;
 
 /**
- *
  * @author wangtao
  * @create 2018/6/15
  */
@@ -22,7 +21,7 @@ public class TransactionResultBean {
     private Receipt receipt;
 
     @Data
-    public class Tx{
+    public class Tx {
         private String execer;
         private Payload payload;
         private String rawPayload;
@@ -32,24 +31,28 @@ public class TransactionResultBean {
         private Long nonce;
         private String from;
         private String to;
+
         @Data
-        public class Payload{
+        public class Payload {
             private String rawlog;
         }
+
         @Data
-        public class Signature{
+        public class Signature {
             private Integer ty;
             private String pubkey;
             private String signature;
         }
     }
+
     @Data
-    public class Receipt{
+    public class Receipt {
         private Integer ty;
         private String tyName;
         private List<Logs> logs;
+
         @Data
-        public class Logs{
+        public class Logs {
             private Integer ty;
             private String tyName;
             private String log;

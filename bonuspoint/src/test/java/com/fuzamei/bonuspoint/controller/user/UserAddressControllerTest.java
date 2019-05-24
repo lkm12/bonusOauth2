@@ -40,18 +40,19 @@ public class UserAddressControllerTest {
     private MockMvc mockMvc;
     private final static String authorizationName = "Authorization";
     private final static String authorizationValue = "token&1";
+
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
     @Test
-    public void testGetUserAddressList()throws  Exception{
-        Map<String,String> map = new HashMap<String,String>(2);
-        map.put("page","1");
+    public void testGetUserAddressList() throws Exception {
+        Map<String, String> map = new HashMap<String, String>(2);
+        map.put("page", "1");
 
         this.mockMvc.perform(post("/bonus-point/member/address/list")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())
@@ -59,16 +60,16 @@ public class UserAddressControllerTest {
     }
 
     @Test
-    public void testSaveUserAddress() throws Exception{
-        Map<String,String> map = new HashMap<String,String>(8);
-        map.put("receiver","张三");
-        map.put("mobile","17826873177");
-        map.put("address_province","110000");
-        map.put("address_city","110100");
-        map.put("address_area","110101");
-        map.put("area_detail","双门洞");
+    public void testSaveUserAddress() throws Exception {
+        Map<String, String> map = new HashMap<String, String>(8);
+        map.put("receiver", "张三");
+        map.put("mobile", "17826873177");
+        map.put("address_province", "110000");
+        map.put("address_city", "110100");
+        map.put("address_area", "110101");
+        map.put("area_detail", "双门洞");
         this.mockMvc.perform(post("/bonus-point/member/address/create")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())
@@ -76,17 +77,17 @@ public class UserAddressControllerTest {
     }
 
     @Test
-    public void testUpdateUserAddress()throws Exception{
-        Map<String,Object> map = new HashMap<String,Object>(8);
-        map.put("address_id",1);
-        map.put("receiver","张三");
-        map.put("mobile","17826873177");
-        map.put("address_province","110000");
-        map.put("address_city","110100");
-        map.put("address_area","110101");
-        map.put("area_detail","双门洞");
+    public void testUpdateUserAddress() throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>(8);
+        map.put("address_id", 1);
+        map.put("receiver", "张三");
+        map.put("mobile", "17826873177");
+        map.put("address_province", "110000");
+        map.put("address_city", "110100");
+        map.put("address_area", "110101");
+        map.put("area_detail", "双门洞");
         this.mockMvc.perform(put("/bonus-point/member/address/update")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())
@@ -94,11 +95,11 @@ public class UserAddressControllerTest {
     }
 
     @Test
-    public void testDeleteUserAddress()throws Exception{
-        Map<String,Object> map = new HashMap<String,Object>(8);
-        map.put("address_id",1);
+    public void testDeleteUserAddress() throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>(8);
+        map.put("address_id", 1);
         this.mockMvc.perform(delete("/bonus-point/member/address/delete")
-                .header(authorizationName,authorizationValue)
+                .header(authorizationName, authorizationValue)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJsonBytes(map)))
                 .andExpect(status().isOk()).andDo(print())

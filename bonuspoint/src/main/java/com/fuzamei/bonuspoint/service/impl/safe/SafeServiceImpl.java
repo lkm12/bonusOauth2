@@ -13,6 +13,7 @@ import com.fuzamei.bonuspoint.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class SafeServiceImpl implements SafeService {
     private final AccountDao accountDao;
 
     @Autowired
-    public SafeServiceImpl( AccountDao accountDao) {
+    public SafeServiceImpl(AccountDao accountDao) {
         this.accountDao = accountDao;
     }
 
@@ -94,9 +95,6 @@ public class SafeServiceImpl implements SafeService {
     }
 
 
-
-
-
     @Override
     public boolean hasMobile(Long uid) {
         AccountPO accountPO = accountDao.getUserById(uid);
@@ -128,7 +126,7 @@ public class SafeServiceImpl implements SafeService {
     @Override
     public ResponseVO updateMobile(SecrecyDTO secrecyDTO) {
         secrecyDTO.setUpdatedAt(System.currentTimeMillis());
-        int result =  accountDao.updateMobile(secrecyDTO);
+        int result = accountDao.updateMobile(secrecyDTO);
         if (result == 1) {
             Map<String, String> map = new HashMap<>(16);
             map.put("mobile", secrecyDTO.getMobile());
@@ -140,7 +138,7 @@ public class SafeServiceImpl implements SafeService {
     @Override
     public ResponseVO updateEmail(SecrecyDTO secrecyDTO) {
         secrecyDTO.setUpdatedAt(System.currentTimeMillis());
-        int result =  accountDao.updateEmail(secrecyDTO);
+        int result = accountDao.updateEmail(secrecyDTO);
         if (result == 1) {
             Map<String, String> map = new HashMap<>(16);
             map.put("email", secrecyDTO.getEmail());

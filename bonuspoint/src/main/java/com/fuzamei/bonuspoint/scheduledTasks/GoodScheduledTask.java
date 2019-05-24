@@ -26,8 +26,8 @@ public class GoodScheduledTask {
     /**
      * 每 10 分钟扫描过期商品
      */
-    @Scheduled(cron = "0 0/10 * * * ?",zone = "CST")
-    public void autoOutTImeGood(){
+    @Scheduled(cron = "0 0/10 * * * ?", zone = "CST")
+    public void autoOutTImeGood() {
         log.info("扫描过期商品");
         goodService.autoOutTImeGood();
     }

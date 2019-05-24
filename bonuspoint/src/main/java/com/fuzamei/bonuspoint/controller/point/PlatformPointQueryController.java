@@ -40,7 +40,7 @@ public class PlatformPointQueryController {
     private final MemberPointService memberPointService;
 
     @Autowired
-    public PlatformPointQueryController(PlatformPointService platformPointService,UserService userService,MemberPointService memberPointService) {
+    public PlatformPointQueryController(PlatformPointService platformPointService, UserService userService, MemberPointService memberPointService) {
         this.platformPointService = platformPointService;
         this.userService = userService;
         this.memberPointService = memberPointService;
@@ -83,18 +83,18 @@ public class PlatformPointQueryController {
 
     /**
      * 平台查看积分发放记录
+     *
      * @param token
-     * @param queryDTO{
-     *                 startTime:                 起始时间           非必需
-     *                 endTime：                  结束时间           非必需
-     *                 mobile                     模糊查询手机号      非必需
-     *                 page：                     当前页             非必需
-     *                 pageSize：                 页大小             非必需
+     * @param queryDTO{ startTime:                 起始时间           非必需
+     *                  endTime：                  结束时间           非必需
+     *                  mobile                     模糊查询手机号      非必需
+     *                  page：                     当前页             非必需
+     *                  pageSize：                 页大小             非必需
      * @return
      */
     @LogAnnotation(note = "平台查看积分发放记录")
     @PostMapping("point-grant-list")
-    public ResponseVO getGrantPointList(@RequestAttribute("token") Token token, @RequestBody QueryPointDTO queryDTO){
+    public ResponseVO getGrantPointList(@RequestAttribute("token") Token token, @RequestBody QueryPointDTO queryDTO) {
 
         // 设置默认值
         if (queryDTO.getPage() == null || queryDTO.getPage() <= 0) {
@@ -148,9 +148,9 @@ public class PlatformPointQueryController {
      *
      * @param jsonData 接收参数
      *                 {
-     *
+     *                 <p>
      *                 id:用户id
-     *
+     *                 <p>
      *                 }
      * @return 响应
      */
@@ -166,7 +166,7 @@ public class PlatformPointQueryController {
             log.info("参数错误");
             return new ResponseVO(CommonResponseEnum.PARAMETER_ERROR);
         }
-        if(StringUtil.isBlank(String.valueOf(pagePointDTO.getId()))){
+        if (StringUtil.isBlank(String.valueOf(pagePointDTO.getId()))) {
             return new ResponseVO(CommonResponseEnum.PARAMETER_BLANK);
         }
         return memberPointService.userPointInfo(pagePointDTO);

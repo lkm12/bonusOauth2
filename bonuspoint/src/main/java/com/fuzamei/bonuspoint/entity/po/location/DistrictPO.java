@@ -12,13 +12,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DistrictPO {
-    /** 县编码*/
+    /**
+     * 县编码
+     */
     private Long code;
-    /** 县名称*/
+    /**
+     * 县名称
+     */
     private String areaName;
-    /** 所属市编码*/
+    /**
+     * 所属市编码
+     */
     private Long cityCode;
-    /** 邮编 */
+    /**
+     * 邮编
+     */
     private Integer zipCode;
 
 }

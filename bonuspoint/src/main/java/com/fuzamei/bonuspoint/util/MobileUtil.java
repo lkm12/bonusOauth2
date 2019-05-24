@@ -27,7 +27,7 @@ public class MobileUtil {
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
         Phonenumber.PhoneNumber phoneNumber;
         phoneNumber = phoneNumberUtil.parse(mobile, country.toUpperCase());
-        if (phoneNumberUtil.isValidNumber(phoneNumber)){
+        if (phoneNumberUtil.isValidNumber(phoneNumber)) {
             return true;
         }
         return false;

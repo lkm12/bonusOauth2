@@ -29,10 +29,11 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     private static final String TOKEN = "token";
     @Autowired
     private RedisTemplateUtil redisTemplateUtil;
-    /** 加密密钥 */
+    /**
+     * 加密密钥
+     */
     @Value("${token.encrypt.key}")
     private String encryptKey;
-
 
 
     @Override

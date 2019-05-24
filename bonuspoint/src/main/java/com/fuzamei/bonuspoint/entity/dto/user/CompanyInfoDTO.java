@@ -14,51 +14,95 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 public class CompanyInfoDTO extends PageDTO {
 
-    /** 集团信息编号 */
+    /**
+     * 集团信息编号
+     */
     private Long id;
-    /** 用户id */
+    /**
+     * 用户id
+     */
     private Long uid;
-    /** 用户名 */
+    /**
+     * 用户名
+     */
     private String username;
-    /**集团所属平台id*/
+    /**
+     * 集团所属平台id
+     */
     private Long pId;
-    /** 集团名称 */
+    /**
+     * 集团名称
+     */
     private String companyName;
-    /** 集团详细地址 */
+    /**
+     * 集团详细地址
+     */
     private String companyAddress;
-    /** 公司logo */
+    /**
+     * 公司logo
+     */
     private String logoUrl;
-    /** 集团负责人 */
+    /**
+     * 集团负责人
+     */
     private String companyLeader;
-    /** 法人身份证号*/
+    /**
+     * 法人身份证号
+     */
     private String companyLeaderIdCard;
-    /** 法人手机 */
+    /**
+     * 法人手机
+     */
     private String companyLeaderMobile;
-    /** 集团电话 */
+    /**
+     * 集团电话
+     */
     private String companyTelephone;
-    /** 公司邮箱 */
+    /**
+     * 公司邮箱
+     */
     private String companyEmail;
-    /** 银行 */
+    /**
+     * 银行
+     */
     private String bank;
-    /** 支行 */
+    /**
+     * 支行
+     */
     private String bankBranch;
-    /** 银行账户名 */
+    /**
+     * 银行账户名
+     */
     private String bankAccount;
-    /** 银行账号 */
+    /**
+     * 银行账号
+     */
     private String bankNum;
-    /** 当前备付金 */
+    /**
+     * 当前备付金
+     */
     private BigDecimal amount;
-    /** 备付金账户 */
+    /**
+     * 备付金账户
+     */
     private String cashNum;
-    /** 备付金比例 */
+    /**
+     * 备付金比例
+     */
     private Float cashRate;
-    /** 通用积分兑换比例（N：1通用积分） */
+    /**
+     * 通用积分兑换比例（N：1通用积分）
+     */
     private Float pointRate;
 
-    /** 排序字段 */
+    /**
+     * 排序字段
+     */
     private String orderBy;
 
-    /**创建时间*/
+    /**
+     * 创建时间
+     */
     private Long createdAt;
 
 

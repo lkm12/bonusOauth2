@@ -15,12 +15,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TypeGoodVO {
-    /** 父分类id*/
+    /**
+     * 父分类id
+     */
     private Long id;
-    /** 父分类名称*/
+    /**
+     * 父分类名称
+     */
     private String name;
-    /** 图像路径*/
+    /**
+     * 图像路径
+     */
     private String img;
-    /** 预览商品信息*/
+    /**
+     * 预览商品信息
+     */
     List<GoodVO> goods;
 }

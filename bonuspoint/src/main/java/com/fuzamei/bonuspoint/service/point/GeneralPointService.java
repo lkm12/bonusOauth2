@@ -6,6 +6,7 @@ import com.fuzamei.common.model.vo.ResponseVO;
 public interface GeneralPointService {
     /**
      * 转通用积分
+     *
      * @param sendPointDTO
      * @return
      */

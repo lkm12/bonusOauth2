@@ -67,7 +67,7 @@ public class MainPlatformServiceImpl implements MainPlatformService {
     @Autowired
     public MainPlatformServiceImpl(BlockInfoMapper blockInfoMapper, UserService userService, UserDao userDao, AccountMapper accountMapper,
                                    PlatformInfoMapper platformInfoMapper, AccountDao accountDao, MainPlatformBC mainPlatformBC,
-                                   BlockChainUtil blockChainUtil,MemberPointDao memberPointDao) {
+                                   BlockChainUtil blockChainUtil, MemberPointDao memberPointDao) {
         this.blockInfoMapper = blockInfoMapper;
         this.userService = userService;
         this.userDao = userDao;
@@ -78,7 +78,6 @@ public class MainPlatformServiceImpl implements MainPlatformService {
         this.blockChainUtil = blockChainUtil;
         this.memberPointDao = memberPointDao;
     }
-
 
 
     @Override
@@ -95,7 +94,7 @@ public class MainPlatformServiceImpl implements MainPlatformService {
 
 
         PlatformInfoPO platformInfoPO = new PlatformInfoPO();
-        BeanUtils.copyProperties(platformInfoDTO,platformInfoPO);
+        BeanUtils.copyProperties(platformInfoDTO, platformInfoPO);
         platformInfoPO.setUid(accountPO.getId());
         platformInfoPO.setMark(UUID.randomUUID().toString());
         result = platformInfoMapper.insertSelective(platformInfoPO);
@@ -136,17 +135,15 @@ public class MainPlatformServiceImpl implements MainPlatformService {
     public ResponseVO listPlatform(PageDTO pageDTO) {
         Example example = new Example(PlatformInfoPO.class);
         Example.Criteria criteria = example.createCriteria();
-        if (pageDTO.getFuzzyMatch()!=null) {
+        if (pageDTO.getFuzzyMatch() != null) {
             criteria.andLike("platform_name", pageDTO.getFuzzyMatch());
         }
         Page page = PageHelper.startPage(pageDTO.getPage(), pageDTO.getPageSize());
-        List<PlatformInfoPO> appVersionPOList =platformInfoMapper.selectByExample(example);
+        List<PlatformInfoPO> appVersionPOList = platformInfoMapper.selectByExample(example);
         int total = Integer.valueOf(String.valueOf(page.getTotal()));
         PageBean pageBean = new PageBean<>(appVersionPOList, pageDTO.getPage(), pageDTO.getPageSize(), total);
-        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS,pageBean);
+        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS, pageBean);
     }
-
-
 
 
 }

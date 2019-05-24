@@ -56,7 +56,6 @@ public class MainPlatformManageController {
     }
 
     /**
-     *
      * @param token
      * @param platformInfoForm {
      *                         username
@@ -74,21 +73,21 @@ public class MainPlatformManageController {
      *                         taxNumber
      *                         cashRate
      *                         pointRate
-     *
-     * }
+     *                         <p>
+     *                         }
      * @return
      */
     @LogAnnotation(note = "添加平台")
     @PostMapping("/add-platform")
-    public ResponseVO createPlatform(@RequestAttribute("token")Token token,
+    public ResponseVO createPlatform(@RequestAttribute("token") Token token,
                                      @RequestBody @Validated PlatformInfoForm platformInfoForm,
-                                     BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+                                     BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
         //检查管理员用户名是否被注册
-        AccountPO accountPO =new AccountPO();
+        AccountPO accountPO = new AccountPO();
         accountPO.setPId(token.getUid());
         accountPO.setUsername(platformInfoForm.getUsername());
         int count = accountService.countUser(accountPO);
@@ -105,9 +104,9 @@ public class MainPlatformManageController {
         }
         //构造平台管理员用户
         AccountDTO accountDTO = new AccountDTO();
-        BeanUtils.copyProperties(platformInfoForm,accountDTO);
-        accountDTO.setPasswordHash(MD5HashUtil.md5SaltEncrypt(platformInfoForm.getPassword(),salt));
-        accountDTO.setPaywordHash(MD5HashUtil.md5SaltEncrypt(platformInfoForm.getPayword(),salt));
+        BeanUtils.copyProperties(platformInfoForm, accountDTO);
+        accountDTO.setPasswordHash(MD5HashUtil.md5SaltEncrypt(platformInfoForm.getPassword(), salt));
+        accountDTO.setPaywordHash(MD5HashUtil.md5SaltEncrypt(platformInfoForm.getPayword(), salt));
         String privateKey = KeyUtil.privateKey(platformInfoForm.getPassword(), RandomUtil.getRandomString(32));
         String publicKey = KeyUtil.publicKey(privateKey);
         accountDTO.setPublicKey(publicKey);
@@ -117,16 +116,16 @@ public class MainPlatformManageController {
         accountDTO.setRole(Roles.PLATFORM);
         //构造平台信息
         PlatformInfoDTO platformInfoDTO = new PlatformInfoDTO();
-        BeanUtils.copyProperties(platformInfoDTO,platformInfoForm);
-        return mainPlatformService.addPlatform(accountDTO,platformInfoDTO);
+        BeanUtils.copyProperties(platformInfoDTO, platformInfoForm);
+        return mainPlatformService.addPlatform(accountDTO, platformInfoDTO);
 
     }
 
     @LogAnnotation(note = "添加广告")
     @PostMapping("/add-advertisement")
-    public ResponseVO addAdvertisement(@RequestBody @Validated AdvertisementDTO advertisementDTO,BindingResult bindingResult){
+    public ResponseVO addAdvertisement(@RequestBody @Validated AdvertisementDTO advertisementDTO, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -135,19 +134,19 @@ public class MainPlatformManageController {
 
     @LogAnnotation(note = "删除广告")
     @DeleteMapping("/delete-advertisement/{id}")
-    public ResponseVO deleteAdvertisement(@PathVariable("id") Integer id){
+    public ResponseVO deleteAdvertisement(@PathVariable("id") Integer id) {
 
         return advertisementService.deleteAdvertisement(id);
     }
 
-    @LogAnnotation(note="更新广告")
+    @LogAnnotation(note = "更新广告")
     @PostMapping("/update-advertisement")
-    public ResponseVO updateAdvertisement(@RequestBody @Validated AdvertisementDTO advertisementDTO,BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    public ResponseVO updateAdvertisement(@RequestBody @Validated AdvertisementDTO advertisementDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
-        if (advertisementDTO.getId()==null){
+        if (advertisementDTO.getId() == null) {
             return new ResponseVO<>(CommonResponseEnum.FAILURE, "PARAMETER_BLANK");
         }
         return advertisementService.updateAdvertisement(advertisementDTO);

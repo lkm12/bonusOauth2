@@ -26,12 +26,13 @@ public class ED25519Util {
 
     /**
      * ed25519签名
+     *
      * @param requestByte
      * @param bytePrivateKey
      * @return
      * @throws Exception
      */
-    public static ByteString sign(byte[] requestByte, byte[] bytePrivateKey) throws Exception{
+    public static ByteString sign(byte[] requestByte, byte[] bytePrivateKey) throws Exception {
         EdDSAParameterSpec spec = EdDSANamedCurveTable.getByName(EdDSANamedCurveTable.ED_25519);
         Signature sgr = new EdDSAEngine(MessageDigest.getInstance(spec.getHashAlgorithm()));
 

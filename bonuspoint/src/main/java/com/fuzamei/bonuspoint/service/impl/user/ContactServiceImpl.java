@@ -124,7 +124,7 @@ public class ContactServiceImpl implements ContactService {
         pageAPP.setSize(String.valueOf(pagePointDTO.getPageSize()));
         pageAPP.initPage();
 
-        PageAPPVO pageAPPVO = new PageAPPVO(pageAPP.getPageSize(),pageAPP.getPageNO());
+        PageAPPVO pageAPPVO = new PageAPPVO(pageAPP.getPageSize(), pageAPP.getPageNO());
         pageAPPVO.setPageSize(String.valueOf(pageAPP.getPageSize()));
         pageAPPVO.setPageNO(String.valueOf(pageAPP.getPageNO()));
 

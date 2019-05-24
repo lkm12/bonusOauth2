@@ -17,8 +17,8 @@ public class SendEmailUtil {
     private static final String authorizationCode = "fzm123456";
     private static final String from = "17826873177@163.com";
     private static final String host = "smtp.163.com";
-    public  static void   sendEmail(String toEmail,String emailTitle,String emailContent)
-    {
+
+    public static void sendEmail(String toEmail, String emailTitle, String emailContent) {
 
 
         // 获取系统属性
@@ -28,13 +28,12 @@ public class SendEmailUtil {
         properties.setProperty("mail.smtp.host", host);
         properties.setProperty("mail.smtp.auth", "true");
         // 获取默认session对象
-        Session session = Session.getDefaultInstance(properties,new Authenticator(){
-            public PasswordAuthentication getPasswordAuthentication()
-            {
+        Session session = Session.getDefaultInstance(properties, new Authenticator() {
+            public PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(from, authorizationCode); //发件人邮件用户名、密码
             }
         });
-        try{
+        try {
             // 创建默认的 MimeMessage 对象
             MimeMessage message = new MimeMessage(session);
 
@@ -55,7 +54,7 @@ public class SendEmailUtil {
             Transport.send(message);
 
 
-        }catch (MessagingException mex) {
+        } catch (MessagingException mex) {
             mex.printStackTrace();
         }
     }

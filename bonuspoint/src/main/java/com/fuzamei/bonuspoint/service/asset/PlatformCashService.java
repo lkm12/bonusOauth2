@@ -16,7 +16,7 @@ public interface PlatformCashService {
      * @param platformCashRecordDTO 分页查询数据传输类
      * @return 请求响应
      * @author qbanxiaoli
-     * @description  获取会员用户资产信息
+     * @description 获取会员用户资产信息
      */
     ResponseVO<PageBean<PlatformCashRecordVO>> listMemberCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
 
@@ -24,7 +24,7 @@ public interface PlatformCashService {
      * @param platformCashRecordDTO 分页查询数据传输类
      * @return 请求响应
      * @author qbanxiaoli
-     * @description  获取集团资产信息
+     * @description 获取集团资产信息
      */
     ResponseVO<PageBean<PlatformCashRecordVO>> listCompanyCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
 
@@ -40,7 +40,7 @@ public interface PlatformCashService {
      * @param platformCashRecordDTO 分页查询数据传输类
      * @return 请求响应
      * @author qbanxiaoli
-     * @description  获取集团提现记录
+     * @description 获取集团提现记录
      */
     ResponseVO<PageBean<PlatformCashRecordVO>> getWithdrawCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
 
@@ -48,7 +48,7 @@ public interface PlatformCashService {
      * @param platformCashRecordDTO 分页查询数据传输类
      * @return 请求响应
      * @author qbanxiaoli
-     * @description  获取备付金充值列表
+     * @description 获取备付金充值列表
      */
     ResponseVO listRechargeCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
 
@@ -64,7 +64,7 @@ public interface PlatformCashService {
      * @param platformCashRecordDTO 分页查询数据传输类
      * @return 请求响应
      * @author qbanxiaoli
-     * @description  获取集团列表
+     * @description 获取集团列表
      */
     ResponseVO listCompany(PlatformCashRecordDTO platformCashRecordDTO);
 
@@ -72,7 +72,7 @@ public interface PlatformCashService {
      * @param platformCashRecordDTO 分页查询数据传输类
      * @return 请求响应
      * @author qbanxiaoli
-     * @description  获取备付金预警通知列表
+     * @description 获取备付金预警通知列表
      */
     ResponseVO<PageBean<PlatformCashRecordVO>> listProvisionsNotice(PlatformCashRecordDTO platformCashRecordDTO);
 
@@ -80,7 +80,7 @@ public interface PlatformCashService {
      * @param platformCashRecordDTO 分页查询数据传输类
      * @return 请求响应
      * @author qbanxiaoli
-     * @description  获取会员用户集团积分列表
+     * @description 获取会员用户集团积分列表
      */
     ResponseVO listMemberPointCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
 
@@ -88,7 +88,7 @@ public interface PlatformCashService {
      * @param platformCashRecordDTO 数据传输类
      * @return 请求响应
      * @author qbanxiaoli
-     * @description  获取会员用户集团积分详情
+     * @description 获取会员用户集团积分详情
      */
     ResponseVO getMemberPointCashRecordDetail(PlatformCashRecordDTO platformCashRecordDTO);
 
@@ -96,7 +96,7 @@ public interface PlatformCashService {
      * @param platformCashRecordDTO 分页查询数据传输类
      * @return 请求响应
      * @author qbanxiaoli
-     * @description  获取集团比例信息列表
+     * @description 获取集团比例信息列表
      */
     ResponseVO<PageBean<PlatformCashRecordVO>> listCompanyRateCashRecord(PlatformCashRecordDTO platformCashRecordDTO);
 
@@ -118,6 +118,7 @@ public interface PlatformCashService {
 
     /**
      * 获取平台备付金流水
+     *
      * @param uid
      * @return
      */

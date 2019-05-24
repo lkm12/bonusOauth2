@@ -39,19 +39,21 @@ public interface CompanyMemberDao {
 
     /**
      * 查集团会员数
+     *
      * @param companyId 集团信息id
-     * @param time 成为会员时间
+     * @param time      成为会员时间
      * @return
      */
     @Select("select count(*) from bp_company_member where company_id = #{companyId} and join_at > #{time}")
-    int countMember(@Param("companyId") Long companyId,@Param("time") Long time);
+    int countMember(@Param("companyId") Long companyId, @Param("time") Long time);
 
     /**
      * 统计会员活跃数据
+     *
      * @param companyId 集团信息数据
-     * @param time 会员登录时间
+     * @param time      会员登录时间
      * @return
      */
     @Select("select count(*) from bp_company_member inner join bp_user on member_id = bp_user.id where company_id = #{companyId} and login_at >#{time}")
-    int countActivityMember(@Param("companyId") Long companyId,@Param("time") Long time);
+    int countActivityMember(@Param("companyId") Long companyId, @Param("time") Long time);
 }

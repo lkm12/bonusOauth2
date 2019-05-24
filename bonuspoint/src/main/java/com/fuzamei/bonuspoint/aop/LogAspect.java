@@ -27,17 +27,17 @@ import java.util.Arrays;
 public class LogAspect {
 
     @Around("@annotation(logAnnotation)")
-    public Object doAround(ProceedingJoinPoint point,LogAnnotation logAnnotation) throws Throwable {
-        log.info("进入{}接口",logAnnotation.note());
-        log.info("处理方法为：{}.{}",point.getSignature().getDeclaringTypeName(),point.getSignature().getName());
+    public Object doAround(ProceedingJoinPoint point, LogAnnotation logAnnotation) throws Throwable {
+        log.info("进入{}接口", logAnnotation.note());
+        log.info("处理方法为：{}.{}", point.getSignature().getDeclaringTypeName(), point.getSignature().getName());
         long startTime = System.currentTimeMillis();
-        log.info("入参：{}",point.getArgs());
+        log.info("入参：{}", point.getArgs());
         //执行，获取结果
         Object returnValue = point.proceed(point.getArgs());
 
-        log.info("执行返回结果为：{}",returnValue);
+        log.info("执行返回结果为：{}", returnValue);
         long endTime = System.currentTimeMillis();
-        log.info("{}接口执行用时：{}ms",logAnnotation.note(),endTime-startTime);
+        log.info("{}接口执行用时：{}ms", logAnnotation.note(), endTime - startTime);
         return returnValue;
     }
 }

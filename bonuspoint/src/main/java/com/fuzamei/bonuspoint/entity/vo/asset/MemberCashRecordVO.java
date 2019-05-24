@@ -13,21 +13,37 @@ import java.math.BigDecimal;
 @Data
 public class MemberCashRecordVO {
 
-    /** 积分总数量 */
+    /**
+     * 积分总数量
+     */
     private BigDecimal pointNum;
-    /** 通用积分兑现比例 */
+    /**
+     * 通用积分兑现比例
+     */
     private BigDecimal cashRate;
-    /** 通用积分 */
+    /**
+     * 通用积分
+     */
     private BigDecimal generalPoint;
-    /** 商户积分总数 */
+    /**
+     * 商户积分总数
+     */
     private BigDecimal pointTotal;
-    /** 用户id */
+    /**
+     * 用户id
+     */
     private Long memberId;
-    /** 用户手机号 */
+    /**
+     * 用户手机号
+     */
     private String mobile;
-    /** 用户地址 */
+    /**
+     * 用户地址
+     */
     private String address;
-    /** 推荐人 */
+    /**
+     * 推荐人
+     */
     private String referee;
 
 }

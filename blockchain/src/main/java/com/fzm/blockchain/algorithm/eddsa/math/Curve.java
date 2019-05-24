@@ -1,13 +1,12 @@
 /**
  * EdDSA-Java by str4d
- *
+ * <p>
  * To the extent possible under law, the person who associated CC0 with
  * EdDSA-Java has waived all copyright and related or neighboring rights
  * to EdDSA-Java.
- *
+ * <p>
  * You should have received a copy of the CC0 legalcode along with this
  * work. If not, see <https://creativecommons.org/publicdomain/zero/1.0/>.
- *
  */
 package com.fzm.blockchain.algorithm.eddsa.math;
 
@@ -16,8 +15,8 @@ import java.io.Serializable;
 /**
  * A twisted Edwards curve.
  * Points on the curve satisfy $-x^2 + y^2 = 1 + d x^2y^2$
- * @author str4d
  *
+ * @author str4d
  */
 public class Curve implements Serializable {
     private static final long serialVersionUID = 4578920872509827L;
@@ -63,16 +62,16 @@ public class Curve implements Serializable {
 
     public GroupElement getZero(GroupElement.Representation repr) {
         switch (repr) {
-        case P2:
-            return zeroP2;
-        case P3:
-            return zeroP3;
-        case P3PrecomputedDouble:
-            return zeroP3PrecomputedDouble;
-        case PRECOMP:
-            return zeroPrecomp;
-        default:
-            return null;
+            case P2:
+                return zeroP2;
+            case P3:
+                return zeroP3;
+            case P3PrecomputedDouble:
+                return zeroP3PrecomputedDouble;
+            case PRECOMP:
+                return zeroPrecomp;
+            default:
+                return null;
         }
     }
 
@@ -84,8 +83,8 @@ public class Curve implements Serializable {
     @Override
     public int hashCode() {
         return f.hashCode() ^
-               d.hashCode() ^
-               I.hashCode();
+                d.hashCode() ^
+                I.hashCode();
     }
 
     @Override
@@ -96,7 +95,7 @@ public class Curve implements Serializable {
             return false;
         Curve c = (Curve) o;
         return f.equals(c.getField()) &&
-               d.equals(c.getD()) &&
-               I.equals(c.getI());
+                d.equals(c.getD()) &&
+                I.equals(c.getI());
     }
 }

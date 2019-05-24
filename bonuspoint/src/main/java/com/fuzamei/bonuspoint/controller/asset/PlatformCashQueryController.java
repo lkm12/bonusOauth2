@@ -157,7 +157,6 @@ public class PlatformCashQueryController {
     }
 
     /**
-
      * @param platformCashRecordDTO 请求参数
      *                              {
      *                              payword: 交易密码 (required = true)
@@ -239,7 +238,7 @@ public class PlatformCashQueryController {
      * @return
      */
     @PostMapping("/platform-cash-flow")
-    public ResponseVO getPlatformCashFlow(@RequestBody PlatformCashRecordDTO platformCashRecordDTO ){
+    public ResponseVO getPlatformCashFlow(@RequestBody PlatformCashRecordDTO platformCashRecordDTO) {
 
 
         return platformCashService.getPlatformCashFlow(platformCashRecordDTO);

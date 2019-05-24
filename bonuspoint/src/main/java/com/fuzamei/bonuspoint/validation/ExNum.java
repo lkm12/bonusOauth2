@@ -8,18 +8,20 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = ExNumValidator.class)
-@Target({ElementType.METHOD,ElementType.FIELD,ElementType.ANNOTATION_TYPE,ElementType.CONSTRUCTOR,ElementType.PARAMETER})
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExNum {
 
     String message() default "";
 
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
+
     @Documented
-    @Target({ElementType.METHOD,ElementType.FIELD,ElementType.ANNOTATION_TYPE,ElementType.CONSTRUCTOR,ElementType.PARAMETER})
+    @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface List{
+    public @interface List {
         Phone[] value();
     }
 }

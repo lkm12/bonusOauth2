@@ -423,7 +423,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public ResponseVO findUserInfoById(Long id) {
         AccountPO accountPO = accountMapper.selectByPrimaryKey(id);
@@ -442,7 +441,7 @@ public class UserServiceImpl implements UserService {
     public ResponseVO findInviteInfo(Long id) {
 
         Example example = new Example(InvitePO.class);
-        example.createCriteria().andEqualTo("uid",id);
+        example.createCriteria().andEqualTo("uid", id);
 
         //查找邀请码信息
         InvitePO invitePO = inviteMapper.selectOneByExample(example);
@@ -458,7 +457,7 @@ public class UserServiceImpl implements UserService {
 
         num = userDao.selectInviteNum(id);
 
-        if(num == null){
+        if (num == null) {
             num = 0;
         }
         map.put("code", code);
@@ -505,11 +504,11 @@ public class UserServiceImpl implements UserService {
     public ResponseVO getUserInfoListFromPlatform(PagePointDTO pagePointDTO) {
 
         Example example = new Example(PlatformInfoPO.class);
-        example.createCriteria().andEqualTo("uid",pagePointDTO.getId());
+        example.createCriteria().andEqualTo("uid", pagePointDTO.getId());
         PlatformInfoPO platformInfoPO = platformInfoMapper.selectOneByExample(example);
-       if(platformInfoPO == null){
-           return new ResponseVO(CommonResponseEnum.PLATFORM_NOT_EXIST);
-       }
+        if (platformInfoPO == null) {
+            return new ResponseVO(CommonResponseEnum.PLATFORM_NOT_EXIST);
+        }
 
         if (pagePointDTO.getPage() == null || pagePointDTO.getPage() < 1) {
             pagePointDTO.setPage(1);
@@ -580,7 +579,6 @@ public class UserServiceImpl implements UserService {
         userPO.setFilePath(filePath);
 
 
-
         log.info("查询成功");
         return new ResponseVO<>(UserResponseEnum.MEMBER_INFO_SUCCESS, userPO);
 
@@ -588,6 +586,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 查询用户持有对应集团的可用会员积分总数
+     *
      * @param uid uid
      * @param gid gid
      * @return
@@ -602,8 +601,6 @@ public class UserServiceImpl implements UserService {
         map.put("points", points);
         return new ResponseVO(UserResponseEnum.QUERY_POINT_SUCCESS, map);
     }
-
-
 
 
 }

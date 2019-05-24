@@ -35,11 +35,10 @@ public class MemberPointQueryController {
     private Integer maxSize;
 
 
-
     private final MemberPointService memberPointService;
 
     @Autowired
-    public MemberPointQueryController(  MemberPointService memberPointService) {
+    public MemberPointQueryController(MemberPointService memberPointService) {
         this.memberPointService = memberPointService;
     }
 
@@ -120,23 +119,19 @@ public class MemberPointQueryController {
     }
 
 
-
-
     /**
      * 获取可转积分列表
      * lkm
      *
-     * @param
-     *                 {
-     *                 opPubKey: 对方公钥
-     *                 }
+     * @param { opPubKey: 对方公钥
+     *          }
      * @return 响应
      */
     @PostMapping("tranpoint-list")
     public ResponseVO memberTranPointList(@RequestAttribute("token") Token token, @RequestBody @Validated(Point.PointList.class) ExchangePointDTO exchangeDTO,
                                           BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -146,25 +141,21 @@ public class MemberPointQueryController {
     }
 
 
-
     /**
      * 获取积分使用明细详情（用户）
      * lkm
      *
-     * @param
-     *                 {
-     *
-     *                 pointType:积分类型
-     *                 id:流水号
-     *
-     *                 }
+     * @param { pointType:积分类型
+     *          id:流水号
+     *          <p>
+     *          }
      * @return 响应
      */
     @PostMapping("point-list-info")
     public ResponseVO pointListInfo(@RequestAttribute("token") Token token, @RequestBody @Validated(Point.PointInfo.class) ExchangePointDTO exchangePointDTO,
                                     BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }

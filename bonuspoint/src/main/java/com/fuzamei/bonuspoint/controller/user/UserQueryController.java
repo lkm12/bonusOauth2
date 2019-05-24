@@ -57,19 +57,17 @@ public class UserQueryController {
     }
 
 
-
-
     /**
      * 转账时通过手机号查找账号
+     *
      * @param token
-     * @param accountDTO{
-     *                     mobile
-     *                 }
+     * @param accountDTO{ mobile
+     *                    }
      * @return
      */
     @LogAnnotation(note = "转账时通过手机号查找账号")
     @PostMapping("/user/get-account-info-by-mobile")
-    public ResponseVO<List<AccountVO>> getUserAccountInfoByMobile(@RequestAttribute("token") Token token, @RequestBody AccountDTO accountDTO){
+    public ResponseVO<List<AccountVO>> getUserAccountInfoByMobile(@RequestAttribute("token") Token token, @RequestBody AccountDTO accountDTO) {
         accountDTO.setPId(token.getPId());
         accountDTO.setRole(Roles.MEMBER);
         return accountService.getAccountInfo(accountDTO);
@@ -78,34 +76,34 @@ public class UserQueryController {
 
     /**
      * 转账时通过公钥查找账号
+     *
      * @param token
-     * @param accountDTO{
-     *                     publicKey
-     *                 }
+     * @param accountDTO{ publicKey
+     *                    }
      * @return
      */
     @LogAnnotation(note = "转账时通过公钥查找账号")
     @PostMapping("/user/get-account-info-by-publicKey")
-    public ResponseVO<AccountVO> getUserAccountInfoByPublicKey(@RequestAttribute("token") Token token, @RequestBody AccountDTO accountDTO){
+    public ResponseVO<AccountVO> getUserAccountInfoByPublicKey(@RequestAttribute("token") Token token, @RequestBody AccountDTO accountDTO) {
         return accountService.getAccountInfoByPublicKey(accountDTO.getPublicKey());
 
     }
 
     /**
      * 检查手机号是否已被使用
-     * @param accountVO{
-     *                     mobile
-     *                     pId
-     *                 }
+     *
+     * @param accountVO{ mobile
+     *                   pId
+     *                   }
      * @return
      */
-    @LogAnnotation(note ="检查手机号是否已被使用")
+    @LogAnnotation(note = "检查手机号是否已被使用")
     @PostMapping("/user/is-mobile-exist")
-    public ResponseVO isMobileExist(@RequestBody AccountVO accountVO ){
-       boolean result =  accountService.checkMobileAvailable(accountVO.getPId(),accountVO.getMobile());
-        Map<String ,Object> map = new HashMap<>(1);
-        map.put("isExist",String.valueOf(result));
-        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS,map);
+    public ResponseVO isMobileExist(@RequestBody AccountVO accountVO) {
+        boolean result = accountService.checkMobileAvailable(accountVO.getPId(), accountVO.getMobile());
+        Map<String, Object> map = new HashMap<>(1);
+        map.put("isExist", String.valueOf(result));
+        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS, map);
     }
 
     /**
@@ -124,6 +122,7 @@ public class UserQueryController {
      * password
      * mark
      * role
+     *
      * @param jsonData
      * @return
      */
@@ -140,7 +139,7 @@ public class UserQueryController {
 
 
         if (StringUtil.isBlank(userDTO.getUsername()) || StringUtil.isBlank(userDTO.
-                getPassword()) || StringUtil.isBlank(userDTO.getMark())|| userDTO.getRole() == null) {
+                getPassword()) || StringUtil.isBlank(userDTO.getMark()) || userDTO.getRole() == null) {
             log.info("参数不能为空");
             return new ResponseVO(CommonResponseEnum.PARAMETER_BLANK);
         }
@@ -161,19 +160,20 @@ public class UserQueryController {
 
     /**
      * 查询用户持有对应集团的可用会员积分总数
+     *
      * @param token token
-     * @param gid gid
+     * @param gid   gid
      * @return
      */
     @GetMapping("/query/point-sum")
-    public ResponseVO getCompanyPoint(@RequestAttribute("token") Token token,@RequestParam Long gid){
+    public ResponseVO getCompanyPoint(@RequestAttribute("token") Token token, @RequestParam Long gid) {
         log.info("查询用户持有接团可用积分");
-        return userService.getCompanyPoint(token.getUid(),gid);
+        return userService.getCompanyPoint(token.getUid(), gid);
     }
 
     @LogAnnotation(note = "获取广告列表")
     @GetMapping("/list-advertisement")
-    public ResponseVO listAdvertisement(){
+    public ResponseVO listAdvertisement() {
         return advertisementService.listAdvertisement();
     }
 }

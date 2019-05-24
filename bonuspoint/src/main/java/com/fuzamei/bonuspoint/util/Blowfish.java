@@ -10,11 +10,8 @@ import java.security.MessageDigest;
 import java.util.Random;
 
 /**
- *
- *
  * @author wangtao
  * @create 2018/3/16
- *
  */
 
 public class Blowfish {
@@ -189,11 +186,11 @@ public class Blowfish {
         int[] m_sbox3;
         int[] m_sbox4;
 
-        static final int[] pbox_init = { 0x243f6a88, 0x85a308d3, 0x13198a2e, 0x3707344, 0xa4093822,
+        static final int[] pbox_init = {0x243f6a88, 0x85a308d3, 0x13198a2e, 0x3707344, 0xa4093822,
                 0x299f31d0, 0x82efa98, 0xec4e6c89, 0x452821e6, 0x38d01377,
                 0xbe5466cf, 0x34e90c6c, 0xc0ac29b7, 0xc97c50dd, 0x3f84d5b5,
-                0xb5470917, 0x9216d5d9, 0x8979fb1b };
-        static final int[] sbox_init_1 = { 0xd1310ba6, 0x98dfb5ac, 0x2ffd72db, 0xd01adfb7,
+                0xb5470917, 0x9216d5d9, 0x8979fb1b};
+        static final int[] sbox_init_1 = {0xd1310ba6, 0x98dfb5ac, 0x2ffd72db, 0xd01adfb7,
                 0xb8e1afed, 0x6a267e96, 0xba7c9045, 0xf12c7f99,
                 0x24a19947, 0xb3916cf7, 0x801f2e2, 0x858efc16,
                 0x636920d8, 0x71574e69, 0xa458fea3, 0xf4933d7e,
@@ -256,8 +253,8 @@ public class Blowfish {
                 0xbc9bc6e4, 0x2b60a476, 0x81e67400, 0x8ba6fb5,
                 0x571be91f, 0xf296ec6b, 0x2a0dd915, 0xb6636521,
                 0xe7b9f9b6, 0xff34052e, 0xc5855664, 0x53b02d5d,
-                0xa99f8fa1, 0x8ba4799, 0x6e85076a };
-        static final int[] sbox_init_2 = { 0x4b7a70e9, 0xb5b32944, 0xdb75092e, 0xc4192623,
+                0xa99f8fa1, 0x8ba4799, 0x6e85076a};
+        static final int[] sbox_init_2 = {0x4b7a70e9, 0xb5b32944, 0xdb75092e, 0xc4192623,
                 0xad6ea6b0, 0x49a7df7d, 0x9cee60b8, 0x8fedb266,
                 0xecaa8c71, 0x699a17ff, 0x5664526c, 0xc2b19ee1,
                 0x193602a5, 0x75094c29, 0xa0591340, 0xe4183a3e,
@@ -320,8 +317,8 @@ public class Blowfish {
                 0xc3453484, 0xfdd56705, 0xe1e9ec9, 0xdb73dbd3,
                 0x105588cd, 0x675fda79, 0xe3674340, 0xc5c43465,
                 0x713e38d8, 0x3d28f89e, 0xf16dff20, 0x153e21e7,
-                0x8fb03d4a, 0xe6e39f2b, 0xdb83adf7 };
-        static final int[] sbox_init_3 = { 0xe93d5a68, 0x948140f7, 0xf64c261c, 0x94692934,
+                0x8fb03d4a, 0xe6e39f2b, 0xdb83adf7};
+        static final int[] sbox_init_3 = {0xe93d5a68, 0x948140f7, 0xf64c261c, 0x94692934,
                 0x411520f7, 0x7602d4f7, 0xbcf46b2e, 0xd4a20068,
                 0xd4082471, 0x3320f46a, 0x43b7d4b7, 0x500061af,
                 0x1e39f62e, 0x97244546, 0x14214f74, 0xbf8b8840,
@@ -384,8 +381,8 @@ public class Blowfish {
                 0x4dad0fc4, 0x1e50ef5e, 0xb161e6f8, 0xa28514d9,
                 0x6c51133c, 0x6fd5c7e7, 0x56e14ec4, 0x362abfce,
                 0xddc6c837, 0xd79a3234, 0x92638212, 0x670efa8e,
-                0x406000e0 };
-        static final int[] sbox_init_4 = { 0x3a39ce37, 0xd3faf5cf, 0xabc27737, 0x5ac52d1b,
+                0x406000e0};
+        static final int[] sbox_init_4 = {0x3a39ce37, 0xd3faf5cf, 0xabc27737, 0x5ac52d1b,
                 0x5cb0679e, 0x4fa33742, 0xd3822740, 0x99bc9bbe,
                 0xd5118e9d, 0xbf0f7315, 0xd62d1c7e, 0xc700c47b,
                 0xb78c1b6b, 0x21a19045, 0xb26eb1be, 0x6a366eb4,
@@ -448,7 +445,7 @@ public class Blowfish {
                 0x8ae88dd8, 0x7aaaf9b0, 0x4cf9aa7e, 0x1948c25c,
                 0x2fb8a8c, 0x1c36ae4, 0xd6ebe1f9, 0x90d4f869, 0xa65cdea0,
                 0x3f09252d, 0xc208e69f, 0xb74e6132, 0xce77e25b,
-                0x578fdfe3, 0x3ac372e6 };
+                0x578fdfe3, 0x3ac372e6};
 
         public BlowfishECB(byte[] bfkey) {
             m_pbox = new int[18];
@@ -573,7 +570,7 @@ public class Blowfish {
         if ((nLen -= 8) == 0) {
             return "";
         }
-        byte[] buf= new byte[nLen];
+        byte[] buf = new byte[nLen];
         nNumOfBytes = binHexToBytes(sCipherText, buf, 16, 0, nLen);
         if (nNumOfBytes < nLen) {
             return null;
@@ -696,8 +693,7 @@ public class Blowfish {
 
     private BlowfishCBC m_bfish;
     private static Random m_rndGen = new Random();
-    static final char HEXTAB[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-
+    static final char HEXTAB[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
 
 }

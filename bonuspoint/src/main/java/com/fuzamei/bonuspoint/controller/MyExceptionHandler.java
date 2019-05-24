@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Slf4j
 public class MyExceptionHandler {
-   // @ExceptionHandler(value = Exception.class)
-    public ResponseVO defaultErrorhandler( Exception e){
+    // @ExceptionHandler(value = Exception.class)
+    public ResponseVO defaultErrorhandler(Exception e) {
         log.error(e.getMessage());
         return new ResponseVO(CommonResponseEnum.BAD_REQUEST);
     }

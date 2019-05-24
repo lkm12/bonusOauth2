@@ -12,5 +12,4 @@ public class CommonConst {
     public static final String OK = "OK";
 
 
-
 }

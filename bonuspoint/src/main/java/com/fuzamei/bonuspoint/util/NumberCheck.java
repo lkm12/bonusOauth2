@@ -12,19 +12,20 @@ import java.util.regex.Pattern;
 public class NumberCheck {
     /**
      * 数值判断是否为[0,100]之间，最多两位小数
-     * @author wangjie
+     *
      * @param cashRate Float 备付金比例
      * @return
+     * @author wangjie
      */
-    public static boolean checkCashRate(Float cashRate){
-        if(cashRate>100 || cashRate<0){
+    public static boolean checkCashRate(Float cashRate) {
+        if (cashRate > 100 || cashRate < 0) {
             return false;
         }
         String str = cashRate.toString();
         int index = str.indexOf(".");
-        if(index>0){
-            int l = str.length()-1-index;
-            if(l>2){
+        if (index > 0) {
+            int l = str.length() - 1 - index;
+            if (l > 2) {
                 return false;
             }
         }
@@ -34,19 +35,20 @@ public class NumberCheck {
 
     /**
      * 数值判断，值是否大于等于0，且最多两位小数
-     * @author wangjie
+     *
      * @param pointRate
      * @return
+     * @author wangjie
      */
-    public static boolean checkPointRate(Float pointRate){
-        if(pointRate<=0){
+    public static boolean checkPointRate(Float pointRate) {
+        if (pointRate <= 0) {
             return false;
         }
         String str = pointRate.toString();
         int index = str.indexOf(".");
-        if(index>0){
-            int l = str.length()-1-index;
-            if(l>2){
+        if (index > 0) {
+            int l = str.length() - 1 - index;
+            if (l > 2) {
                 return false;
             }
         }
@@ -55,17 +57,18 @@ public class NumberCheck {
 
     /**
      * 6位数支付密码校验
+     *
      * @param payword
      * @return
      */
-    public static boolean checkPayword(String payword){
-        if (payword == null || payword.length()!=6){
+    public static boolean checkPayword(String payword) {
+        if (payword == null || payword.length() != 6) {
             return false;
         }
-        try{
+        try {
             Integer number = Integer.parseInt(payword);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;

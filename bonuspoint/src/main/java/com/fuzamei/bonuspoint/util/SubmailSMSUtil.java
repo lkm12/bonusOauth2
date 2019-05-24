@@ -50,17 +50,19 @@ public class SubmailSMSUtil {
     /**
      * API 请求接口配置
      */
-    private static final String URL="https://api.mysubmail.com/message/send";
+    private static final String URL = "https://api.mysubmail.com/message/send";
+
     /**
      * 备用接口
+     *
      * @param mobile 手机号
-     * @param code 短信验证码
-     * http://api.mysubmail.com/message/send
-     * https://api.submail.cn/message/send
-     * http://api.submail.cn/message/send
+     * @param code   短信验证码
+     *               http://api.mysubmail.com/message/send
+     *               https://api.submail.cn/message/send
+     *               http://api.submail.cn/message/send
      */
 
-    public  boolean sendCaptcha(String mobile ,String code) {
+    public boolean sendCaptcha(String mobile, String code) {
         TreeMap<String, Object> requestData = new TreeMap<String, Object>();
         /**
          * --------------------------------参数配置------------------------------------
@@ -87,26 +89,25 @@ public class SubmailSMSUtil {
          */
 
 
-
         /**
          *  签名验证方式
          *  详细说明可参考 SUBMAIL 官网，开发文档 → 开始 → API 授权与验证机制
          */
-        String message =content.replace("code",code);
+        String message = content.replace("code", code);
         requestData.put("appid", appid);
         requestData.put("content", message);
         requestData.put("to", mobile);
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         @SuppressWarnings("deprecation")
-        ContentType contentType = ContentType.create(HTTP.PLAIN_TEXT_TYPE,HTTP.UTF_8);
-        for(Map.Entry<String, Object> entry: requestData.entrySet()){
+        ContentType contentType = ContentType.create(HTTP.PLAIN_TEXT_TYPE, HTTP.UTF_8);
+        for (Map.Entry<String, Object> entry : requestData.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            if(value instanceof String){
-                builder.addTextBody(key, String.valueOf(value),contentType);
+            if (value instanceof String) {
+                builder.addTextBody(key, String.valueOf(value), contentType);
             }
         }
-        if(signtype.equals(TYPE_MD5) || signtype.equals(TYPE_SHA1)){
+        if (signtype.equals(TYPE_MD5) || signtype.equals(TYPE_SHA1)) {
             String timestamp = getTimestamp();
             requestData.put("timestamp", timestamp);
             requestData.put("sign_type", signtype);
@@ -114,7 +115,7 @@ public class SubmailSMSUtil {
             builder.addTextBody("timestamp", timestamp);
             builder.addTextBody("sign_type", signtype);
             builder.addTextBody("signature", RequestEncoder.encode(signtype, signStr), contentType);
-        }else{
+        } else {
             builder.addTextBody("signature", appkey, contentType);
         }
         /**
@@ -125,30 +126,30 @@ public class SubmailSMSUtil {
         HttpPost httpPost = new HttpPost(URL);
         httpPost.addHeader("charset", "UTF-8");
         httpPost.setEntity(builder.build());
-        try{
+        try {
             CloseableHttpClient closeableHttpClient = HttpClientBuilder.create().build();
             HttpResponse response = closeableHttpClient.execute(httpPost);
             HttpEntity httpEntity = response.getEntity();
-            if(httpEntity != null){
+            if (httpEntity != null) {
                 String jsonStr = EntityUtils.toString(httpEntity, "UTF-8");
-                log.info("向手机{}发送验证码，返回信息{}",mobile,jsonStr);
-               Map<String,Object> map = JSON.parseObject(jsonStr);
-               if ("success".equals(map.get("status"))){
-                   return true;
-               }
-               log.error("向手机号：{}发送验证码失败",mobile);
-               return false;
+                log.info("向手机{}发送验证码，返回信息{}", mobile, jsonStr);
+                Map<String, Object> map = JSON.parseObject(jsonStr);
+                if ("success".equals(map.get("status"))) {
+                    return true;
+                }
+                log.error("向手机号：{}发送验证码失败", mobile);
+                return false;
 
             }
-        }catch(ClientProtocolException e){
+        } catch (ClientProtocolException e) {
             log.error(e.getMessage());
-        }catch(IOException e){
+        } catch (IOException e) {
             log.error(e.getMessage());
         }
         return false;
     }
 
-    public static  boolean sendSMS(String mobile ,String message) {
+    public static boolean sendSMS(String mobile, String message) {
         TreeMap<String, Object> requestData = new TreeMap<String, Object>();
         /**
          * --------------------------------参数配置------------------------------------
@@ -175,7 +176,6 @@ public class SubmailSMSUtil {
          */
 
 
-
         /**
          *  签名验证方式
          *  详细说明可参考 SUBMAIL 官网，开发文档 → 开始 → API 授权与验证机制
@@ -186,15 +186,15 @@ public class SubmailSMSUtil {
         requestData.put("to", mobile);
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         @SuppressWarnings("deprecation")
-        ContentType contentType = ContentType.create(HTTP.PLAIN_TEXT_TYPE,HTTP.UTF_8);
-        for(Map.Entry<String, Object> entry: requestData.entrySet()){
+        ContentType contentType = ContentType.create(HTTP.PLAIN_TEXT_TYPE, HTTP.UTF_8);
+        for (Map.Entry<String, Object> entry : requestData.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            if(value instanceof String){
-                builder.addTextBody(key, String.valueOf(value),contentType);
+            if (value instanceof String) {
+                builder.addTextBody(key, String.valueOf(value), contentType);
             }
         }
-        if(signtype.equals(TYPE_MD5) || signtype.equals(TYPE_SHA1)){
+        if (signtype.equals(TYPE_MD5) || signtype.equals(TYPE_SHA1)) {
             String timestamp = getTimestamp();
             requestData.put("timestamp", timestamp);
             requestData.put("sign_type", signtype);
@@ -202,7 +202,7 @@ public class SubmailSMSUtil {
             builder.addTextBody("timestamp", timestamp);
             builder.addTextBody("sign_type", signtype);
             builder.addTextBody("signature", RequestEncoder.encode(signtype, signStr), contentType);
-        }else{
+        } else {
             builder.addTextBody("signature", appkey, contentType);
         }
         /**
@@ -213,24 +213,24 @@ public class SubmailSMSUtil {
         HttpPost httpPost = new HttpPost(URL);
         httpPost.addHeader("charset", "UTF-8");
         httpPost.setEntity(builder.build());
-        try{
+        try {
             CloseableHttpClient closeableHttpClient = HttpClientBuilder.create().build();
             HttpResponse response = closeableHttpClient.execute(httpPost);
             HttpEntity httpEntity = response.getEntity();
-            if(httpEntity != null){
+            if (httpEntity != null) {
                 String jsonStr = EntityUtils.toString(httpEntity, "UTF-8");
-                log.info("向手机{}发送短信，返回信息{}",mobile,jsonStr);
-                Map<String,Object> map = JSON.parseObject(jsonStr);
-                if ("success".equals(map.get("status"))){
+                log.info("向手机{}发送短信，返回信息{}", mobile, jsonStr);
+                Map<String, Object> map = JSON.parseObject(jsonStr);
+                if ("success".equals(map.get("status"))) {
                     return true;
                 }
-                log.error("向手机号：{}发送短信失败",mobile);
+                log.error("向手机号：{}发送短信失败", mobile);
                 return false;
 
             }
-        }catch(ClientProtocolException e){
+        } catch (ClientProtocolException e) {
             log.error(e.getMessage());
-        }catch(IOException e){
+        } catch (IOException e) {
             log.error(e.getMessage());
         }
         return false;
@@ -238,16 +238,17 @@ public class SubmailSMSUtil {
 
     /**
      * 获取时间戳
+     *
      * @return
      */
-    private static String getTimestamp(){
+    private static String getTimestamp() {
         CloseableHttpClient closeableHttpClient = HttpClientBuilder.create().build();
         HttpGet httpget = new HttpGet(TIMESTAMP);
-        try{
+        try {
             HttpResponse response = closeableHttpClient.execute(httpget);
             HttpEntity httpEntity = response.getEntity();
-            String jsonStr = EntityUtils.toString(httpEntity,"UTF-8");
-            if(jsonStr != null){
+            String jsonStr = EntityUtils.toString(httpEntity, "UTF-8");
+            if (jsonStr != null) {
                 JSONObject json = JSONObject.fromObject(jsonStr);
                 return json.getString("timestamp");
             }

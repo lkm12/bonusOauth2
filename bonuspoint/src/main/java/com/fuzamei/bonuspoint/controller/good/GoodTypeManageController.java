@@ -29,6 +29,7 @@ public class GoodTypeManageController {
 
     /**
      * 添加商品父分类
+     *
      * @param goodTypeDTO 分类信息
      * @return
      */
@@ -43,11 +44,12 @@ public class GoodTypeManageController {
     }
 
     @DeleteMapping("/platform/types/delete/{id}")
-    public ResponseVO deleteGoodType(@RequestAttribute("token") Token token,@PathVariable("id") Long id){
+    public ResponseVO deleteGoodType(@RequestAttribute("token") Token token, @PathVariable("id") Long id) {
         return goodTypeService.deleteGoodType(id);
     }
+
     @DeleteMapping("/platform/subTypes/delete/{id}")
-    public ResponseVO deleteGoodSubType(@RequestAttribute("token") Token token,@PathVariable("id") Long id){
+    public ResponseVO deleteGoodSubType(@RequestAttribute("token") Token token, @PathVariable("id") Long id) {
         return goodSubTypeService.deleteGoodSubType(id);
     }
 
@@ -71,11 +73,12 @@ public class GoodTypeManageController {
 
     /**
      * 删除商品分类
+     *
      * @param id 分类id
      * @return
      */
     @DeleteMapping("/types/{id}")
-    public ResponseVO deleteType(@PathVariable Long id){
+    public ResponseVO deleteType(@PathVariable Long id) {
         return goodTypeService.deleteGoodType(id);
     }
 
@@ -98,12 +101,12 @@ public class GoodTypeManageController {
     /**
      * 修改商品子分类
      *
-     * @param id          子类ID
+     * @param id 子类ID
      * @return
      */
     @PutMapping("/subtypes/{id}")
     public ResponseVO updateSubType(@PathVariable Long id,
-            @RequestBody(required = false) GoodSubTypeDTO goodSubTypeDTO) {
+                                    @RequestBody(required = false) GoodSubTypeDTO goodSubTypeDTO) {
 
         if (goodSubTypeDTO == null) {
             return new ResponseVO(GoodResponseEnum.GOOD_TYPE_FAILED);
@@ -111,8 +114,6 @@ public class GoodTypeManageController {
         goodSubTypeDTO.setId(id);
         return goodSubTypeService.updateSubType(goodSubTypeDTO);
     }
-
-
 
 
 }

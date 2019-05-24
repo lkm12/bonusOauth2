@@ -30,6 +30,7 @@ public interface PointRecordMapper extends TkMapper<PointRecordPO> {
      */
     @SelectProvider(type = PointRecordSqlFactory.class, method = "querySendPoint")
     List<PointRecordVO> querySendPoint(QueryPointSendDTO queryPointSendDTO);
+
     @SelectProvider(type = PointRecordSqlFactory.class, method = "queryPointRecordList")
     List<PointRecordDTO> queryPointRecordList(PointRecordDTO pointRecordDTO);
 }

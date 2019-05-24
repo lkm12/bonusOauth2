@@ -1,13 +1,12 @@
 /**
  * EdDSA-Java by str4d
- *
+ * <p>
  * To the extent possible under law, the person who associated CC0 with
  * EdDSA-Java has waived all copyright and related or neighboring rights
  * to EdDSA-Java.
- *
+ * <p>
  * You should have received a copy of the CC0 legalcode along with this
  * work. If not, see <https://creativecommons.org/publicdomain/zero/1.0/>.
- *
  */
 package com.fzm.blockchain.algorithm.eddsa;
 
@@ -23,19 +22,19 @@ import java.util.Arrays;
 
 /**
  * An EdDSA private key.
- *<p>
+ * <p>
  * Warning: Private key encoding is based on the current curdle WG draft,
  * and is subject to log. See getEncoded().
- *</p><p>
+ * </p><p>
  * For compatibility with older releases, decoding supports both the old and new
  * draft specifications. See decode().
- *</p><p>
+ * </p><p>
  * Ref: https://tools.ietf.org/html/draft-ietf-curdle-pkix-04
- *</p><p>
+ * </p><p>
  * Old Ref: https://tools.ietf.org/html/draft-josefsson-pkix-eddsa-04
- *</p>
- * @author str4d
+ * </p>
  *
+ * @author str4d
  */
 public class EdDSAPrivateKey implements EdDSAKey, PrivateKey {
     private static final long serialVersionUID = 23495873459878957L;
@@ -63,7 +62,7 @@ public class EdDSAPrivateKey implements EdDSAKey, PrivateKey {
 
     public EdDSAPrivateKey(PKCS8EncodedKeySpec spec) throws InvalidKeySpecException {
         this(new EdDSAPrivateKeySpec(decode(spec.getEncoded()),
-                                     EdDSANamedCurveTable.ED_25519_CURVE_SPEC));
+                EdDSANamedCurveTable.ED_25519_CURVE_SPEC));
     }
 
     @Override
@@ -78,22 +77,22 @@ public class EdDSAPrivateKey implements EdDSAKey, PrivateKey {
 
     /**
      * Returns the public key in its canonical encoding.
-     *<p>
+     * <p>
      * This implements the following specs:
-     *<ul><li>
+     * <ul><li>
      * General encoding: https://tools.ietf.org/html/draft-ietf-curdle-pkix-04
-     *</li><li>
+     * </li><li>
      * Key encoding: https://tools.ietf.org/html/rfc8032
-     *</li></ul>
-     *<p>
+     * </li></ul>
+     * <p>
      * This encodes the seed. It will return null if constructed from
      * a spec which was directly constructed from H, in which case seed is null.
-     *</p><p>
+     * </p><p>
      * For keys in older formats, decoding and then re-encoding is sufficient to
      * migrate them to the canonical encoding.
-     *</p>
+     * </p>
      * Relevant spec quotes:
-     *<pre>
+     * <pre>
      *  OneAsymmetricKey ::= SEQUENCE {
      *    version Version,
      *    privateKeyAlgorithm PrivateKeyAlgorithmIdentifier,
@@ -109,28 +108,28 @@ public class EdDSAPrivateKey implements EdDSAKey, PrivateKey {
      *  PrivateKey ::= OCTET STRING
      *  PublicKey ::= OCTET STRING
      *  Attributes ::= SET OF Attribute
-     *</pre>
+     * </pre>
      *
-     *<pre>
+     * <pre>
      *  ... when encoding a OneAsymmetricKey object, the private key is wrapped
      *  in a CurvePrivateKey object and wrapped by the OCTET STRING of the
      *  'privateKey' field.
      *
      *  CurvePrivateKey ::= OCTET STRING
-     *</pre>
+     * </pre>
      *
-     *<pre>
+     * <pre>
      *  AlgorithmIdentifier  ::=  SEQUENCE  {
      *    algorithm   OBJECT IDENTIFIER,
      *    parameters  ANY DEFINED BY algorithm OPTIONAL
      *  }
      *
      *  For all of the OIDs, the parameters MUST be absent.
-     *</pre>
+     * </pre>
      *
-     *<pre>
+     * <pre>
      *  id-Ed25519   OBJECT IDENTIFIER ::= { 1 3 101 112 }
-     *</pre>
+     * </pre>
      *
      * @return 48 bytes for Ed25519, null for other curves
      */
@@ -176,17 +175,17 @@ public class EdDSAPrivateKey implements EdDSAKey, PrivateKey {
 
     /**
      * Extracts the private key bytes from the provided encoding.
-     *<p>
+     * <p>
      * This will decode data conforming to the current spec at
      * https://tools.ietf.org/html/draft-ietf-curdle-pkix-04
      * or as inferred from the old spec at
      * https://tools.ietf.org/html/draft-josefsson-pkix-eddsa-04.
-     *</p><p>
+     * </p><p>
      * Contrary to draft-ietf-curdle-pkix-04, it WILL accept a parameter value
      * of NULL, as it is required for interoperability with the default Java
      * keystore. Other implementations MUST NOT copy this behaviour from here
      * unless they also need to read keys from the default Java keystore.
-     *</p><p>
+     * </p><p>
      * This is really dumb for now. It does not use a general-purpose ASN.1 decoder.
      * See also getEncoded().
      *
@@ -225,24 +224,24 @@ public class EdDSAPrivateKey implements EdDSAKey, PrivateKey {
             //
             int idx = 0;
             if (d[idx++] != 0x30 ||
-                d[idx++] != (totlen - 2) ||
-                d[idx++] != 0x02 ||
-                d[idx++] != 1 ||
-                d[idx++] != 0 ||
-                d[idx++] != 0x30 ||
-                d[idx++] != idlen ||
-                d[idx++] != 0x06 ||
-                d[idx++] != 3 ||
-                d[idx++] != (1 * 40) + 3 ||
-                d[idx++] != 101) {
+                    d[idx++] != (totlen - 2) ||
+                    d[idx++] != 0x02 ||
+                    d[idx++] != 1 ||
+                    d[idx++] != 0 ||
+                    d[idx++] != 0x30 ||
+                    d[idx++] != idlen ||
+                    d[idx++] != 0x06 ||
+                    d[idx++] != 3 ||
+                    d[idx++] != (1 * 40) + 3 ||
+                    d[idx++] != 101) {
                 throw new InvalidKeySpecException("unsupported key spec");
             }
             idx++; // OID, checked above
             // parameters only with old OID
             if (doid == OID_OLD) {
                 if (d[idx++] != 0x0a ||
-                    d[idx++] != 1 ||
-                    d[idx++] != 1) {
+                        d[idx++] != 1 ||
+                        d[idx++] != 1) {
                     throw new InvalidKeySpecException("unsupported key spec");
                 }
             } else {
@@ -257,18 +256,18 @@ public class EdDSAPrivateKey implements EdDSAKey, PrivateKey {
                 // PKCS8 and then re-encoding to pass on), so we must accept it.
                 if (idlen == 7) {
                     if (d[idx++] != 0x05 ||
-                        d[idx++] != 0) {
+                            d[idx++] != 0) {
                         throw new InvalidKeySpecException("unsupported key spec");
                     }
                 }
                 // PrivateKey wrapping the CurvePrivateKey
                 if (d[idx++] != 0x04 ||
-                    d[idx++] != 34) {
+                        d[idx++] != 34) {
                     throw new InvalidKeySpecException("unsupported key spec");
                 }
             }
             if (d[idx++] != 0x04 ||
-                d[idx++] != 32) {
+                    d[idx++] != 32) {
                 throw new InvalidKeySpecException("unsupported key spec");
             }
             byte[] rv = new byte[32];
@@ -285,36 +284,36 @@ public class EdDSAPrivateKey implements EdDSAKey, PrivateKey {
     }
 
     /**
-     *  @return will be null if constructed from a spec which was
-     *          directly constructed from H
+     * @return will be null if constructed from a spec which was
+     * directly constructed from H
      */
     public byte[] getSeed() {
         return seed;
     }
 
     /**
-     *  @return the hash of the seed
+     * @return the hash of the seed
      */
     public byte[] getH() {
         return h;
     }
 
     /**
-     *  @return the private key
+     * @return the private key
      */
     public byte[] geta() {
         return a;
     }
 
     /**
-     *  @return the public key
+     * @return the public key
      */
     public GroupElement getA() {
         return A;
     }
 
     /**
-     *  @return the public key
+     * @return the public key
      */
     public byte[] getAbyte() {
         return Abyte;
@@ -333,6 +332,6 @@ public class EdDSAPrivateKey implements EdDSAKey, PrivateKey {
             return false;
         EdDSAPrivateKey pk = (EdDSAPrivateKey) o;
         return Arrays.equals(seed, pk.getSeed()) &&
-               edDsaSpec.equals(pk.getParams());
+                edDsaSpec.equals(pk.getParams());
     }
 }

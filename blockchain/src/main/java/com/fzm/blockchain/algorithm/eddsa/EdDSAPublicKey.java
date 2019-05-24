@@ -1,13 +1,12 @@
 /**
  * EdDSA-Java by str4d
- *
+ * <p>
  * To the extent possible under law, the person who associated CC0 with
  * EdDSA-Java has waived all copyright and related or neighboring rights
  * to EdDSA-Java.
- *
+ * <p>
  * You should have received a copy of the CC0 legalcode along with this
  * work. If not, see <https://creativecommons.org/publicdomain/zero/1.0/>.
- *
  */
 package com.fzm.blockchain.algorithm.eddsa;
 
@@ -24,19 +23,19 @@ import java.util.Arrays;
 
 /**
  * An EdDSA public key.
- *<p>
+ * <p>
  * Warning: Public key encoding is is based on the current curdle WG draft,
  * and is subject to log. See getEncoded().
- *</p><p>
+ * </p><p>
  * For compatibility with older releases, decoding supports both the old and new
  * draft specifications. See decode().
- *</p><p>
+ * </p><p>
  * Ref: https://tools.ietf.org/html/draft-ietf-curdle-pkix-04
- *</p><p>
+ * </p><p>
  * Old Ref: https://tools.ietf.org/html/draft-josefsson-pkix-eddsa-04
- *</p>
- * @author str4d
+ * </p>
  *
+ * @author str4d
  */
 public class EdDSAPublicKey implements EdDSAKey, PublicKey {
     private static final long serialVersionUID = 9837459837498475L;
@@ -59,7 +58,7 @@ public class EdDSAPublicKey implements EdDSAKey, PublicKey {
 
     public EdDSAPublicKey(X509EncodedKeySpec spec) throws InvalidKeySpecException {
         this(new EdDSAPublicKeySpec(decode(spec.getEncoded()),
-                                    EdDSANamedCurveTable.ED_25519_CURVE_SPEC));
+                EdDSANamedCurveTable.ED_25519_CURVE_SPEC));
     }
 
     @Override
@@ -74,19 +73,19 @@ public class EdDSAPublicKey implements EdDSAKey, PublicKey {
 
     /**
      * Returns the public key in its canonical encoding.
-     *<p>
+     * <p>
      * This implements the following specs:
-     *<ul><li>
+     * <ul><li>
      * General encoding: https://tools.ietf.org/html/draft-ietf-curdle-pkix-04
-     *</li><li>
+     * </li><li>
      * Key encoding: https://tools.ietf.org/html/rfc8032
-     *</li></ul>
-     *<p>
+     * </li></ul>
+     * <p>
      * For keys in older formats, decoding and then re-encoding is sufficient to
      * migrate them to the canonical encoding.
-     *</p>
+     * </p>
      * Relevant spec quotes:
-     *<pre>
+     * <pre>
      *  In the X.509 certificate, the subjectPublicKeyInfo field has the
      *  SubjectPublicKeyInfo type, which has the following ASN.1 syntax:
      *
@@ -94,20 +93,20 @@ public class EdDSAPublicKey implements EdDSAKey, PublicKey {
      *    algorithm         AlgorithmIdentifier,
      *    subjectPublicKey  BIT STRING
      *  }
-     *</pre>
+     * </pre>
      *
-     *<pre>
+     * <pre>
      *  AlgorithmIdentifier  ::=  SEQUENCE  {
      *    algorithm   OBJECT IDENTIFIER,
      *    parameters  ANY DEFINED BY algorithm OPTIONAL
      *  }
      *
      *  For all of the OIDs, the parameters MUST be absent.
-     *</pre>
+     * </pre>
      *
-     *<pre>
+     * <pre>
      *  id-Ed25519   OBJECT IDENTIFIER ::= { 1 3 101 112 }
-     *</pre>
+     * </pre>
      *
      * @return 44 bytes for Ed25519, null for other curves
      */
@@ -143,20 +142,20 @@ public class EdDSAPublicKey implements EdDSAKey, PublicKey {
 
     /**
      * Extracts the public key bytes from the provided encoding.
-     *<p>
+     * <p>
      * This will decode data conforming to the current spec at
      * https://tools.ietf.org/html/draft-ietf-curdle-pkix-04
      * or the old spec at
      * https://tools.ietf.org/html/draft-josefsson-pkix-eddsa-04.
-     *</p><p>
+     * </p><p>
      * Contrary to draft-ietf-curdle-pkix-04, it WILL accept a parameter value
      * of NULL, as it is required for interoperability with the default Java
      * keystore. Other implementations MUST NOT copy this behaviour from here
      * unless they also need to read keys from the default Java keystore.
-     *</p><p>
+     * </p><p>
      * This is really dumb for now. It does not use a general-purpose ASN.1 decoder.
      * See also getEncoded().
-     *</p>
+     * </p>
      *
      * @return 32 bytes for Ed25519, throws for other curves
      */
@@ -193,21 +192,21 @@ public class EdDSAPublicKey implements EdDSAKey, PublicKey {
             //
             int idx = 0;
             if (d[idx++] != 0x30 ||
-                d[idx++] != (totlen - 2) ||
-                d[idx++] != 0x30 ||
-                d[idx++] != idlen ||
-                d[idx++] != 0x06 ||
-                d[idx++] != 3 ||
-                d[idx++] != (1 * 40) + 3 ||
-                d[idx++] != 101) {
+                    d[idx++] != (totlen - 2) ||
+                    d[idx++] != 0x30 ||
+                    d[idx++] != idlen ||
+                    d[idx++] != 0x06 ||
+                    d[idx++] != 3 ||
+                    d[idx++] != (1 * 40) + 3 ||
+                    d[idx++] != 101) {
                 throw new InvalidKeySpecException("unsupported key spec");
             }
             idx++; // OID, checked above
             // parameters only with old OID
             if (doid == OID_OLD) {
                 if (d[idx++] != 0x0a ||
-                    d[idx++] != 1 ||
-                    d[idx++] != 1) {
+                        d[idx++] != 1 ||
+                        d[idx++] != 1) {
                     throw new InvalidKeySpecException("unsupported key spec");
                 }
             } else {
@@ -222,14 +221,14 @@ public class EdDSAPublicKey implements EdDSAKey, PublicKey {
                 // PKCS8 and then re-encoding to pass on), so we must accept it.
                 if (idlen == 7) {
                     if (d[idx++] != 0x05 ||
-                        d[idx++] != 0) {
+                            d[idx++] != 0) {
                         throw new InvalidKeySpecException("unsupported key spec");
                     }
                 }
             }
             if (d[idx++] != 0x03 ||
-                d[idx++] != 33 ||
-                d[idx++] != 0) {
+                    d[idx++] != 33 ||
+                    d[idx++] != 0) {
                 throw new InvalidKeySpecException("unsupported key spec");
             }
             byte[] rv = new byte[32];
@@ -252,7 +251,7 @@ public class EdDSAPublicKey implements EdDSAKey, PublicKey {
     public GroupElement getNegativeA() {
         // Only read Aneg once, otherwise read re-ordering might occur between here and return. Requires all GroupElement's fields to be final.
         GroupElement ourAneg = Aneg;
-        if(ourAneg == null) {
+        if (ourAneg == null) {
             ourAneg = A.negate();
             Aneg = ourAneg;
         }
@@ -276,6 +275,6 @@ public class EdDSAPublicKey implements EdDSAKey, PublicKey {
             return false;
         EdDSAPublicKey pk = (EdDSAPublicKey) o;
         return Arrays.equals(Abyte, pk.getAbyte()) &&
-               edDsaSpec.equals(pk.getParams());
+                edDsaSpec.equals(pk.getParams());
     }
 }

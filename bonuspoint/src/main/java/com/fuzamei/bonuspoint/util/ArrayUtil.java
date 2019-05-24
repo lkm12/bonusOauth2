@@ -7,11 +7,8 @@
 package com.fuzamei.bonuspoint.util;
 
 /**
- *
- *
  * @author wangtao
  * @create 2017/12/15
- *
  */
 
 public class ArrayUtil {

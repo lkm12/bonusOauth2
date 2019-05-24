@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * @description
  * @create 2018/6/28 16:31
  */
-public interface GeneralPointRelationDao  {
+public interface GeneralPointRelationDao {
 
     /**
      * @param uid 用户id

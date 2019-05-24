@@ -6,7 +6,7 @@ import com.fuzamei.bonuspoint.validation.PointType;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PointTypeValidator implements ConstraintValidator<PointType,Integer>{
+public class PointTypeValidator implements ConstraintValidator<PointType, Integer> {
 
     @Override
     public void initialize(PointType constraintAnnotation) {
@@ -15,10 +15,10 @@ public class PointTypeValidator implements ConstraintValidator<PointType,Integer
 
     @Override
     public boolean isValid(Integer integer, ConstraintValidatorContext constraintValidatorContext) {
-        if(integer == null){
+        if (integer == null) {
             return true;
         }
-        if(integer != PointInfoConstant.ONE && integer != PointInfoConstant.TWO && integer != PointInfoConstant.THREE){
+        if (integer != PointInfoConstant.ONE && integer != PointInfoConstant.TWO && integer != PointInfoConstant.THREE) {
             return false;
         }
         return true;

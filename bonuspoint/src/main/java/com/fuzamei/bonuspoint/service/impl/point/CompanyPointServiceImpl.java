@@ -203,7 +203,7 @@ public class CompanyPointServiceImpl implements CompanyPointService {
         companyInfoPO.setUid(companyPointDTO.getUid());
         companyInfoPO = companyInfoMapper.selectOne(companyInfoPO);
         //检查商户是否被关闭
-        if (companyInfoPO.getCompanyStatus()!=null && companyInfoPO.getCompanyStatus().equals(CompanyStatus.COMPANY_SHOT_DOWN)){
+        if (companyInfoPO.getCompanyStatus() != null && companyInfoPO.getCompanyStatus().equals(CompanyStatus.COMPANY_SHOT_DOWN)) {
             return new ResponseVO(UserResponseEnum.COMPANY_HAS_BEEN_DELETED);
         }
 
@@ -291,8 +291,8 @@ public class CompanyPointServiceImpl implements CompanyPointService {
         pointRecordPO.setCategory(PointRecordConstant.CATEGORY_GROUP_ISSUED);
         //设置积分兑换比例
         pointRecordPO.setPointRate(companyInfoPO.getPointRate());
-       // pointRecordPO.setHash(hash);
-       // pointRecordPO.setHeight(height);
+        // pointRecordPO.setHash(hash);
+        // pointRecordPO.setHeight(height);
         //保存发放积分记录
         try {
             pointRecordMapper.insert(pointRecordPO);
@@ -308,8 +308,8 @@ public class CompanyPointServiceImpl implements CompanyPointService {
         p.setType(PointRecordConstant.POINT_ADD);
         //用户接收集团积分
         p.setCategory(PointRecordConstant.CATEGORY_USER_INCOME);
-     //   p.setHash(hash);
-       // p.setHeight(height);
+        //   p.setHash(hash);
+        // p.setHeight(height);
         //保存接收积分记录
         try {
             pointRecordMapper.insert(p);
@@ -442,7 +442,7 @@ public class CompanyPointServiceImpl implements CompanyPointService {
         generalPointRecordPO.setType(GeneralPointRecordConstant.POINT_SUB);
         //集团向平台结算通用积分
         generalPointRecordPO.setCategory(GeneralPointRecordConstant.CATEGORY_COMPANY_SETTLE);
-       // generalPointRecordPO.setHash(hash);
+        // generalPointRecordPO.setHash(hash);
         //generalPointRecordPO.setHeight(height);
         generalPointRecordPO.setPlatformPointRate(platformInfoPO.getPointRate());
         //保存结算通用积分记录
@@ -460,7 +460,7 @@ public class CompanyPointServiceImpl implements CompanyPointService {
         cashRecordPO.setType(CashRecordConstant.INCOME_ASSETS);
         //集团结算通用积分
         cashRecordPO.setCategory(CashRecordConstant.POINT_BALANCE);
-      //  cashRecordPO.setHash(hash);
+        //  cashRecordPO.setHash(hash);
         //cashRecordPO.setHeight(height);
         //保存资产记录
         try {
@@ -505,15 +505,15 @@ public class CompanyPointServiceImpl implements CompanyPointService {
         CompanyInfoPO companyInfoPO = new CompanyInfoPO();
         companyInfoPO.setUid(uid);
         companyInfoPO = companyInfoMapper.selectOne(companyInfoPO);
-        if (companyInfoPO.getCompanyStatus()!=null && companyInfoPO.getCompanyStatus().equals(CompanyStatus.COMPANY_SHOT_DOWN)){
+        if (companyInfoPO.getCompanyStatus() != null && companyInfoPO.getCompanyStatus().equals(CompanyStatus.COMPANY_SHOT_DOWN)) {
             return new ResponseVO(UserResponseEnum.COMPANY_HAS_BEEN_DELETED);
         }
         if (applyPointDTO.getPointName() == null) {
             return new ResponseVO(PointResponseEnum.POINT_NAME_IS_NULL);
         }
 
-        if (applyPointDTO.getNum() == null || applyPointDTO.getNum().intValue() == 0 ){
-            return  new  ResponseVO(PointResponseEnum.POINT_NUM_ZERO);
+        if (applyPointDTO.getNum() == null || applyPointDTO.getNum().intValue() == 0) {
+            return new ResponseVO(PointResponseEnum.POINT_NUM_ZERO);
         }
 
         //设置积分有效期
@@ -615,7 +615,7 @@ public class CompanyPointServiceImpl implements CompanyPointService {
 
         Long unixTime = pointInfoPO.getEndTime() == null ? null : Long.valueOf(pointInfoPO.getEndTime()) / 1000;
         try {
-            log.info("集团发行积分参数：{}，{}，{}，{},{}",userPrivatePo.getPublicKey(),userPrivatePo.getPrivateKey(),companyInfo.getId(),pointInfoPO.getId(),pointInfoPO.getNum());
+            log.info("集团发行积分参数：{}，{}，{}，{},{}", userPrivatePo.getPublicKey(), userPrivatePo.getPrivateKey(), companyInfo.getId(), pointInfoPO.getId(), pointInfoPO.getNum());
             /*
             ResponseBean<String> responseBean = publishPointBC.publish(userPrivatePo.getPublicKey(), userPrivatePo.getPrivateKey(), companyInfo.getId(), pointInfoPO.getId(), pointInfoPO.getNum(), unixTime);
             if (responseBean == null || responseBean.getError() != null || responseBean.getResult() == null) {
@@ -635,15 +635,15 @@ public class CompanyPointServiceImpl implements CompanyPointService {
             PointRecordPO recordPO = new PointRecordPO();
             recordPO.setId(pointRecordPO.getId());
             //recordPO.setHeight(queryTransaction.getResult().getHeight());
-           // recordPO.setHash(responseBean.getResult());
+            // recordPO.setHash(responseBean.getResult());
             recordPO.setUpdatedAt(System.currentTimeMillis());
             pointRecordMapper.updateByPrimaryKeySelective(recordPO);
             //插入积分上链记录表
             BlockInfoPO blockInfoPO = new BlockInfoPO();
             blockInfoPO.setUid(uid);
             blockInfoPO.setOperationType(Brokerpoints.ActionType.CreateMerchantPoint_VALUE);
-           // blockInfoPO.setHash(responseBean.getResult());
-           // blockInfoPO.setHeight(queryTransaction.getResult().getHeight());
+            // blockInfoPO.setHash(responseBean.getResult());
+            // blockInfoPO.setHeight(queryTransaction.getResult().getHeight());
             blockInfoPO.setCreatedAt(System.currentTimeMillis());
             blockInfoDao.insertBlockInfo(blockInfoPO);
         } catch (Exception e) {
@@ -661,8 +661,9 @@ public class CompanyPointServiceImpl implements CompanyPointService {
 
     /**
      * 集团申请积分转换
+     *
      * @param companyId 集团id
-     * @param nums 申请积分数量
+     * @param nums      申请积分数量
      */
     @Override
     public void tranterReleasePoint(Long companyId, BigDecimal nums) {
@@ -738,7 +739,7 @@ public class CompanyPointServiceImpl implements CompanyPointService {
 
         Long unixTime = pointInfoPO.getEndTime() == null ? null : Long.valueOf(pointInfoPO.getEndTime()) / 1000;
         try {
-            log.info("集团发行积分参数：{}，{}，{}，{},{}",userPrivatePo.getPublicKey(),userPrivatePo.getPrivateKey(),companyInfo.getId(),pointInfoPO.getId(),pointInfoPO.getNum());
+            log.info("集团发行积分参数：{}，{}，{}，{},{}", userPrivatePo.getPublicKey(), userPrivatePo.getPrivateKey(), companyInfo.getId(), pointInfoPO.getId(), pointInfoPO.getNum());
             /*
             ResponseBean<String> responseBean = publishPointBC.publish(userPrivatePo.getPublicKey(), userPrivatePo.getPrivateKey(), companyInfo.getId(), pointInfoPO.getId(), pointInfoPO.getNum(), unixTime);
 
@@ -758,16 +759,16 @@ public class CompanyPointServiceImpl implements CompanyPointService {
 //            //更新数据库对应hash 和 height
             PointRecordPO recordPO = new PointRecordPO();
             recordPO.setId(pointRecordPO.getId());
-           // recordPO.setHeight(queryTransaction.getResult().getHeight());
-           // recordPO.setHash(responseBean.getResult());
+            // recordPO.setHeight(queryTransaction.getResult().getHeight());
+            // recordPO.setHash(responseBean.getResult());
             recordPO.setUpdatedAt(System.currentTimeMillis());
             pointRecordMapper.updateByPrimaryKeySelective(recordPO);
             //插入积分上链记录表
             BlockInfoPO blockInfoPO = new BlockInfoPO();
             blockInfoPO.setUid(uid);
             blockInfoPO.setOperationType(Brokerpoints.ActionType.CreateMerchantPoint_VALUE);
-          //  blockInfoPO.setHash(responseBean.getResult());
-           // blockInfoPO.setHeight(queryTransaction.getResult().getHeight());
+            //  blockInfoPO.setHash(responseBean.getResult());
+            // blockInfoPO.setHeight(queryTransaction.getResult().getHeight());
             blockInfoPO.setCreatedAt(System.currentTimeMillis());
             blockInfoDao.insertBlockInfo(blockInfoPO);
         } catch (Exception e) {
@@ -780,6 +781,7 @@ public class CompanyPointServiceImpl implements CompanyPointService {
 
     /**
      * 用户积分兑换记录（商户）
+     *
      * @param goodExcelDTO
      * @return
      */
@@ -803,11 +805,11 @@ public class CompanyPointServiceImpl implements CompanyPointService {
         List<ExcelPO> excelPOList = companyPointDao.findExchangeGeneralByPlatform(goodExcelDTO);
 
 
-        excelPOList.stream().forEach(e ->{
+        excelPOList.stream().forEach(e -> {
 
             e.setPointRateStr(e.getPointRate() + ":1");
-            if(e.getCashNum() != null){
-                e.setCashNumStr("-"+e.getCashNum());
+            if (e.getCashNum() != null) {
+                e.setCashNumStr("-" + e.getCashNum());
             }
 
         });

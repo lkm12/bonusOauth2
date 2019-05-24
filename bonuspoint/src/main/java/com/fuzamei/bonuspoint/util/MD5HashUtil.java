@@ -13,11 +13,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *
- *
  * @author wangtao
  * @create 2018/3/26
- *
  */
 @Slf4j
 public class MD5HashUtil {
@@ -33,7 +30,7 @@ public class MD5HashUtil {
      * @return 加密结果
      * @throws Exception
      */
-    public static String md5Encrypt(String message)  {
+    public static String md5Encrypt(String message) {
         return md5SaltEncrypt(message, "");
     }
 
@@ -41,7 +38,7 @@ public class MD5HashUtil {
      * md5加盐加密
      *
      * @param message 待加密信息
-     * @param salt 盐
+     * @param salt    盐
      * @return 加密结果
      * @throws Exception
      */

@@ -17,60 +17,104 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserPO {
 
-    /**用户id*/
+    /**
+     * 用户id
+     */
     private Long id;
-    /**邀请码*/
+    /**
+     * 邀请码
+     */
     private String inviteCode;
-    /**角色（0->超级管理,1->平台,2->集团,3->商户,4->个人用户）*/
+    /**
+     * 角色（0->超级管理,1->平台,2->集团,3->商户,4->个人用户）
+     */
     private Integer role;
-    /**是否初始化*/
+    /**
+     * 是否初始化
+     */
     private Integer isInitialize;
-    /**所属父级*/
+    /**
+     * 所属父级
+     */
     private Long pId;
-    /**登录用户名（用户同手机号)*/
+    /**
+     * 登录用户名（用户同手机号)
+     */
     private String username;
-    /**随机数*/
+    /**
+     * 随机数
+     */
     private String random;
 
-    /**加密密码*/
+    /**
+     * 加密密码
+     */
     private String passwordHash;
 
-    /**加密付款密码*/
+    /**
+     * 加密付款密码
+     */
     private String paywordHash;
 
-    /**手机所属国家*/
+    /**
+     * 手机所属国家
+     */
     private String country;
 
-    /**手机号码*/
+    /**
+     * 手机号码
+     */
     private String mobile;
 
-    /**邮箱地址 */
+    /**
+     * 邮箱地址
+     */
     private String email;
 
-    /**用户昵称 */
+    /**
+     * 用户昵称
+     */
     private String nickname;
 
-    /**头像图片url地址 */
+    /**
+     * 头像图片url地址
+     */
     private String headimgurl;
 
-    /**二维码地址*/
+    /**
+     * 二维码地址
+     */
     private String qrCode;
 
-    /**默认收货地址id（用户）*/
+    /**
+     * 默认收货地址id（用户）
+     */
     private Long defaultAddress;
 
-    /**用户状态(0->冻结,10->可用)*/
+    /**
+     * 用户状态(0->冻结,10->可用)
+     */
     private Integer status;
 
-    /**注册时间 */
+    /**
+     * 注册时间
+     */
     private Long createdAt;
-    /** 修改时间*/
+    /**
+     * 修改时间
+     */
     private Long updatedAt;
-    /**修改交易密码时间*/
+    /**
+     * 修改交易密码时间
+     */
     private Long paywordAt;
-    /**登录时间*/
+    /**
+     * 登录时间
+     */
     private Long loginAt;
-    /** 收货地址*/
+    /**
+     * 收货地址
+     */
     private String areaDetail;
 
     private Long uid;
@@ -92,16 +136,26 @@ public class UserPO {
     private String remark;
     private Long createdTime;
 
-    /**平台名称*/
+    /**
+     * 平台名称
+     */
     private String platformName;
     private String payword;
-    /**街道名称*/
+    /**
+     * 街道名称
+     */
     private String streetName;
-    /**区域名称*/
+    /**
+     * 区域名称
+     */
     private String districtName;
-    /**城市名称*/
+    /**
+     * 城市名称
+     */
     private String cityName;
-    /**省或直辖市名称*/
+    /**
+     * 省或直辖市名称
+     */
     private String provinceName;
 
 }

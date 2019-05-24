@@ -28,13 +28,13 @@ public class RewardQueryController {
     }
 
     @PostMapping("/list-rules")
-    public ResponseVO listRewardRules(@RequestBody RewardQuery rewardQuery , @RequestAttribute("token")Token token){
+    public ResponseVO listRewardRules(@RequestBody RewardQuery rewardQuery, @RequestAttribute("token") Token token) {
         rewardQuery.setPlatformId(token.getUid());
         return rewardService.listRewardRules(rewardQuery);
     }
 
     @GetMapping("/list-company-reward-points/{companyId}")
-    public ResponseVO listRewardPoints(@PathVariable("companyId") Long companyId ,@RequestAttribute("token")Token token ){
-        return rewardService.listCompanyRewardPoints(companyId,token.getUid());
+    public ResponseVO listRewardPoints(@PathVariable("companyId") Long companyId, @RequestAttribute("token") Token token) {
+        return rewardService.listCompanyRewardPoints(companyId, token.getUid());
     }
 }

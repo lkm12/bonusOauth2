@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 用户私密信息PO
+ *
  * @author liumeng
  * @create 2018年6月25日
  */
@@ -13,11 +14,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserPrivatePo {
-    /** 用户id */
+    /**
+     * 用户id
+     */
     private Long id;
-    /** 用户公钥 */
+    /**
+     * 用户公钥
+     */
     private String publicKey;
-    /** 用户私钥 */
+    /**
+     * 用户私钥
+     */
     private String privateKey;
 
 }

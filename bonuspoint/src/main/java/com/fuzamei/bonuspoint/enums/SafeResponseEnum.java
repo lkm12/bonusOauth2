@@ -9,9 +9,9 @@ import com.fuzamei.common.enums.ResponseEnum;
  */
 public enum SafeResponseEnum implements ResponseEnum {
 
-    MOBILE_BLANK("false","MOBILE_BLANK","500"),
-    EMAIL_BLANK("false","EMAIL_BLANK","500"),
-    CAPTCHA_TYPE_WRONG("false","CAPTCHA_TYPE_WRONG","500"),
+    MOBILE_BLANK("false", "MOBILE_BLANK", "500"),
+    EMAIL_BLANK("false", "EMAIL_BLANK", "500"),
+    CAPTCHA_TYPE_WRONG("false", "CAPTCHA_TYPE_WRONG", "500"),
     TWO_DIFFERENT_INPUT("false", "TWO_DIFFERENT_INPUT", "201"),
     MOBILE_BOUNDED("false", "MOBILE_BOUNDED", "202"),
     MOBILE_FORMAT_ERROR("false", "MOBILE_FORMAT_ERROR", "203"),
@@ -50,7 +50,7 @@ public enum SafeResponseEnum implements ResponseEnum {
         return code;
     }
 
-   SafeResponseEnum(String success, String message, String code) {
+    SafeResponseEnum(String success, String message, String code) {
         this.success = success;
         this.message = message;
         this.code = code;

@@ -8,21 +8,35 @@ import javax.persistence.Table;
 @Data
 @Table(name = "bp_relation")
 public class InvitePO {
-    /**邀请码注册人uid*/
+    /**
+     * 邀请码注册人uid
+     */
     @Id
     private Long id;
-    /**用户id*/
+    /**
+     * 用户id
+     */
     private Long uid;
-    /**上级链*/
+    /**
+     * 上级链
+     */
     private String chains;
-    /**父级id*/
+    /**
+     * 父级id
+     */
     private Long pId;
 
-    /**爷级id*/
+    /**
+     * 爷级id
+     */
     private Long gpid;
-    /**邀请码*/
+    /**
+     * 邀请码
+     */
     private String inviteCode;
-    /**创建时间*/
+    /**
+     * 创建时间
+     */
     private Long createdAt;
 
 }

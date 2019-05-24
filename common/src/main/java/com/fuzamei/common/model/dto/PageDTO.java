@@ -10,18 +10,30 @@ import lombok.Data;
  **/
 @Data
 public class PageDTO {
-    /** 模糊匹配信息*/
+    /**
+     * 模糊匹配信息
+     */
     private String fuzzyMatch;
-    /** 分页大小*/
+    /**
+     * 分页大小
+     */
     private Integer pageSize;
-    /** 当前页数*/
+    /**
+     * 当前页数
+     */
     private Integer page;
 
-    /** 起始时间 */
+    /**
+     * 起始时间
+     */
     private Long startTime;
-    /** 结束时间 */
+    /**
+     * 结束时间
+     */
     private Long endTime;
 
-    /**排序类型 1：由大到小，2：由小到大 */
+    /**
+     * 排序类型 1：由大到小，2：由小到大
+     */
     private Integer orderType;
 }

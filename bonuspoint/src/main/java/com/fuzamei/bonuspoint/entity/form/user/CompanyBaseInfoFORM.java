@@ -16,28 +16,42 @@ import javax.validation.constraints.NotBlank;
  **/
 @Data
 public class CompanyBaseInfoFORM {
-    /** 集团名称 */
-    @NotBlank(message = "PARAMETER_ERROR" )
+    /**
+     * 集团名称
+     */
+    @NotBlank(message = "PARAMETER_ERROR")
     private String companyName;
-    /** 集团负责人 */
-    @NotBlank(message = "PARAMETER_ERROR" )
+    /**
+     * 集团负责人
+     */
+    @NotBlank(message = "PARAMETER_ERROR")
     private String companyLeader;
-    /** 法人身份证号*/
+    /**
+     * 法人身份证号
+     */
     @IDCard
-    @NotBlank(message = "PARAMETER_ERROR" )
+    @NotBlank(message = "PARAMETER_ERROR")
     private String companyLeaderIdCard;
-    /** 法人手机 */
+    /**
+     * 法人手机
+     */
     @Phone
-    @NotBlank(message = "PARAMETER_ERROR" )
+    @NotBlank(message = "PARAMETER_ERROR")
     private String companyLeaderMobile;
-    /** 集团电话 */
+    /**
+     * 集团电话
+     */
     @TelePhone
     private String companyTelephone;
-    /** 公司邮箱 */
-    @Email(message = "EMAIL_FORMAT_ERROR" )
-    @NotBlank(message = "PARAMETER_ERROR" )
+    /**
+     * 公司邮箱
+     */
+    @Email(message = "EMAIL_FORMAT_ERROR")
+    @NotBlank(message = "PARAMETER_ERROR")
     private String companyEmail;
-    /** 公司logo */
+    /**
+     * 公司logo
+     */
     private String logoUrl;
 
 }

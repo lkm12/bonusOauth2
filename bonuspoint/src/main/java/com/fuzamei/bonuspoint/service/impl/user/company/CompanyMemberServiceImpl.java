@@ -39,18 +39,18 @@ public class CompanyMemberServiceImpl implements CompanyMemberService {
         long timeMillis = calendar.getTimeInMillis();
 
         //日新增会员
-        int newMemberToday = companyMemberDao.countMember(companyId,timeMillis);
+        int newMemberToday = companyMemberDao.countMember(companyId, timeMillis);
 
         //统计日活量
-        int activityMemberToday = companyMemberDao.countActivityMember(companyId,timeMillis);
+        int activityMemberToday = companyMemberDao.countActivityMember(companyId, timeMillis);
 
         //统计月活量
         calendar.set(Calendar.DATE, 1);
         timeMillis = calendar.getTimeInMillis();
-        int activityMemberOfTheMonth = companyMemberDao.countActivityMember(companyId,timeMillis);
+        int activityMemberOfTheMonth = companyMemberDao.countActivityMember(companyId, timeMillis);
 
         //通过 =role、=pId条件统计累计会员量
-        int totalMember = companyMemberDao.countMember(companyId,0L);
+        int totalMember = companyMemberDao.countMember(companyId, 0L);
         Map<String, Object> map = new HashMap<>(16);
         map.put("newMemberToday", newMemberToday);
         map.put("activityMemberToday", activityMemberToday);

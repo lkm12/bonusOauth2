@@ -54,6 +54,7 @@ public interface CompanyCashDao {
      */
     @SelectProvider(type = CompanyCashSqlFactory.class, method = "getProvisionsCashRecord")
     CompanyInfoPO getProvisionsCashRecord(Long uid);
+
     @Select("<script>" +
             "SELECT bp_cash_record.id, bp_platform_info.platform_name AS oppositeName , " +
             "CASE WHEN TYPE = 1 THEN '入金' WHEN TYPE = 2 THEN '出金' END AS typeStr," +

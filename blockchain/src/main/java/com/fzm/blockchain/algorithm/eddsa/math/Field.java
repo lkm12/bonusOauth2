@@ -1,13 +1,12 @@
 /**
  * EdDSA-Java by str4d
- *
+ * <p>
  * To the extent possible under law, the person who associated CC0 with
  * EdDSA-Java has waived all copyright and related or neighboring rights
  * to EdDSA-Java.
- *
+ * <p>
  * You should have received a copy of the CC0 legalcode along with this
  * work. If not, see <https://creativecommons.org/publicdomain/zero/1.0/>.
- *
  */
 package com.fzm.blockchain.algorithm.eddsa.math;
 
@@ -15,8 +14,8 @@ import java.io.Serializable;
 
 /**
  * An EdDSA finite field. Includes several pre-computed values.
- * @author str4d
  *
+ * @author str4d
  */
 public class Field implements Serializable {
     private static final long serialVersionUID = 8746587465875676L;
@@ -80,7 +79,7 @@ public class Field implements Serializable {
         return qm5d8;
     }
 
-    public Encoding getEncoding(){
+    public Encoding getEncoding() {
         return enc;
     }
 

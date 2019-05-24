@@ -51,18 +51,17 @@ public class CompanyManageController {
     }
 
 
-
     /**
      * 商户修改店铺基本信息
+     *
      * @param token
-     * @param companyBaseInfoFORM{
-     *                             companyName
+     * @param companyBaseInfoFORM{ companyName
      *                             companyLeader
      *                             companLeaderIdCard
      *                             companyLeaderMobile
      *                             companyEmail
      *                             logoUrl
-     *                         }
+     *                             }
      * @return
      */
     @LogAnnotation(note = "商户修改店铺基本信息")
@@ -70,12 +69,12 @@ public class CompanyManageController {
     public ResponseVO updateCompanyBaseInfo(@RequestAttribute("token") Token token,
                                             @RequestBody CompanyBaseInfoFORM companyBaseInfoFORM,
                                             BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
         CompanyInfoDTO companyInfoDTO = new CompanyInfoDTO();
-        BeanUtils.copyProperties(companyBaseInfoFORM,companyInfoDTO);
+        BeanUtils.copyProperties(companyBaseInfoFORM, companyInfoDTO);
         Long companyId = companyInfoService.getCompanyIdByUid(token.getUid());
         companyInfoDTO.setId(companyId);
         return companyInfoService.updateCompanyBaseInfo(companyInfoDTO);

@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public interface CompanyInfoDao {
 
     /**
-     * @param uid 用户id
+     * @param uid    用户id
      * @param amount 备付金金额
      * @return 0 or 1
      * @author qbanxiaoli

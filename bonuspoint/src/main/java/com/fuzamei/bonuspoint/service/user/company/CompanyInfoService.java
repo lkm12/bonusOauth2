@@ -17,6 +17,7 @@ public interface CompanyInfoService {
 
     /**
      * 获取单个集团信息
+     *
      * @param uid uid
      * @return 请求响应
      */
@@ -24,6 +25,7 @@ public interface CompanyInfoService {
 
     /**
      * 查看集团信息列表
+     *
      * @param companyInfoDTO
      * @return
      */
@@ -31,10 +33,11 @@ public interface CompanyInfoService {
 
     /**
      * 获取集团信息列表
+     *
      * @param
      * @return 请求响应
      */
-   // ResponseVO listCompanyInfo();
+    // ResponseVO listCompanyInfo();
 
     Long getCompanyIdByUid(Long uid);
 
@@ -42,6 +45,7 @@ public interface CompanyInfoService {
 
     /**
      * 平台设置集团备付金比例
+     *
      * @param companyInfoDTO
      * @return
      */
@@ -49,6 +53,7 @@ public interface CompanyInfoService {
 
     /**
      * 平台设置集团积分兑换比例
+     *
      * @param companyInfoDTO
      * @return
      */
@@ -56,7 +61,8 @@ public interface CompanyInfoService {
 
     /**
      * 平台添加集团
-     * @param accountDTO 要添加的集团用户信息
+     *
+     * @param accountDTO     要添加的集团用户信息
      * @param companyInfoDTO 要添加的集团信息
      * @return
      */
@@ -64,6 +70,7 @@ public interface CompanyInfoService {
 
     /**
      * 通过集团所属平台查平台下属集团备付金比例
+     *
      * @param companyInfoDTO
      * @return
      */
@@ -71,6 +78,7 @@ public interface CompanyInfoService {
 
     /**
      * 通过集团所属平台查平台下属集团积分的兑换比例
+     *
      * @param companyInfoDTO
      * @return
      */
@@ -82,14 +90,16 @@ public interface CompanyInfoService {
 
     /**
      * 删除商家
+     *
      * @param platformUid 平台管理员id
-     * @param companyId 商户id
+     * @param companyId   商户id
      * @return
      */
     ResponseVO deleteCompany(Long platformUid, Long companyId);
 
     /**
      * 获取平台下属所有集团
+     *
      * @param platformUid 平台管理员id
      * @return
      */

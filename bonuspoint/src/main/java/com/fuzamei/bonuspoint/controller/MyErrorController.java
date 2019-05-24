@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MyErrorController {
 
     @RequestMapping("/token-error")
-    public ResponseVO tokenError(@RequestAttribute("responseVO") ResponseVO responseVO){
+    public ResponseVO tokenError(@RequestAttribute("responseVO") ResponseVO responseVO) {
 
         return responseVO;
     }

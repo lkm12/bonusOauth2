@@ -30,7 +30,7 @@ public class IOSVersionPO {
     private String downUrl;
 
     /**
-     *     是否强制更新 0否，1是
+     * 是否强制更新 0否，1是
      */
 
     private Integer forcedUpdate;

@@ -38,9 +38,9 @@ public class MyResponseControllerAdvice implements ResponseBodyAdvice<Object> {
         HttpServletRequest httpReq = req.getServletRequest();
         //   Token token = (Token) httpReq.getAttribute("token");
         String client = httpReq.getHeader("client");
-        if (client!=null && appClient.equals(client)) {
+        if (client != null && appClient.equals(client)) {
             String jsonStr = JSON.toJSONString(o);
-            jsonStr=JsonUtil.jsonNumberToString(jsonStr);
+            jsonStr = JsonUtil.jsonNumberToString(jsonStr);
             return JSON.parseObject(jsonStr);
         }
         return o;

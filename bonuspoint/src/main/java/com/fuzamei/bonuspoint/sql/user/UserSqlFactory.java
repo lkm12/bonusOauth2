@@ -46,7 +46,7 @@ public class UserSqlFactory {
                     SET("nickname='" + userDTO.getNickname() + "'");
                 }
                 if (userDTO.getHeadimgurl() != null) {
-                    SET("headimgurl='" + userDTO.getHeadimgurl()+"'");
+                    SET("headimgurl='" + userDTO.getHeadimgurl() + "'");
                 }
                 if (userDTO.getQrCode() != null) {
                     SET("qr_code='" + userDTO.getQrCode() + "'");
@@ -60,11 +60,11 @@ public class UserSqlFactory {
                 if (userDTO.getIsInitialize() != null) {
                     SET("is_initialize=" + userDTO.getIsInitialize());
                 }
-                if(userDTO.getPublickey() != null){
-                    SET("public_key='" + userDTO.getPublickey()+"'");
+                if (userDTO.getPublickey() != null) {
+                    SET("public_key='" + userDTO.getPublickey() + "'");
                 }
-                if(userDTO.getPrivatekey() != null){
-                    SET("private_key='" + userDTO.getPrivatekey()+"'");
+                if (userDTO.getPrivatekey() != null) {
+                    SET("private_key='" + userDTO.getPrivatekey() + "'");
                 }
 
                 if (userDTO.getCreatedAt() != null) {
@@ -143,6 +143,7 @@ public class UserSqlFactory {
         log.info("\nsql--------------------\n" + sql.toString());
         return sql.toString();
     }
+
     public String addBlockInfo(BlockInfoDTO blockInfoDTO) {
         SQL sql = new SQL() {
             {

@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * 商品分类SQL
+ *
  * @author liumeng
  * @create 2018年4月18日
  */
@@ -19,17 +20,19 @@ public class GoodSql {
     private GoodSql() {
         throw new AssertionError("不能实例化 GoodSql");
     }
+
     /**
      * 添加商品信息
-     * @param goodPO    商品信息
+     *
+     * @param goodPO 商品信息
      * @return SQL
      */
     public static String savaGoodWithOutKey(GoodPO goodPO) {
         return new SQL() {
             {
                 INSERT_INTO("bp_good");
-                if (goodPO.getId() != null){
-                    VALUES("id",   goodPO.getId().toString() );
+                if (goodPO.getId() != null) {
+                    VALUES("id", goodPO.getId().toString());
                 }
                 if (goodPO.getGid() != null) {
                     VALUES("gid", "'" + goodPO.getGid() + "'");
@@ -86,9 +89,11 @@ public class GoodSql {
         }.toString();
 
     }
+
     /**
      * 添加商品信息
-     * @param goodPO    商品信息
+     *
+     * @param goodPO 商品信息
      * @return SQL
      */
     public static String savaGood(GoodPO goodPO) {
@@ -153,6 +158,7 @@ public class GoodSql {
 
     /**
      * 更新商品信息
+     *
      * @param goodPO
      * @return sql
      */
@@ -227,6 +233,7 @@ public class GoodSql {
 
     /**
      * 根据查询条件获取商品信息
+     *
      * @param queryGoodDTO
      * @return SQL
      */
@@ -274,8 +281,8 @@ public class GoodSql {
                 WHERE("good.sid = subtype.id");
                 WHERE("subtype.pid = type.id");
                 WHERE("uuser.id = company.uid");
-                if (queryGoodDTO.getPid() != null){
-                    WHERE("uuser.p_id = " + queryGoodDTO.getPid() );
+                if (queryGoodDTO.getPid() != null) {
+                    WHERE("uuser.p_id = " + queryGoodDTO.getPid());
                 }
                 if (queryGoodDTO.getGid() != null) {
                     WHERE("good.gid=" + queryGoodDTO.getGid());
@@ -343,6 +350,7 @@ public class GoodSql {
 
     /**
      * 获取指定商品信息
+     *
      * @param id 商品id
      * @return SQL
      */
@@ -396,6 +404,7 @@ public class GoodSql {
 
     /**
      * 商品兑换详情查询
+     *
      * @param exchangeDTO 查询条件
      * @return sql
      */
@@ -479,11 +488,12 @@ public class GoodSql {
 
     /**
      * 分类商品预览sql
+     *
      * @param tid 分类id
      * @param pid 平台id
      * @return
      */
-    public static String previewGood(Long tid , Long pid) {
+    public static String previewGood(Long tid, Long pid) {
         return new SQL() {
             {
                 List<String> columns = new ArrayList<>();

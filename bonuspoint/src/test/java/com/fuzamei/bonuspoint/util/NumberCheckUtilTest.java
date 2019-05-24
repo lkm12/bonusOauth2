@@ -12,10 +12,10 @@ import org.junit.Test;
 @Slf4j
 public class NumberCheckUtilTest {
     @Test
-    public void testPaywordCheck(){
-        String payword ="12345.6";
+    public void testPaywordCheck() {
+        String payword = "12345.6";
         boolean result = NumberCheck.checkPayword(payword);
-        System.out.println("\n result= "+result);
+        System.out.println("\n result= " + result);
 
     }
 }

@@ -37,7 +37,7 @@ public class ExcelQueryController {
     private final MemberPointService memberPointService;
 
     @Autowired
-    public ExcelQueryController(MemberPointService memberPointService,CompanyInfoService companyInfoService) {
+    public ExcelQueryController(MemberPointService memberPointService, CompanyInfoService companyInfoService) {
 
         this.companyInfoService = companyInfoService;
         this.memberPointService = memberPointService;
@@ -51,7 +51,7 @@ public class ExcelQueryController {
         List<MemberPointPO> memberPointPOList = memberPointService.getAllMemberPointInfo(queryUserDTO);
         List<MemberPointExcel> memberPointExcelList = memberPointPOList.stream().map(memberPointPO -> {
             MemberPointExcel memberPointExcel = new MemberPointExcel();
-            BeanUtils.copyProperties(memberPointPO,memberPointExcel);
+            BeanUtils.copyProperties(memberPointPO, memberPointExcel);
             memberPointExcel.setCreatedAt(TimeUtil.transformTimeMillisToFormatTime(memberPointPO.getCreatedAt()));
             return memberPointExcel;
         }).collect(Collectors.toList());
@@ -61,14 +61,15 @@ public class ExcelQueryController {
         response.setHeader("content-type", "application/octet-stream ;charset=utf-8 ");
         response.setCharacterEncoding("UTF-8");
         try {
-            response.setHeader("Content-Disposition", "attachment; filename=" +java.net.URLEncoder.encode("积分详情.xls", "UTF-8"));
+            response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode("积分详情.xls", "UTF-8"));
             response.getOutputStream().write(ExcelExportUtil.exportToBytes(memberPointExcelList));
         } catch (IOException e) {
             log.error(e.getMessage());
         }
     }
+
     @GetMapping("/platform/download-member-point-info")
-    public void downloadMemeberPointInfo(HttpServletRequest request, HttpServletResponse response,@RequestAttribute("token") Token token){
+    public void downloadMemeberPointInfo(HttpServletRequest request, HttpServletResponse response, @RequestAttribute("token") Token token) {
         List<CompanyInfoDTO> companyInfoDTOList = companyInfoService.getAllCompanyInSamePlatform(token.getUid());
         Workbook workbook = new HSSFWorkbook();
         companyInfoDTOList.stream().map(companyInfoDTO -> {
@@ -77,11 +78,11 @@ public class ExcelQueryController {
             List<MemberPointPO> memberPointPOList = memberPointService.getAllMemberPointInfo(queryUserDTO);
             List<MemberPointExcel> memberPointExcelList = memberPointPOList.stream().map(memberPointPO -> {
                 MemberPointExcel memberPointExcel = new MemberPointExcel();
-                BeanUtils.copyProperties(memberPointPO,memberPointExcel);
+                BeanUtils.copyProperties(memberPointPO, memberPointExcel);
                 memberPointExcel.setCreatedAt(TimeUtil.transformTimeMillisToFormatTime(memberPointPO.getCreatedAt()));
                 return memberPointExcel;
             }).collect(Collectors.toList());
-            ExcelUtil.exportWorkbook(workbook,memberPointExcelList,companyInfoDTO.getCompanyName());
+            ExcelUtil.exportWorkbook(workbook, memberPointExcelList, companyInfoDTO.getCompanyName());
             return null;
         }).toArray();
 
@@ -90,7 +91,7 @@ public class ExcelQueryController {
         response.setHeader("content-type", "application/octet-stream ;charset=utf-8 ");
         response.setCharacterEncoding("UTF-8");
         try {
-            response.setHeader("Content-Disposition", "attachment; filename=" +java.net.URLEncoder.encode("积分详情.xls", "UTF-8"));
+            response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode("积分详情.xls", "UTF-8"));
             response.getOutputStream().write(ExcelUtil.exportToBytes(workbook));
         } catch (IOException e) {
             log.error(e.getMessage());

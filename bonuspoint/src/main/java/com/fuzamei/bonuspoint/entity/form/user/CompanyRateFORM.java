@@ -15,22 +15,30 @@ import javax.validation.constraints.*;
 @Data
 public class CompanyRateFORM {
 
-    /**集团id*/
-    @NotNull(message = "{PARAMETER_ERROR}" ,groups = CompanyInfo.class)
+    /**
+     * 集团id
+     */
+    @NotNull(message = "{PARAMETER_ERROR}", groups = CompanyInfo.class)
     private Long id;
-    /**交易密码*/
-    @NotBlank(message = "{PARAMETER_ERROR}" ,groups = CompanyInfo.class)
+    /**
+     * 交易密码
+     */
+    @NotBlank(message = "{PARAMETER_ERROR}", groups = CompanyInfo.class)
     @Payword(groups = CompanyInfo.class)
     private String payword;
-    /** 备付金比例 */
-    @NotNull(message = "{PARAMETER_ERROR}" ,groups = CompanyInfo.updateCashRate.class)
-    @Min(value = 0,message ="{CASH_RATE_ERROR}",groups = CompanyInfo.updateCashRate.class)
-    @Max(value = 1,message ="{CASH_RATE_ERROR}",groups = CompanyInfo.updateCashRate.class)
-    @Null(message = "{PARAMETER_ERROR}" ,groups = CompanyInfo.updatePointRate.class)
+    /**
+     * 备付金比例
+     */
+    @NotNull(message = "{PARAMETER_ERROR}", groups = CompanyInfo.updateCashRate.class)
+    @Min(value = 0, message = "{CASH_RATE_ERROR}", groups = CompanyInfo.updateCashRate.class)
+    @Max(value = 1, message = "{CASH_RATE_ERROR}", groups = CompanyInfo.updateCashRate.class)
+    @Null(message = "{PARAMETER_ERROR}", groups = CompanyInfo.updatePointRate.class)
     private Float cashRate;
-    /** 通用积分兑换比例（N：1通用积分） */
-    @NotNull(message = "{PARAMETER_ERROR}" ,groups = CompanyInfo.updatePointRate.class)
-    @Min(value = 0,message ="{POINT_RATE_ERROR}",groups = CompanyInfo.updatePointRate.class)
-    @Null(message = "{PARAMETER_ERROR}" ,groups = CompanyInfo.updateCashRate.class)
+    /**
+     * 通用积分兑换比例（N：1通用积分）
+     */
+    @NotNull(message = "{PARAMETER_ERROR}", groups = CompanyInfo.updatePointRate.class)
+    @Min(value = 0, message = "{POINT_RATE_ERROR}", groups = CompanyInfo.updatePointRate.class)
+    @Null(message = "{PARAMETER_ERROR}", groups = CompanyInfo.updateCashRate.class)
     private Float pointRate;
 }

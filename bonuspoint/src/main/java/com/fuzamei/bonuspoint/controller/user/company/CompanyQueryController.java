@@ -53,14 +53,14 @@ public class CompanyQueryController {
      *
      * @param token
      * @param accountDTO {
-     *                mobile        手机号
-     *                }
+     *                   mobile        手机号
+     *                   }
      * @return
      * @author wangjie
      */
     @LogAnnotation(note = "集团查询某个会员公钥")
     @PostMapping("/info-block")
-    public ResponseVO<AccountVO> getMemberBlockInfo(@RequestAttribute("token") Token token , @RequestBody AccountDTO accountDTO) {
+    public ResponseVO<AccountVO> getMemberBlockInfo(@RequestAttribute("token") Token token, @RequestBody AccountDTO accountDTO) {
 
         boolean isChinaMobile = RegxUtils.isChinaPhoneLegal(accountDTO.getMobile());
         if (!isChinaMobile) {
@@ -70,8 +70,8 @@ public class CompanyQueryController {
         accountDTO.setRole(Roles.MEMBER);
         AccountPO accountPO = accountService.getAccount(accountDTO);
         AccountVO accountVO = new AccountVO();
-        BeanUtils.copyProperties(accountPO,accountVO);
-        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS,accountVO);
+        BeanUtils.copyProperties(accountPO, accountVO);
+        return new ResponseVO<>(CommonResponseEnum.QUERY_SUCCESS, accountVO);
     }
 
     /**
@@ -95,10 +95,10 @@ public class CompanyQueryController {
      *
      * @param token
      * @param queryUserDTO {
-     *                mobile
-     *                page
-     *                pageSize
-     *                }
+     *                     mobile
+     *                     page
+     *                     pageSize
+     *                     }
      * @return
      * @author wangjie
      */
@@ -113,13 +113,14 @@ public class CompanyQueryController {
 
     /**
      * 商户查看自己店铺基本信息
+     *
      * @param token
-     * @author wangjie
      * @return
+     * @author wangjie
      */
     @LogAnnotation(note = "商户查看自己店铺基本信息")
     @GetMapping("/company-base-info")
-    public ResponseVO<CompanyBaseInfoVO> getCompanyBaseInfo(@RequestAttribute("token") Token token){
+    public ResponseVO<CompanyBaseInfoVO> getCompanyBaseInfo(@RequestAttribute("token") Token token) {
         return companyInfoService.getCompanyBaseInfo(token.getUid());
     }
 

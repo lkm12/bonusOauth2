@@ -15,11 +15,15 @@ import javax.persistence.Table;
 @Data
 @Table(name = "bp_general_point_info")
 public class GeneralPointInfoPO {
-    /** 积分编号 */
+    /**
+     * 积分编号
+     */
     @Id
     @GeneratedValue(generator = "JDBC")
     private Long id;
-    /** 所属平台id */
+    /**
+     * 所属平台id
+     */
     private Long platformId;
 
 }

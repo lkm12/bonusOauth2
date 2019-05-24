@@ -47,7 +47,7 @@ public class MemberManageController {
     private String mobileReg;
 
     @Autowired
-    public MemberManageController(ContactService contactService, UserService userService,AccountService accountService) {
+    public MemberManageController(ContactService contactService, UserService userService, AccountService accountService) {
         this.contactService = contactService;
         this.userService = userService;
         this.accountService = accountService;
@@ -65,7 +65,7 @@ public class MemberManageController {
     public ResponseVO createContact(@RequestAttribute("token") Token token, @RequestBody @Validated(User.CreateContact.class)
             ContactCreateDTO contactCreateDTO, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -77,18 +77,19 @@ public class MemberManageController {
 
     /**
      * 更新联系人
-     *
+     * <p>
      * mobile:手机
      * publickey：公钥
      * remark：备注
+     *
      * @param
      * @return
      */
     @PostMapping("/contacts/update")
     public ResponseVO updateContact(@RequestAttribute("token") Token token, @RequestBody @Validated(User.CreateContact.class)
-            ContactCreateDTO contactCreateDTO,BindingResult bindingResult) {
+            ContactCreateDTO contactCreateDTO, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -109,9 +110,9 @@ public class MemberManageController {
     @SuppressWarnings("unchecked")
     @PostMapping("/contacts/delete")
     public ResponseVO deleteContact(@RequestAttribute("token") Token token, @RequestBody @Validated(User.DeleteContact.class)
-            ContactCreateDTO contactCreateDTO,BindingResult bindingResult ) {
+            ContactCreateDTO contactCreateDTO, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.info("参数错误：{}", bindingResult.getFieldError().getDefaultMessage());
             return new ResponseVO<>(CommonResponseEnum.FAILURE, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -127,7 +128,7 @@ public class MemberManageController {
      * username:用户名
      * password:密码
      * code:验证码
-     *
+     * <p>
      * inviteCode:邀请码
      * mark:平台uuid
      *
@@ -139,20 +140,18 @@ public class MemberManageController {
 
         UserDTO userDTO;
 
-        userDTO = JSON.parseObject(jsonData,UserDTO.class);
-
+        userDTO = JSON.parseObject(jsonData, UserDTO.class);
 
 
         if (StringUtil.isBlank(userDTO.getUsername()) || StringUtil.isBlank(userDTO.
-                getPassword()) || StringUtil.isBlank(userDTO.getCode()) || StringUtil.isBlank(userDTO.getMark()) || StringUtil.isBlank(userDTO.getInviteCode()))
-                 {
+                getPassword()) || StringUtil.isBlank(userDTO.getCode()) || StringUtil.isBlank(userDTO.getMark()) || StringUtil.isBlank(userDTO.getInviteCode())) {
             log.info("参数不能为空");
             return new ResponseVO(CommonResponseEnum.PARAMETER_BLANK);
 
         }
         //校验用户名
         Boolean n = userDTO.getUsername().matches(mobileReg);
-        if(!n){
+        if (!n) {
             return new ResponseVO(UserResponseEnum.USERNAME_FORMAT_FAIL);
         }
         //校验密码
@@ -162,16 +161,15 @@ public class MemberManageController {
 
         String passwordHash = null;
         try {
-               passwordHash = MD5HashUtil.md5SaltEncrypt(userDTO.getPassword(), salt);
+            passwordHash = MD5HashUtil.md5SaltEncrypt(userDTO.getPassword(), salt);
         } catch (Exception e) {
-                e.printStackTrace();
-            }
-            userDTO.setPasswordHash(passwordHash);
+            e.printStackTrace();
+        }
+        userDTO.setPasswordHash(passwordHash);
 
-            log.info("参数校验正常");
+        log.info("参数校验正常");
 
-            return userService.addUser(userDTO);
-
+        return userService.addUser(userDTO);
 
 
     }
@@ -180,13 +178,13 @@ public class MemberManageController {
      * 修改用户昵称
      *
      * @param accountDTO {
-     *                nickname    用户昵称
-     *                }
+     *                   nickname    用户昵称
+     *                   }
      * @author wangjie
      */
     @LogAnnotation(note = "修改用户昵称")
     //@PutMapping("/edit-nickname")
-    @RequestMapping(value = "/edit-nickname",method = {RequestMethod.PUT,RequestMethod.POST})
+    @RequestMapping(value = "/edit-nickname", method = {RequestMethod.PUT, RequestMethod.POST})
     public ResponseVO updateNickname(@RequestAttribute("token") Token token, @RequestBody AccountDTO accountDTO) {
         accountDTO.setId(token.getUid());
         accountDTO.setUpdatedAt(TimeUtil.timestamp());

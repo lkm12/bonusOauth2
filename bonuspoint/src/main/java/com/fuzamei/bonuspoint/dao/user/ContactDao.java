@@ -45,6 +45,7 @@ public interface ContactDao {
             "  LIMIT #{begin},#{pageSize} " +
             "</script>")
     List<ContactInfoVO> findContactsList(PagePointDTO pagePointDTO);
+
     @Select("<script> select count(*) FROM " +
             "  bp_contacts LEFT JOIN bp_user ON bp_contacts.op_uid = bp_user.id  <where> " +
             "  <if test = 'username != null '> username = #{username} </if> and uid = #{id}  </where> " +

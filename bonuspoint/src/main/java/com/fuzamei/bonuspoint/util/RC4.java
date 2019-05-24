@@ -14,8 +14,6 @@ public class RC4 {
     }
 
 
-
-
     public static byte[] encry_RC4_byte(String data, String key) {
         if (data == null || key == null) {
             return null;
@@ -78,11 +76,7 @@ public class RC4 {
     }
 
 
-
-
-
-
-    private static byte[] RC4Base (byte [] input, String mKkey) {
+    private static byte[] RC4Base(byte[] input, String mKkey) {
         int x = 0;
         int y = 0;
         byte key[] = initKey(mKkey);

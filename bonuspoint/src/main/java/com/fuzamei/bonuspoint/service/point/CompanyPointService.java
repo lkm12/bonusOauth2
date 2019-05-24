@@ -100,13 +100,15 @@ public interface CompanyPointService {
 
     /**
      * 集团申请积分转换
+     *
      * @param companyId 集团id
-     * @param nums 申请积分数量
+     * @param nums      申请积分数量
      */
     void tranterReleasePoint(Long companyId, BigDecimal nums);
 
     /**
      * 用户积分兑换记录（商户）
+     *
      * @param goodExcelDTO
      * @return
      */

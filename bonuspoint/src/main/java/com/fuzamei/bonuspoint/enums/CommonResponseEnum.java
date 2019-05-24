@@ -23,10 +23,10 @@ public enum CommonResponseEnum implements ResponseEnum {
     TOKEN_WRONG("false", "TOKEN_WRONG", "233"),
     COMPANY_NOT_EXIST("false", "COMPANY_NOT_EXIST", "270"),
     FIND_BUY_GENERAL_POINTS_SUCCESS("true", "FIND_BUY_GENERAL_POINTS_SUCCESS", "200"),
-    BAD_REQUEST("false","BAD_REQUEST","500"),
-    TOKEN_ERROR("false", "TOKEN_ERROR","401"),
-    TOKEN_NOT_ACTIVE("false","TOKEN_NOT_ACTIVE","401"),
-    TOKEN_BLANK_ERROR("false", "TOKEN_BLANK_ERROR","401"),
+    BAD_REQUEST("false", "BAD_REQUEST", "500"),
+    TOKEN_ERROR("false", "TOKEN_ERROR", "401"),
+    TOKEN_NOT_ACTIVE("false", "TOKEN_NOT_ACTIVE", "401"),
+    TOKEN_BLANK_ERROR("false", "TOKEN_BLANK_ERROR", "401"),
     VARIABLE("true", "VARIABLE", "100"),
     SUCCESS("true", "SUCCESS", "200"),
     FAILURE("false", "FAILURE", "300"),
@@ -42,9 +42,9 @@ public enum CommonResponseEnum implements ResponseEnum {
     SEND_CAPTCHA_ERROR("false", "SEND_CAPTCHA_ERROR", "500"),
     IMAGE_FOMMAT_NOT_RIGHT("false", "IMAGE_FOMMAT_NOT_RIGHT", "400"),
     IMAGE_IS_EMPTY("false", "IMAGE_IS_EMPTY", "401"),
-    CHAIN_FAILE("false","CHAIN_FAILE","402"),
-    APK_FORMAT_ERROR("false","APK_FORMAT_ERROR","403"),
-    PLATFORM_LOGIN_ERROR("false","PLATFORM_LOGIN_ERROR" ,"409" );
+    CHAIN_FAILE("false", "CHAIN_FAILE", "402"),
+    APK_FORMAT_ERROR("false", "APK_FORMAT_ERROR", "403"),
+    PLATFORM_LOGIN_ERROR("false", "PLATFORM_LOGIN_ERROR", "409");
 
 
     private String success;

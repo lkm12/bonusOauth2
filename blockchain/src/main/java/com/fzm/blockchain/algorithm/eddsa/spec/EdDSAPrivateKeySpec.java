@@ -1,13 +1,12 @@
 /**
  * EdDSA-Java by str4d
- *
+ * <p>
  * To the extent possible under law, the person who associated CC0 with
  * EdDSA-Java has waived all copyright and related or neighboring rights
  * to EdDSA-Java.
- *
+ * <p>
  * You should have received a copy of the CC0 legalcode along with this
  * work. If not, see <https://creativecommons.org/publicdomain/zero/1.0/>.
- *
  */
 package com.fzm.blockchain.algorithm.eddsa.spec;
 
@@ -20,7 +19,6 @@ import java.util.Arrays;
 
 /**
  * @author str4d
- *
  */
 public class EdDSAPrivateKeySpec implements KeySpec {
     private final byte[] seed;
@@ -30,12 +28,12 @@ public class EdDSAPrivateKeySpec implements KeySpec {
     private final EdDSAParameterSpec spec;
 
     /**
-     *  @param seed the private key
-     *  @param spec the parameter specification for this key
-     *  @throws IllegalArgumentException if seed length is wrong or hash algorithm is unsupported
+     * @param seed the private key
+     * @param spec the parameter specification for this key
+     * @throws IllegalArgumentException if seed length is wrong or hash algorithm is unsupported
      */
     public EdDSAPrivateKeySpec(byte[] seed, EdDSAParameterSpec spec) {
-        if (seed.length != spec.getCurve().getField().getb()/8)
+        if (seed.length != spec.getCurve().getField().getb() / 8)
             throw new IllegalArgumentException("seed length is wrong");
 
         this.spec = spec;
@@ -55,9 +53,9 @@ public class EdDSAPrivateKeySpec implements KeySpec {
             // Saves ~0.4ms per key when running signing tests.
             // TODO: are these bitflips the same for any hash function?
             h[0] &= 248;
-            h[(b/8)-1] &= 63;
-            h[(b/8)-1] |= 64;
-            a = Arrays.copyOfRange(h, 0, b/8);
+            h[(b / 8) - 1] &= 63;
+            h[(b / 8) - 1] |= 64;
+            a = Arrays.copyOfRange(h, 0, b / 8);
 
             A = spec.getB().scalarMultiply(a);
         } catch (NoSuchAlgorithmException e) {
@@ -66,27 +64,27 @@ public class EdDSAPrivateKeySpec implements KeySpec {
     }
 
     /**
-     *  Initialize directly from the hash.
-     *  getSeed() will return null if this constructor is used.
+     * Initialize directly from the hash.
+     * getSeed() will return null if this constructor is used.
      *
-     *  @param spec the parameter specification for this key
-     *  @param h the private key
-     *  @throws IllegalArgumentException if hash length is wrong
-     *  @since 0.1.1
+     * @param spec the parameter specification for this key
+     * @param h    the private key
+     * @throws IllegalArgumentException if hash length is wrong
+     * @since 0.1.1
      */
     public EdDSAPrivateKeySpec(EdDSAParameterSpec spec, byte[] h) {
-        if (h.length != spec.getCurve().getField().getb()/4)
+        if (h.length != spec.getCurve().getField().getb() / 4)
             throw new IllegalArgumentException("hash length is wrong");
 
-	this.seed = null;
-	this.h = h;
-	this.spec = spec;
-	int b = spec.getCurve().getField().getb();
+        this.seed = null;
+        this.h = h;
+        this.spec = spec;
+        int b = spec.getCurve().getField().getb();
 
         h[0] &= 248;
-        h[(b/8)-1] &= 63;
-        h[(b/8)-1] |= 64;
-        a = Arrays.copyOfRange(h, 0, b/8);
+        h[(b / 8) - 1] &= 63;
+        h[(b / 8) - 1] |= 64;
+        a = Arrays.copyOfRange(h, 0, b / 8);
 
         A = spec.getB().scalarMultiply(a);
     }
@@ -100,28 +98,28 @@ public class EdDSAPrivateKeySpec implements KeySpec {
     }
 
     /**
-     *  @return will be null if constructed directly from the private key
+     * @return will be null if constructed directly from the private key
      */
     public byte[] getSeed() {
         return seed;
     }
 
     /**
-     *  @return the hash
+     * @return the hash
      */
     public byte[] getH() {
         return h;
     }
 
     /**
-     *  @return the private key
+     * @return the private key
      */
     public byte[] geta() {
         return a;
     }
 
     /**
-     *  @return the public key
+     * @return the public key
      */
     public GroupElement getA() {
         return A;

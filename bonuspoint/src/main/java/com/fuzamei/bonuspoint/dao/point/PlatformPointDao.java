@@ -31,6 +31,7 @@ public interface PlatformPointDao {
 
     /**
      * 判断用户是否是平台的管理人员（单平台）
+     *
      * @param uid 用户id
      * @return
      */
@@ -39,7 +40,8 @@ public interface PlatformPointDao {
 
     /**
      * 平台拒绝发放积分
-     * @param id 申请id
+     *
+     * @param id     申请id
      * @param reason 拒绝原因
      * @return
      */
@@ -50,6 +52,7 @@ public interface PlatformPointDao {
 
     /**
      * 同意发放积分
+     *
      * @param id 记录id
      * @return
      */

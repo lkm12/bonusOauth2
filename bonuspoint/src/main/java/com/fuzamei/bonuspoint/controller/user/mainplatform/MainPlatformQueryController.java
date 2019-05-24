@@ -39,24 +39,18 @@ public class MainPlatformQueryController {
 
     @LogAnnotation(note = "查看平台列表")
     @PostMapping("/list-platform")
-    public ResponseVO listPlatform(@RequestBody PageDTO pageDTO){
+    public ResponseVO listPlatform(@RequestBody PageDTO pageDTO) {
         if (pageDTO.getPage() == null || pageDTO.getPage() < 1) {
             pageDTO.setPage(1);
         }
-        if (pageDTO.getPageSize() == null || pageDTO.getPageSize()<1 ) {
+        if (pageDTO.getPageSize() == null || pageDTO.getPageSize() < 1) {
             pageDTO.setPageSize(1);
         }
-        if (pageDTO.getPageSize()>maxSize){
+        if (pageDTO.getPageSize() > maxSize) {
             pageDTO.setPageSize(maxSize);
         }
         return mainPlatformService.listPlatform(pageDTO);
     }
-
-
-
-
-
-
 
 
 }

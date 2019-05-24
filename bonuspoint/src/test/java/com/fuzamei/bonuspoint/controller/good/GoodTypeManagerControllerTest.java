@@ -47,12 +47,14 @@ public class GoodTypeManagerControllerTest extends BaseControllerTest {
                         .contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJsonString(goodType)))
                 .andExpect(status().isOk()).andDo(print()).andReturn().getResponse().getContentAsString();
     }
+
     @Test
     public void deleteType() throws Exception {
         log.info("删除商品分类");
         this.mockMvc.perform(delete("/bonus-point/goodtype/types/23").header(authorizationName, authorizationValue))
                 .andExpect(status().isOk()).andDo(print()).andReturn().getResponse().getContentAsString();
     }
+
     @Test
     public void saveSubType() throws Exception {
         log.info("添加商品子分类");

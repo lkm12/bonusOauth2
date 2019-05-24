@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
-public interface ContactMapper extends TkMapper<ContactPO>{
+public interface ContactMapper extends TkMapper<ContactPO> {
 }

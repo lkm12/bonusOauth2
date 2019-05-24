@@ -46,14 +46,15 @@ public class OrderExportTest {
         dataSource.setAutoCommit(true);
         this.dataSource = dataSource;
     }
+
     @Test
-    public void export() throws  Exception{
+    public void export() throws Exception {
         String sql = "SELECT orders.* ,company.id as companyId, uuser.username,uuser.mobile,company.company_name,good.`name` AS good_name FROM ld_good_orders AS orders\n" +
                 "LEFT JOIN ld_good AS good ON good.id = orders.good_id\n" +
                 "LEFT JOIN ld_user AS uuser ON uuser.id =orders.uid\n" +
                 "LEFT JOIN ld_company_info AS company ON company.uid = orders.gid\n";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        List<OrderExport> goodExports = jdbcTemplate.query(sql,new OrderExportRowMapper());
+        List<OrderExport> goodExports = jdbcTemplate.query(sql, new OrderExportRowMapper());
         //创建excel
         Workbook wb = new HSSFWorkbook();
         CreationHelper createHelper = wb.getCreationHelper();
@@ -83,7 +84,7 @@ public class OrderExportTest {
         row.createCell(20).setCellValue("成交时间");
         for (int i = 0; i < goodExports.size(); i++) {
             OrderExport orderExport = goodExports.get(i);
-            row = sheet.createRow(i+1);
+            row = sheet.createRow(i + 1);
             //set head
             row.createCell(0).setCellValue(orderExport.getId());
             row.createCell(1).setCellValue(orderExport.getUid());
@@ -96,10 +97,10 @@ public class OrderExportTest {
             row.createCell(8).setCellValue(orderExport.getNum());
             row.createCell(9).setCellValue(orderExport.getStatus());
             row.createCell(10).setCellValue(orderExport.getPayModel());
-            if (orderExport.getPrice() != null){
+            if (orderExport.getPrice() != null) {
                 row.createCell(11).setCellValue(orderExport.getPrice().doubleValue());
             }
-            if (orderExport.getTotal() != null){
+            if (orderExport.getTotal() != null) {
                 row.createCell(12).setCellValue(orderExport.getTotal().doubleValue());
             }
             row.createCell(13).setCellValue(orderExport.getDistribution());
@@ -113,7 +114,7 @@ public class OrderExportTest {
 
         }
 
-        try  (OutputStream fileOut = new FileOutputStream("订单导出.xls")) {
+        try (OutputStream fileOut = new FileOutputStream("订单导出.xls")) {
             wb.write(fileOut);
         }
 
@@ -121,7 +122,7 @@ public class OrderExportTest {
 
     }
 
-    private class  OrderExportRowMapper implements RowMapper<OrderExport> {
+    private class OrderExportRowMapper implements RowMapper<OrderExport> {
 
         @Override
         public OrderExport mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -135,7 +136,7 @@ public class OrderExportTest {
             orderExport.setGoodId(resultSet.getLong("good_id"));
             orderExport.setGoodName(resultSet.getString("good_name"));
             Object payModel = resultSet.getObject("pay_mode");
-            if (payModel != null ){
+            if (payModel != null) {
                 orderExport.setPayModel(payModel.toString().equals("1") ? "会员积分" : "通用积分");
             }
             orderExport.setPrice(resultSet.getBigDecimal("price"));
@@ -144,40 +145,40 @@ public class OrderExportTest {
             orderExport.setDistribution(resultSet.getString("distribution"));
             orderExport.setMessage(resultSet.getString("message"));
             orderExport.setAddressInfo(resultSet.getString("address_info"));
-            int status =resultSet.getInt("status");
+            int status = resultSet.getInt("status");
             String statusName = null;
-            switch (status){
-                case 0 :
+            switch (status) {
+                case 0:
                     statusName = "待结算";
                     break;
-                case 1 :
+                case 1:
                     statusName = "待发货";
                     break;
-                case 2 :
+                case 2:
                     statusName = "运输中";
                     break;
-                case 3 :
+                case 3:
                     statusName = "待确认收货";
                     break;
-                case 4 :
+                case 4:
                     statusName = "成功交易";
                     break;
-                case 5 :
+                case 5:
                     statusName = "退货中待集团确认";
                     break;
-                case 6 :
+                case 6:
                     statusName = "退货成功";
                     break;
-                case 99 :
+                case 99:
                     statusName = "买家关闭交易";
                     break;
-                case 100 :
+                case 100:
                     statusName = "超时失效";
                     break;
-                case 101 :
+                case 101:
                     statusName = "隐藏订单";
                     break;
-                case 102 :
+                case 102:
                     statusName = "取消订单";
                     break;
 
@@ -187,21 +188,22 @@ public class OrderExportTest {
             orderExport.setBackLogisticsInfo(resultSet.getString("back_logistics_info"));
             orderExport.setBack_memo(resultSet.getString("back_memo"));
             Object payedat = resultSet.getObject("payed_at");
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            if (payedat != null){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            if (payedat != null) {
                 orderExport.setPayedAt(sdf.format(new Date(((Long) payedat) * 1000)));
             }
             Object bargainAt = resultSet.getObject("bargain_at");
-            if (bargainAt != null){
-                orderExport.setBargainAt(sdf.format(new Date(((Long) bargainAt) * 1000) ));
+            if (bargainAt != null) {
+                orderExport.setBargainAt(sdf.format(new Date(((Long) bargainAt) * 1000)));
             }
             return orderExport;
         }
     }
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    private class OrderExport{
+    private class OrderExport {
         private Long id;
         private Long uid;
         private String username;
@@ -210,7 +212,7 @@ public class OrderExportTest {
         private String companyName;
         private Long goodId;
         private String goodName;
-        private Long num ;
+        private Long num;
         private String status;
         private String payModel;
         private BigDecimal price;
